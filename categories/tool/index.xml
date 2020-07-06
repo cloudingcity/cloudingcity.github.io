@@ -1,0 +1,49 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tool - Clouding City 克勞丁城市</title>
+    <link>https://clouding.city/categories/tool/</link>
+    <description>Recent content in Tool on Clouding City 克勞丁城市</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Tue, 21 Apr 2020 02:19:41 +0800</lastBuildDate>
+    
+        <atom:link href="https://clouding.city/categories/tool/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>申請 JetBrains Open Source Licenses</title>
+      <link>https://clouding.city/tool/jetbrain-open-source-license/</link>
+      <pubDate>Tue, 21 Apr 2020 02:19:41 +0800</pubDate>
+      
+      <guid>https://clouding.city/tool/jetbrain-open-source-license/</guid>
+      <description>最近申請到了 JetBrains Open Source License，來分享一下申請的過程</description>
+    </item><item>
+      <title>我的生產力工具</title>
+      <link>https://clouding.city/tool/my-productivity-tools/</link>
+      <pubDate>Sun, 22 Sep 2019 16:19:25 +0800</pubDate>
+      
+      <guid>https://clouding.city/tool/my-productivity-tools/</guid>
+      <description>分享一下我的生產力工具，如果增加工作效率</description>
+    </item><item>
+      <title>PsySH 強大的 PHP REPL</title>
+      <link>https://clouding.city/php/psysh/</link>
+      <pubDate>Sun, 22 Jul 2018 22:08:55 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/psysh/</guid>
+      <description>A runtime developer console, interactive debugger and REPL for PHP.</description>
+    </item><item>
+      <title>ngrok 讓外界可以造訪 localhost</title>
+      <link>https://clouding.city/tool/ngrok/</link>
+      <pubDate>Wed, 14 Jun 2017 15:19:35 +0000</pubDate>
+      
+      <guid>https://clouding.city/tool/ngrok/</guid>
+      <description>需要臨時 demo 本地端開發東西給別人看嗎? 不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。</description>
+    </item><item>
+      <title>Tables Generator 好用的線上畫表格工具</title>
+      <link>https://clouding.city/tool/tables-generator/</link>
+      <pubDate>Sun, 07 May 2017 21:45:51 +0000</pubDate>
+      
+      <guid>https://clouding.city/tool/tables-generator/</guid>
+      <description>Tables Generator 是一個線上畫表個工具，支援 LaTex、HTML、Text、Markdown、MediaWiki多種語法。</description>
+    </item>
+  </channel>
+</rss>

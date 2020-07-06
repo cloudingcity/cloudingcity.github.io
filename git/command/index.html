@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>Git 指令 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="筆記一下 Git 指令。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Git 指令</h1>
+          <p class="post-date">Posted <time datetime="2017-06-03">Jun 3, 2017</time></p>
+        </header>
+        
+        <p>筆記一下 Git 指令。</p>
+<h1 id="config">Config</h1>
+<h2 id="config-1">config</h2>
+<p>設定/取得 設定檔值</p>
+<p>三個層級，設定優先權: local &gt; global &gt; system</p>
+<ul>
+<li>系統 <code>--system</code></li>
+<li>使用者 <code>--global</code></li>
+<li>儲存庫 <code>--local</code> (default)</li>
+</ul>
+<pre><code class="language-bash"># git config [file-opstion] [name] [value]
+#
+# --system/--global/--local: 層級
+# -l: 列出設定檔值
+# --unset: 刪除設定
+
+# 設定 user.name
+$ git config --global user.name clouding
+
+# 別名 tree
+$ git config --global alias.tree &quot;log --graph --decorate --pretty=oneline --abbrev-commit&quot;
+
+# 刪除設定
+$ git config --global --unset alias.tree
+</code></pre>
+<blockquote>
+<p>更多設定 <a href="https://git-scm.com/docs/git-config">git-config</a></p>
+</blockquote>
+<hr>
+<h1 id="getting-and-creating-projects">Getting and Creating Projects</h1>
+<h2 id="init">init</h2>
+<p>建立/初始化 儲存庫</p>
+<pre><code class="language-bash"># git init [directory]
+#
+# --bare: 建立原型儲存庫
+
+# 建立 repository
+$ git init NewRepo
+
+# 建立原型儲存庫
+$ git init --bare NewRepo.git
+</code></pre>
+<h2 id="clone">clone</h2>
+<p>複製儲存庫</p>
+<pre><code class="language-bash"># git clone [directory]
+#
+# --bare: 建立原型儲存庫
+
+# 複製 repository
+$ git clone git@github.com:cloudingcity/git-test.git
+
+# 將一般儲存庫轉成原型儲存庫
+$ git clone --bare git-test git-test.git
+</code></pre>
+<hr>
+<h1 id="basic-snapshotting">Basic Snapshotting</h1>
+<h2 id="add">add</h2>
+<p>新增內容到索引</p>
+<pre><code class="language-bash"># git add
+#
+# -f: 強制新增，忽略 .gitignore
+# -A: 新增全部
+
+# 新增全部
+$ git add .
+</code></pre>
+<h2 id="status">status</h2>
+<p>顯示工作狀態</p>
+<h2 id="diff">diff</h2>
+<p>顯示 提交/工作狀態/分支差異</p>
+<pre><code class="language-bash"># git diff
+
+# 比較 master new 兩分支差異
+$ git diff master..new
+</code></pre>
+<h2 id="commit">commit</h2>
+<p>提交改變到儲存庫</p>
+<pre><code class="language-bash"># git commit
+#
+# -m: 提交的訊息，設定多個為段落
+# --amend -m: 修該最近的提交訊息，會產生新的hash id，如果已經push出去了就不要用它
+#
+# 沒設定則用 vi 開啟編輯，或 core.editor 設定值
+
+# 提交
+$ git commit -m &quot;First commit.&quot;
+</code></pre>
+<h2 id="reset">reset</h2>
+<p>Reset HEAD / hash id 狀態</p>
+<pre><code class="language-bash"># git reset
+#
+# --soft: 保留索引
+# --hard: 強制回到初始狀態(使用小心)
+
+# 強制 reset HEAD
+$ git reset HEAD --hard
+</code></pre>
+<h2 id="rm">rm</h2>
+<p>移除檔案索引</p>
+<pre><code class="language-bash"># git rm
+#
+# --cached 保留檔案
+# -f 強制刪除
+
+# 移除索引
+$ git rm --cached newFile.txt
+
+# 移除索引並刪除檔案
+$ git rm -f newFile.txt
+</code></pre>
+<hr>
+<h1 id="branching-and-merging">Branching and Merging</h1>
+<h2 id="branch">branch</h2>
+<p>顯示/建立/刪除 分支</p>
+<pre><code class="language-bash"># git branch
+#
+# -d: 刪除分支
+# -D: 刪除分支即使還沒合併
+# -f: 強制
+
+# 顯示分支
+$ git branch
+
+# 建立分支 new
+$ git branch new
+
+# 刪除分支 new
+$ git branch -d new
+</code></pre>
+<h2 id="checkout">checkout</h2>
+<p>切換分支</p>
+<pre><code class="language-bash"># git checkout
+#
+# -b: 建立分支並切換
+
+# 切換到前一個分支
+$ git checkout -
+</code></pre>
+<h2 id="merge">merge</h2>
+<p>合併分支</p>
+<pre><code class="language-bash"># git merge [branch]
+
+# 合併分支 new
+$ git merge new
+</code></pre>
+<h2 id="mergetool">mergetool</h2>
+<p>用合併工具合併衝突</p>
+<p>git config:</p>
+<ul>
+<li>merge.tool 設定合併工具</li>
+<li>mergetool.keepBackup false 成功合併自動刪除 <code>*.orig</code> 檔案</li>
+</ul>
+<h2 id="log">log</h2>
+<p>顯示提交紀錄</p>
+<pre><code class="language-bash"># git log
+#
+# --oneline: --pretty=oneline --abbrev-commit
+
+# 顯示master new 分支差異紀錄
+$ git log master..new
+</code></pre>
+<h2 id="stash">stash</h2>
+<p>儲存追蹤檔案狀態</p>
+<pre><code class="language-bash"># git stash
+#
+# save [message]: 儲存狀態並給訊息
+# list: 列出所有
+# clear: 清空
+# pop [index]: 取出
+# show [index]: 顯示狀態
+
+# Stash all tracked files without a message/description to index 0
+$ git stash
+
+# List the current stashes
+$ git list
+
+# Pop stash index 2
+$ git pop 2
+</code></pre>
+<h2 id="tag">tag</h2>
+<p>標籤</p>
+<pre><code class="language-bash"># git tag
+#
+# -a: 名稱
+# -m: 訊息
+
+$ git tag -a MyTag -m &quot;Thi is my tag&quot;
+</code></pre>
+<hr>
+<h1 id="sharing-and-updating-projects">Sharing and Updating Projects</h1>
+<h2 id="fetch">fetch</h2>
+<p>抓取差異值，不改變 code</p>
+<pre><code class="language-bash"># git fetch &lt;remote&gt; &lt;place&gt; (&lt;place&gt; = source:destination)
+
+# 新增分支
+$ git fetch origin :newBranch
+</code></pre>
+<h2 id="pull">pull</h2>
+<pre><code class="language-bash"># git pull &lt;remote&gt; &lt;place&gt; (&lt;place&gt; = source:destination)
+#
+# --rebase: 以 rebase 合併，而不是 merge
+
+# 以 rebase 合併
+$ git pull --rebase
+</code></pre>
+<p>git fetch + git merge</p>
+<h2 id="push">push</h2>
+<pre><code class="language-bash"># git push &lt;remote&gt; &lt;place&gt; (&lt;place&gt; = source:destination)
+#
+# -u, --set-upstream: set upstream for git pull/status
+
+# 推送新分支
+$ git push origin newBranch
+
+# 刪除遠端分支
+$ git push origin :newBranch
+</code></pre>
+<h2 id="remote">remote</h2>
+<pre><code class="language-bash"># git remote
+# -v: 詳細
+# show origin: 顯示遠端分支資訊
+# add upstream: 新增遠端分支
+# prune: 刪除有追蹤但遠端已刪除的分支
+
+# 列出遠端已刪除的分支
+$ git remote prune -n origin
+</code></pre>
+<hr>
+<h1 id="inspection">Inspection</h1>
+<h2 id="show">show</h2>
+<p>查看指定提交紀錄</p>
+<pre><code class="language-bash"># git show [hash id]
+</code></pre>
+<h2 id="blame">blame</h2>
+<p>追蹤檔案異動</p>
+<pre><code class="language-bash"># git blame [file]
+</code></pre>
+<hr>
+<h1 id="patching">Patching</h1>
+<h2 id="cherry-pick">cherry-pick</h2>
+<p>選用已存在的提交，可多個，範圍</p>
+<pre><code class="language-bash"># git cherry-pick
+
+$ git cherry-pick hash
+
+$ git cherry-pick feat1~2..feat1~0
+</code></pre>
+<h2 id="rebase">rebase</h2>
+<p>線性合併</p>
+<pre><code class="language-bash"># git rebase
+#
+# -i: 互動模式
+</code></pre>
+<h2 id="revert">revert</h2>
+<p>復原修改，會有提交紀錄</p>
+<pre><code class="language-bash"># C0-&gt;C1-&gt;C2-&gt;C2'
+$ git revert C2
+</code></pre>
+<hr>
+<h1 id="administration">Administration</h1>
+<h2 id="clean">clean</h2>
+<p>Remove untracked files from the working tree</p>
+<pre><code class="language-bash"># git clean
+#
+# -n: 列出欲刪除檔案
+# -f: 強制
+# -d: 整個資料夾
+</code></pre>
+<h2 id="reflog">reflog</h2>
+<p>查詢 git 操作紀錄</p>
+<h2 id="archive">archive</h2>
+<p>備份儲存庫</p>
+<pre><code class="language-bash"># 備份某個分支
+$ git archive master --format=zip --output=../repbck.zip
+
+# 備份某次提交
+$ git archive HEAD --format=zip --output=../headbck.zip
+</code></pre>
+<h2 id="bundle">bundle</h2>
+<p>打包整個儲存庫</p>
+<pre><code class="language-bash"># 打包
+$ git bundle create ../repo.bundle master
+
+# 還原
+$ git clone repo.bundle repo -b master
+</code></pre>
+<hr>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a href="https://git-scm.com/docs">Git Reference</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/git/command/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

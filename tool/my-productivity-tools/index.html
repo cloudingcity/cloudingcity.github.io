@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>我的生產力工具 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="分享一下我的生產力工具，如果增加工作效率" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">我的生產力工具</h1>
+          <p class="post-date">Posted <time datetime="2019-09-22">Sep 22, 2019</time></p>
+        </header>
+        
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/tool/my-productivity-tools/feature_hu3d03a01dcc18bc5be0e67db3d8d209a6_2492554_800x0_resize_q75_lanczos.jpg">
+          <img src="https://clouding.city/tool/my-productivity-tools/feature_hu3d03a01dcc18bc5be0e67db3d8d209a6_2492554_800x0_resize_q75_lanczos.jpg" >
+        </picture>
+        
+        <p>我覺得任何事物都有他的優缺點，沒有什麼一定是好的，或一定不好，工具也是一樣，沒有說 <code>CLI</code> 一定優於 <code>GUI</code>，或相反。</p>
+<p>人一旦習慣就懶得改變，如果技術一直在推陳出新，總不可能工具始終如一都用舊的吧，不如就多多嘗試各種工具，並吸收個別的優點，找到最<strong>適合</strong>自己和現況才是最重要的。</p>
+<h1 id="git">Git</h1>
+<p>20% 用 <code>GUI</code> 看圖，80% <code>CLI</code> 去操作，並搭配 alias 加快處理的速度</p>
+<h3 id="alias">Alias</h3>
+<p>alias 可以降低打字字數，或把一些常用的指令綁在一起，有人問過我設定這麼多會不會搞混，其實不會，因為 alias 都是根據原本語義命名的</p>
+<pre><code class="language-bash">alias gaa='git add -A'
+alias ga='git add'
+alias gaa='git add -A'
+alias gaci='git add -A &amp;&amp; git commit'
+alias gacm='git add -A &amp;&amp; git commit -m'
+alias gacf='git add -A &amp;&amp; git commit --fixup'
+</code></pre>
+<p>偶爾可能會忘記，所以補了一個 <code>galias</code>，方便查看目前設定的 alias 有哪些</p>
+<pre><code class="language-bash">galias() { alias | grep 'git' | sed &quot;s/^\([^=]*\)=\(.*\)/\1 =&gt; \2/&quot;| sed &quot;s/['|\']//g&quot; | sort; }
+</code></pre>
+<blockquote>
+<p><a href="https://github.com/cloudingcity/dotfiles/blob/master/git/aliases.zsh">my git alias</a></p>
+</blockquote>
+<h3 id="tighttpsjonasgithubiotig"><a href="https://jonas.github.io/tig/">Tig</a></h3>
+<p>一個 text mode 的 git CLI tool</p>
+<p>用來快速看路線圖，和整理 commit 時使用，綁定巨集可以複製當前 commit 的 hash id，或者 rebase 某個特定的 commit</p>
+<p>原本我只用 GUI 和指令，加上 tig 讓速度又提升了一個檔次 :D</p>
+<blockquote>
+<p><a href="https://github.com/cloudingcity/dotfiles/blob/master/git/tigrc.symlink">my tigrc</a></p>
+</blockquote>
+<h3 id="gitkrakenhttpswwwgitkrakencom"><a href="https://www.gitkraken.com/">GitKraken</a></h3>
+<p>一個 git GUI tool</p>
+<ul>
+<li>dark theme</li>
+<li>路線圖的呈現簡單乾淨</li>
+<li>可以拖曳 rebase or merge</li>
+<li>同時觀看多個 repository</li>
+<li>單行或區塊 stage/unstage</li>
+<li>免費</li>
+<li><del>吉祥物很可愛</del></li>
+</ul>
+<p>看路線圖和處理 branch 時使用</p>
+<p>缺點：</p>
+<p>偶爾會 crash</p>
+<h1 id="editor">Editor</h1>
+<h3 id="vimhttpsgithubcomvimvim"><a href="https://github.com/vim/vim">Vim</a></h3>
+<p>認真學習 vim 之後，大大提升我的生產力，可以更細膩地處理程式碼，手也不用離開鍵盤，工作起來更舒服</p>
+<p>目前的 IDE 功能越來越厲害，vim 雖然也有很多 plugin 支援，但功能使用起來還是略顯不足</p>
+<p>怎麼辦呢？直接 <code>IDE</code> + <code>Vim Mode</code>，各取其優點，讓你快上加快</p>
+<h3 id="phpstormhttpswwwjetbrainscomphpstorm"><a href="https://www.jetbrains.com/phpstorm/">PHPStorm</a></h3>
+<p>一個看得懂程式碼的 PHP IDE</p>
+<ul>
+<li>強大的 refactor 功能</li>
+<li>單個 method 執行 unit test</li>
+<li>顯示 code coverage 區塊</li>
+<li>找錯字</li>
+<li>反灰沒有使用到的 class method variable import</li>
+<li>還有太多</li>
+</ul>
+<p>缺點：</p>
+<ul>
+<li>很貴</li>
+<li>記憶體怪獸</li>
+<li>開啟速度慢</li>
+</ul>
+<h3 id="golandhttpswwwjetbrainscomgo"><a href="https://www.jetbrains.com/go/">GoLand</a></h3>
+<p>同上</p>
+<h3 id="vscodehttpscodevisualstudiocom"><a href="https://code.visualstudio.com/">VSCode</a></h3>
+<p>一個 open source editor</p>
+<ul>
+<li>免費</li>
+<li>open source</li>
+<li>extension 很多</li>
+</ul>
+<p>我想幾乎 8 成的工程師都是用這個，個人目前拿來寫文章，或一些小 script 的時候使用。vscode 也有支援 vim mode，但 jetbrain IDE 的整合我覺得更好，用起來更順手。</p>
+<h1 id="databases">Databases</h1>
+<h3 id="tableplushttpstablepluscom"><a href="https://tableplus.com/">TablePlus</a></h3>
+<p>一個 database GUI tool</p>
+<ul>
+<li>dark theme</li>
+<li>介面簡單漂亮</li>
+<li>穩定</li>
+<li>支援大部分的 database</li>
+</ul>
+<p>缺點：</p>
+<ul>
+<li>貴</li>
+<li>目前免費版只有 2 個 workspace 和 2 個 tab 可以用，但我們窮人勤勞一點，養成隨手關 tab 的習慣，還是可以用的</li>
+<li>不支援 Linux</li>
+</ul>
+<blockquote>
+<p>之前是用 <a href="https://www.sequelpro.com/">Sequel Pro</a>，但很久沒更新了，新版的 mac os 會 crash</p>
+</blockquote>
+<h1 id="api-client">API Client</h1>
+<h3 id="postmanhttpswwwgetpostmancom"><a href="https://www.getpostman.com">POSTMAN</a></h3>
+<p>一個 API client GUI tool</p>
+<ul>
+<li>dark theme</li>
+<li>免費</li>
+<li>多環境變數設定</li>
+</ul>
+<blockquote>
+<p>原本是用 <a href="https://insomnia.rest/">Insomnia</a>，但 POSTMAN 功能較多，變數設定用起來更順手</p>
+</blockquote>
+<h1 id="links">Links</h1>
+<h3 id="devhintshttpsdevhintsio"><a href="https://devhints.io/">DEVHINTS</a></h3>
+<p>查詢大部分的 cheat sheet</p>
+<h3 id="gitignorehttpswwwgitignoreio"><a href="https://www.gitignore.io/">GitIgnore</a></h3>
+<p>幫助產生 <code>.gitignore</code></p>
+<h3 id="vim-cheat-sheethttpsvimrtorrcom"><a href="https://vim.rtorr.com/">Vim Cheat Sheet</a></h3>
+<p>vim cheat sheet，也有中文</p>
+<h1 id="note">Note</h1>
+<h3 id="notionhttpswwwnotionsoproduct"><a href="https://www.notion.so/product">Notion</a></h3>
+<p>一個功能強大的筆記 tool</p>
+<ul>
+<li>dark theme</li>
+<li>支援 Web, Mobile, Mac, Windows</li>
+<li>搭配 <a href="https://chrome.google.com/webstore/detail/notion-web-clipper/knheggckgoiihginacbkhaalnibhilkk">plugin</a> 快速擷取文章</li>
+<li>好用的 database 功能</li>
+<li>共同協作</li>
+</ul>
+<h1 id="other">Other</h1>
+<h3 id="numihttpsnumiapp"><a href="https://numi.app/">Numi</a></h3>
+<p>一個什麼都可以算的計算機</p>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/tool/my-productivity-tools/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/tool/ngrok/" class="card blog-card" rel="bookmark" >
+  
+  <div class="card-img-container">
+    <p class="card-img-overlay">Next Article</p>
+    <picture>
+      
+      <source srcset="https://clouding.city/tool/ngrok/demo.png">
+      <img src="https://clouding.city/tool/ngrok/demo.png" class="card-img" >
+    </picture>
+  </div>
+  
+  <article class="card-body">
+    <h2 class="card-title">ngrok 讓外界可以造訪 localhost</h2>
+    <p class="card-text">需要臨時 demo 本地端開發東西給別人看嗎? 不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2017-06-14 614:00">Jun 14, 2017</time></p>
+      <p>#Tool </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

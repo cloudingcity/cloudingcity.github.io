@@ -1,0 +1,35 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Clean Code - Clouding City 克勞丁城市</title>
+    <link>https://clouding.city/categories/clean-code/</link>
+    <description>Recent content in Clean Code on Clouding City 克勞丁城市</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sun, 16 Dec 2018 16:14:47 +0000</lastBuildDate>
+    
+        <atom:link href="https://clouding.city/categories/clean-code/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clean Code 如何寫出更乾淨的程式碼</title>
+      <link>https://clouding.city/php/clean-code/</link>
+      <pubDate>Sun, 16 Dec 2018 16:14:47 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/clean-code/</guid>
+      <description>當每個你看到的程式，執行結果都與你想得差不多，你會察覺到你正工作在 Clean Code 上</description>
+    </item><item>
+      <title>if else 技巧</title>
+      <link>https://clouding.city/php/if-else-tip/</link>
+      <pubDate>Sun, 05 Nov 2017 21:24:17 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/if-else-tip/</guid>
+      <description>if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。</description>
+    </item><item>
+      <title>物件導向設計原則 SOLID</title>
+      <link>https://clouding.city/php/solid/</link>
+      <pubDate>Fri, 26 May 2017 13:33:00 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/solid/</guid>
+      <description>如果有人想成為更棒的PHP工程師? Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 SOLID。</description>
+    </item>
+  </channel>
+</rss>

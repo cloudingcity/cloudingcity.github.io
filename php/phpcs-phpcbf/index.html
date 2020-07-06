@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>PHP_CodeSniffer 檢查程式碼標準 phpcs phpcbf &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="PHP_CodeSniffer 是一個檢查程式碼是否符合標準的工具，裡面有兩個 PHP scripts，phpcs, phpcbf。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">PHP_CodeSniffer 檢查程式碼標準 phpcs phpcbf</h1>
+          <p class="post-date">Posted <time datetime="2017-05-01">May 1, 2017</time></p>
+        </header>
+        
+        <p><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP_CodeSniffer</a> 是一個檢查程式碼是否符合標準的工具，裡面有兩個 PHP scripts，<strong>phpcs</strong>, <strong>phpcbf</strong>。</p>
+<ul>
+<li><strong>phpcs</strong> (PHP Code Sniffer): 檢查程式碼標準。</li>
+<li><strong>phpcbf</strong> (PHP Code Beautifier and Fixer): 修正不符合標準的程式碼。</li>
+</ul>
+<h1 id="安裝">安裝</h1>
+<p>有幾種方法來安裝 PHP_CodeSniffer</p>
+<h2 id="直接下載-phar-檔">直接下載 Phar 檔</h2>
+<pre><code>curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+php phpcs.phar -h
+
+curl -OL https://squizlabs.github.io/PHP_CodeSniffer/phpcbf.phar
+php phpcbf.phar -h
+</code></pre>
+<h2 id="用-composer-安裝">用 Composer 安裝</h2>
+<pre><code>composer global require &quot;squizlabs/php_codesniffer=*&quot;
+
+./vendor/bin/phpcs -h
+./vendor/bin/phpcbf -h
+</code></pre>
+<h1 id="phpcs">phpcs</h1>
+<ul>
+<li>顯示版本資訊</li>
+</ul>
+<pre><code>$ phpcs --version
+</code></pre>
+<ul>
+<li>
+<p>顯示已安裝的程式碼標準</p>
+<pre><code>$ phpcs -i
+</code></pre>
+</li>
+<li>
+<p>以 PSR-2 檢查</p>
+<pre><code>$ phpcs --standard=PSR2 /path/to/code/
+</code></pre>
+</li>
+<li>
+<p>顯示 Diff Report</p>
+<pre><code>$ phpcs --report=diff /path/to/code
+</code></pre>
+</li>
+<li>
+<p>輸出 Diff Report File</p>
+<pre><code>$ phpcs --report-diff=/path/to/changes.diff /path/to/code
+</code></pre>
+</li>
+<li>
+<p>忽略檔案或目錄</p>
+<pre><code>$ phpcs --ignore=/path,code.php /path/to/code/
+</code></pre>
+</li>
+<li>
+<p>設定設定檔值</p>
+<pre><code>$ phpcs --config-set &lt;option&gt; &lt;value&gt;
+</code></pre>
+</li>
+<li>
+<p>查看設定檔</p>
+<pre><code>$ phpcs --config-show &lt;option&gt; &lt;value&gt;
+</code></pre>
+</li>
+<li>
+<p>刪除設定檔值</p>
+<pre><code>$ phpcs --config-delete &lt;option&gt;
+</code></pre>
+</li>
+</ul>
+<blockquote>
+<p>會建設定檔 CodeSniffer.conf
+可設定<a href="https://github.com/squizlabs/PHP_CodeSniffer/wiki/Configuration-Options">設定值</a></p>
+</blockquote>
+<h1 id="phpcbf">phpcbf</h1>
+<ul>
+<li>
+<p>以 PSR-2 修正檔案</p>
+<pre><code>$ phpcbf --standard=PSR2 /path/to/code/
+</code></pre>
+</li>
+<li>
+<p>不影響現有檔案 新增加上.fixed的修正檔案</p>
+<pre><code>$ phpcbf --suffix=.fixed /path/to/code/
+</code></pre>
+</li>
+</ul>
+<h1 id="範例">範例</h1>
+<ol>
+<li>
+<p>設定標準預設值為 <code>PSR-2</code> default_standard=PSR2</p>
+<pre><code>$ phpcs --config-set default_standard PSR2
+Config value &quot;default_standard&quot; added successfully
+</code></pre>
+</li>
+<li>
+<p>設定顏色開啟 colors=1</p>
+<pre><code>$ phpcs --config-set colors 1
+Config value &quot;colors&quot; added successfully
+</code></pre>
+</li>
+<li>
+<p>一個範例檔案 <code>demo.php</code></p>
+<pre><code class="language-php">&lt;?php
+
+class demo {
+    protected $num;
+
+    function __construct(int $num = 0)
+    {
+        if($num != 0){
+            $this-&gt;num = $num;
+        }
+    }
+}
+
+?&gt;
+</code></pre>
+</li>
+<li>
+<p><code>phpcs</code> 檢查</p>
+<pre><code>$ phpcs demo.php
+
+FILE: F:\Coding\Project\test\demo.php
+----------------------------------------------------------------------
+FOUND 7 ERRORS AFFECTING 4 LINES
+----------------------------------------------------------------------
+  3 | ERROR | [ ] Each class must be in a namespace of at least one
+    |       |     level (a top-level vendor name)
+  3 | ERROR | [ ] Class name &quot;demo&quot; is not in camel caps format
+  3 | ERROR | [x] Opening brace of a class must be on the line after
+    |       |     the definition
+  6 | ERROR | [ ] Visibility must be declared on method &quot;__construct&quot;
+  8 | ERROR | [x] Expected 1 space after IF keyword; 0 found
+  8 | ERROR | [x] Expected 1 space after closing parenthesis; found 0
+ 14 | ERROR | [x] A closing tag is not permitted at the end of a PHP
+    |       |     file
+----------------------------------------------------------------------
+PHPCBF CAN FIX THE 4 MARKED SNIFF VIOLATIONS AUTOMATICALLY
+----------------------------------------------------------------------
+
+Time: 40ms; Memory: 4Mb
+</code></pre>
+<p>有4個地方可以用 <code>phpcbf</code> 去修正 ( [X] 的部分)</p>
+</li>
+<li>
+<p><code>phpcbf</code> 修正</p>
+<pre><code>$ phpcbf demo.php
+Changing into directory F:\Coding\Project\test
+Processing demo.php [PHP =&gt; 63 tokens in 14 lines]... DONE in 7ms (4 fixable violations)
+        =&gt; Fixing file: 0/4 violations remaining [made 3 passes]... DONE in 21ms
+Patched 1 file
+Time: 129ms; Memory: 6Mb
+</code></pre>
+</li>
+<li>
+<p>修正完的 <code>demo.php</code></p>
+<pre><code class="language-php">&lt;?php
+
+class demo
+{
+    protected $num;
+
+    function __construct(int $num = 0)
+    {
+        if ($num != 0) {
+            $this-&gt;num = $num;
+        }
+    }
+}
+
+</code></pre>
+</li>
+<li>
+<p><code>phpcs</code> 再檢查一次</p>
+<pre><code>$ phpcs demo.php
+
+FILE: F:\Coding\Project\test\demo.php
+----------------------------------------------------------------------
+FOUND 3 ERRORS AFFECTING 2 LINES
+----------------------------------------------------------------------
+ 3 | ERROR | Each class must be in a namespace of at least one level
+   |       | (a top-level vendor name)
+ 3 | ERROR | Class name &quot;demo&quot; is not in camel caps format
+ 7 | ERROR | Visibility must be declared on method &quot;__construct&quot;
+----------------------------------------------------------------------
+
+Time: 39ms; Memory: 4Mb
+</code></pre>
+</li>
+<li>
+<p>手動修正 <code>demo.php</code></p>
+<pre><code class="language-php">&lt;?php
+
+namespace Clouding\test;
+
+class Demo
+{
+    protected $num;
+
+    public function __construct(int $num = 0)
+    {
+        if ($num != 0) {
+            $this-&gt;num = $num;
+        }
+    }
+}
+</code></pre>
+</li>
+</ol>
+<h1 id="phpstorm">PhpStorm</h1>
+<blockquote>
+<p>version: 2017.1.3</p>
+</blockquote>
+<h2 id="phpcs-1">phpcs</h2>
+<p><strong>PhpStorm</strong> 也有支援 <strong>PHP_CodeSniffer</strong>，隨時檢查程式碼有沒有符合標準。</p>
+<h3 id="設定">設定</h3>
+<ol>
+<li>
+<p><code>Languages &amp; Frameworks</code> &gt; <code>PHP</code> &gt; <code>Code Sniffer</code> &gt; <code>...</code>
+<img src="phpcs_1.png" alt="phpcs_1.png"></p>
+</li>
+<li>
+<p>新增 <strong>phpcs</strong> 路徑，後按 <code>Validate</code> 驗證是否正確
+<img src="phpcs_2.png" alt="phpcs_2.png"></p>
+<blockquote>
+<p>Windwos系統 要指向 phpcs.bat
+如果直接下載 phar 檔沒有 .bat，自己生一個
+echo @php &ldquo;%~dp0phpcs.phar&rdquo; %* &gt; phpcs.bat</p>
+</blockquote>
+</li>
+<li>
+<p><code>Editor</code> &gt; <code>Inspections</code> 裡 <code>PHP</code> &gt; <code>PHP Code Sniffer validation</code>，
+<strong>打勾</strong>並設定 <code>Coding standrad</code> <code>PSR2</code>
+<img src="phpcs_3.png" alt="phpcs_3.png"></p>
+</li>
+</ol>
+<h3 id="測試">測試</h3>
+<p>多了波浪警告不符合的地方
+<img src="phpcs_4.png" alt="phpcs_4.png"></p>
+<h1 id="參考資料">參考資料</h1>
+<ul>
+<li><a href="https://github.com/squizlabs/PHP_CodeSniffer">PHP_CodeSniffer</a></li>
+<li><a href="http://oomusou.io/php/php-psr2/">點燈坊 - PSR-2 PHP Coding Style</a></li>
+<li><a href="http://asika.windspeaker.co/post/3499-phpstorm-ide-codesniffer">ASIKA LAB 飛鳥實驗室 - 讓 PHPStorm IDE 自動使用 CodeSniffer 驗證程式碼</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/php/phpcs-phpcbf/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/php/generator/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">PHP Generators 產生器</h2>
+    <p class="card-text">Generator 是一個簡單版的 Iterator，不同的是不需要實作 Iterator。 只有在需要的時候計算並產生迭代的數值，減少佔用記憶體空間。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2017-04-09 49:00">Apr 9, 2017</time></p>
+      <p>#PHP </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

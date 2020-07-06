@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>Go 簡單例子來理解 sync.Mutex 和 sync.RWMutex &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="用簡單的例子來理解 sync.Mutex 和 sync.RWMutex。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Go 簡單例子來理解 sync.Mutex 和 sync.RWMutex</h1>
+          <p class="post-date">Posted <time datetime="2020-05-01">May 1, 2020</time></p>
+        </header>
+        
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/go/mutex-rwmutex/go-learn_hu28478c9ba1e8937cd2e582b942ccfc77_36749_800x0_resize_lanczos_2.png">
+          <img src="https://clouding.city/go/mutex-rwmutex/go-learn_hu28478c9ba1e8937cd2e582b942ccfc77_36749_800x0_resize_lanczos_2.png" >
+        </picture>
+        
+        <p>用簡單的例子來理解 <code>sync.Mutex</code> 和 <code>sync.RWMutex</code>。</p>
+<h2 id="蓋一間銀行">蓋一間銀行</h2>
+<p>假設有一間銀行，可以存款和查詢餘額。</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;fmt&quot;
+)
+
+type Bank struct {
+    balance int
+}
+
+func (b *Bank) Deposit(amount int) {
+    b.balance += amount
+}
+
+func (b *Bank) Balance() int {
+    return b.balance
+}
+
+func main() {
+    b := &amp;Bank{}
+
+    b.Deposit(1000)
+    b.Deposit(1000)
+    b.Deposit(1000)
+
+    fmt.Println(b.Balance())
+}
+</code></pre>
+<pre><code class="language-shell">$ go run main.go
+3000
+</code></pre>
+<p>執行之後結果是 3000 沒問題，1000+1000+1000=3000。</p>
+<h2 id="同時存款">同時存款</h2>
+<p>銀行不太可能讓人一個一個排隊存款，也需要支援同時存款，當今天存款的動作是並行的，會發生什麼事呢？</p>
+<p>這邊用 sync.WaitGroup 去等待所有 goroutine 執行完畢，之後再印出餘額。</p>
+<pre><code class="language-go">func main() {
+    var wg sync.WaitGroup
+    b := &amp;Bank{}
+
+    wg.Add(3)
+    go func() {
+        b.Deposit(1000)
+        wg.Done()
+    }()
+    go func() {
+        b.Deposit(1000)
+        wg.Done()
+    }()
+    go func() {
+        b.Deposit(1000)
+        wg.Done()
+    }()
+
+    wg.Wait()
+
+    fmt.Println(b.Balance())
+}
+</code></pre>
+<pre><code class="language-shell">$ go run main.go
+3000
+</code></pre>
+<p>還是 3000 沒問題，那我們同時存款 1000 次的時候會發生什麼事呢？</p>
+<pre><code class="language-go">func main() {
+    var wg sync.WaitGroup
+    b := &amp;Bank{}
+
+    n := 1000
+    wg.Add(n)
+    for i := 1; i &lt;= n; i++ {
+        go func() {
+            b.Deposit(1000)
+            wg.Done()
+        }()
+    }
+
+    fmt.Println(b.Balance())
+}
+</code></pre>
+<pre><code class="language-shell">$ go run main.go
+946000
+</code></pre>
+<p>誒奇怪，正常來說 1000 * 1000 = 1000000 嗎？怎麼數字不正確！</p>
+<p>我們這次多帶一個參數 <code>-race</code> 跑看看</p>
+<blockquote>
+<p><code>-race</code> 參數是 go 的 <a href="https://blog.golang.org/race-detector">Race Detector</a>，內建整合工具，可以輕鬆檢查出是否有 race condition</p>
+</blockquote>
+<pre><code class="language-shell">$ go run -race main.go
+==================
+WARNING: DATA RACE
+Read at 0x00c00009e010 by goroutine 8:
+  main.main.func1()
+      .../main.go:15 +0x6f
+
+Previous write at 0x00c00009e010 by goroutine 7:
+  main.main.func1()
+      .../main.go:15 +0x85
+
+Goroutine 8 (running) created at:
+  main.main()
+      .../main.go:31 +0xf4
+
+Goroutine 7 (finished) created at:
+  main.main()
+      .../main.go:31 +0xf4
+==================
+996000
+Found 1 data race(s)
+exit status 66
+</code></pre>
+<p>喔喔喔發現原來有 <a href="https://zh.wikipedia.org/wiki/%E7%AB%B6%E7%88%AD%E5%8D%B1%E5%AE%B3">race condition</a>，
+因為同時去對 Bank.balance 去做存取的動作，數量少的時候可能沒問題，當量大的時候就可能出錯。</p>
+<h2 id="syncmutex">sync.Mutex</h2>
+<p>為了防止這種狀況發生，就可以用<a href="https://zh.wikipedia.org/wiki/%E4%BA%92%E6%96%A5%E9%94%81">互斥鎖</a>
+<code>sync.Mutex</code> 來處理這個問題，同時間只有一個 goroutine 能存取該變數。</p>
+<p>這次我們在 <code>Deposit()</code> 存款前先 <code>Lock()</code>，存款後再 <code>Unlock()</code>。</p>
+<pre><code class="language-go">type Bank struct {
+    balance int
+    mux     sync.Mutex
+}
+
+func (b *Bank) Deposit(amount int) {
+    b.mux.Lock()
+    b.balance += amount
+    b.mux.Unlock()
+}
+
+func (b *Bank) Balance() int {
+    return b.balance
+}
+</code></pre>
+<pre><code class="language-shell">$ go run -race main.go
+1000000
+</code></pre>
+<p>這次結果正確了，而且也沒跳出 race condition 的警訊。</p>
+<h2 id="同時存款和查詢">同時存款和查詢</h2>
+<p>想當然會有多人一起存款，就會有多人一起查詢餘額。<del>也會有多人一起運動</del></p>
+<p>多加一組查詢 1000 次的 goroutine 再執行看看。</p>
+<pre><code class="language-go">func main() {
+    var wg sync.WaitGroup
+
+    b := &amp;Bank{}
+
+    n := 1000
+    wg.Add(n)
+    for i := 1; i &lt;= n; i++ {
+        go func() {
+            b.Deposit(1000)
+            wg.Done()
+        }()
+    }
+    wg.Add(n)
+    for i := 1; i &lt;= n; i++ {
+        go func() {
+            _ = b.Balance()
+            wg.Done()
+        }()
+    }
+
+    wg.Wait()
+
+    fmt.Println(b.Balance())
+}
+</code></pre>
+<pre><code class="language-shell">$ go run -race main.go
+==================
+WARNING: DATA RACE
+Read at 0x00c0000180e0 by goroutine 59:
+  main.main.func2()
+      .../main.go:22 +0x6f
+
+Previous write at 0x00c0000180e0 by goroutine 58:
+  main.(*Bank).Deposit()
+      .../main.go:15 +0x70
+  main.main.func1()
+      .../main.go:35 +0x75
+
+Goroutine 59 (running) created at:
+  main.main()
+      .../main.go:40 +0x153
+
+Goroutine 58 (finished) created at:
+  main.main()
+      .../main.go:33 +0xf4
+==================
+==================
+WARNING: DATA RACE
+Read at 0x00c0000180e0 by goroutine 60:
+  main.main.func2()
+      .../main.go:22 +0x6f
+
+Previous write at 0x00c0000180e0 by goroutine 58:
+  main.(*Bank).Deposit()
+      .../main.go:15 +0x70
+  main.main.func1()
+      .../main.go:35 +0x75
+
+Goroutine 60 (running) created at:
+  main.main()
+      .../main.go:40 +0x153
+
+Goroutine 58 (finished) created at:
+  main.main()
+      .../main.go:33 +0xf4
+==================
+1000000
+Found 2 data race(s)
+exit status 66
+</code></pre>
+<p>不意外，因爲同時對 balance 去做讀寫，當然跳出 race condition 的警告。</p>
+<p>我們一樣在 Balance() 加上 <code>Lock()</code> 和 <code>Unlock()</code> 後執行。</p>
+<pre><code class="language-go">type Bank struct {
+    balance int
+    mux     sync.Mutex
+}
+
+func (b *Bank) Deposit(amount int) {
+    b.mux.Lock()
+    b.balance += amount
+    b.mux.Unlock()
+}
+
+func (b *Bank) Balance() (balnce int) {
+    b.mux.Lock()
+    balance = b.balance
+    b.mux.Unlock()
+    return 
+}
+</code></pre>
+<pre><code class="language-shell">$ go run -race main.go
+1000000
+</code></pre>
+<p>結果成功了，也沒有 race 的警告了。</p>
+<h2 id="讀寫互相阻塞">讀寫互相阻塞</h2>
+<p>目前這邊看起來都還不錯，但以現在的情況來說，只要有人讀，或只要有人寫，就會被 block。</p>
+<p>假如銀行存款和查詢各要上花一秒：</p>
+<pre><code class="language-go">package main
+
+import (
+    &quot;log&quot;
+    &quot;sync&quot;
+    &quot;time&quot;
+)
+
+type Bank struct {
+    balance int
+    mux     sync.Mutex
+}
+
+func (b *Bank) Deposit(amount int) {
+    b.mux.Lock()
+    time.Sleep(time.Second) // spend 1 second
+    b.balance += amount
+    b.mux.Unlock()
+}
+
+func (b *Bank) Balance() (balance int) {
+    b.mux.Lock()
+    time.Sleep(time.Second) // spend 1 second
+    balance = b.balance
+    b.mux.Unlock()
+    return 
+}
+
+func main() {
+    var wg sync.WaitGroup
+    b := &amp;Bank{}
+
+    n := 5
+    wg.Add(n)
+    for i := 1; i &lt;= n; i++ {
+        go func() {
+            b.Deposit(1000)
+            log.Printf(&quot;Write: deposit amonut: %v&quot;, 1000)
+            wg.Done()
+        }()
+    }
+    wg.Add(n)
+    for i := 1; i &lt;= n; i++ {
+        go func() {
+            log.Printf(&quot;Read: balance: %v&quot;, b.Balance())
+            wg.Done()
+        }()
+    }
+
+    wg.Wait()
+}
+</code></pre>
+<pre><code class="language-shell">$ go run -race main.go
+2020/05/02 02:11:24 Write: deposit amonut: 1000
+2020/05/02 02:11:25 Write: deposit amonut: 1000
+2020/05/02 02:11:26 Write: deposit amonut: 1000
+2020/05/02 02:11:27 Write: deposit amonut: 1000
+2020/05/02 02:11:28 Write: deposit amonut: 1000
+2020/05/02 02:11:29 Read: balance: 5000
+2020/05/02 02:11:30 Read: balance: 5000
+2020/05/02 02:11:31 Read: balance: 5000
+2020/05/02 02:11:32 Read: balance: 5000
+2020/05/02 02:11:33 Read: balance: 5000
+</code></pre>
+<p>就會發現，每隔一秒才能處理一個 action，以各五次讀寫來說，總共就要花上 10 秒，但對讀來說，應該可以瘋狂讀，每次讀都會是安全的，
+值也都會是一樣，除非當下有寫的動作，它不應該被其他讀的動作 block。</p>
+<h2 id="syncrwmutex">sync.RWMutex</h2>
+<p><code>sync.RWMutex</code> 是一個<a href="https://zh.wikipedia.org/wiki/%E8%AF%BB%E5%86%99%E9%94%81">讀寫鎖</a>(multiple readers, single writer lock)，多讀單寫，可以允許多個讀並發，單個寫。</p>
+<p>把 <code>sync.Mutex</code> 換成 <code>sync.RWMutex</code>：</p>
+<pre><code class="language-go">type Bank struct {
+    balance int
+    mux     sync.RWMutex    // read write lock
+}
+
+func (b *Bank) Deposit(amount int) {
+    b.mux.Lock()            // write lock
+    time.Sleep(time.Second)
+    b.balance += amount
+    b.mux.Unlock()          // wirte unlock
+}
+
+func (b *Bank) Balance() (balance int) {
+    b.mux.RWLock()          // read lock
+    time.Sleep(time.Second)
+    balance = b.balance
+    b.mux.RWUnlock()        // read unlock
+    return 
+}
+</code></pre>
+<pre><code class="language-shell">$ go run -race main.go
+2020/05/02 02:13:59 Write: deposit amonut: 1000
+2020/05/02 02:14:00 Read: balance: 1000
+2020/05/02 02:14:00 Read: balance: 1000
+2020/05/02 02:14:00 Read: balance: 1000
+2020/05/02 02:14:00 Read: balance: 1000
+2020/05/02 02:14:00 Read: balance: 1000
+2020/05/02 02:14:01 Write: deposit amonut: 1000
+2020/05/02 02:14:02 Write: deposit amonut: 1000
+2020/05/02 02:14:03 Write: deposit amonut: 1000
+2020/05/02 02:14:04 Write: deposit amonut: 1000
+</code></pre>
+<p>執行之後會發現，本來要花 10 秒，已經縮短成 5 秒了，只要當下是讀的時候，都會同時進行，並不會互相影響，寫的時候就會 block 讀和寫，只有一個寫會發生。</p>
+<h2 id="總結">總結</h2>
+<ol>
+<li>在寫 goroutine 的時候，需要考慮 race condition，在執行或測試上可以加上 <code>-race</code> 去檢查，以免結果與預期不符</li>
+<li>遇到 race condition 的時候可以考慮用 <code>sync.Mutex</code> 來解決，有讀寫阻塞的時候可以用 <code>sync.RWMutex</code></li>
+<li><code>syncRWMutex</code> 可以有同時允許多個 <code>RLock</code> 和 <code>RUnlock</code> 但只能有一個 <code>Lock</code> 和 <code>Unlock</code></li>
+</ol>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/go/mutex-rwmutex/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/go/refactor/" class="card blog-card" rel="bookmark" >
+  
+  <div class="card-img-container">
+    <p class="card-img-overlay">Next Article</p>
+    <picture>
+      
+      <source srcset="https://clouding.city/go/refactor/go-refactor.png">
+      <img src="https://clouding.city/go/refactor/go-refactor.png" class="card-img" >
+    </picture>
+  </div>
+  
+  <article class="card-body">
+    <h2 class="card-title">Go 重構筆記 1 - Extract Method</h2>
+    <p class="card-text">把相同的程式碼抽出，減少重複的程式碼，增加可讀性。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2020-04-29 429:00">Apr 29, 2020</time></p>
+      <p>#go #refactor </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

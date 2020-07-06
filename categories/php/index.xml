@@ -1,0 +1,84 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP - Clouding City 克勞丁城市</title>
+    <link>https://clouding.city/categories/php/</link>
+    <description>Recent content in PHP on Clouding City 克勞丁城市</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sun, 16 Dec 2018 16:14:47 +0000</lastBuildDate>
+    
+        <atom:link href="https://clouding.city/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Clean Code 如何寫出更乾淨的程式碼</title>
+      <link>https://clouding.city/php/clean-code/</link>
+      <pubDate>Sun, 16 Dec 2018 16:14:47 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/clean-code/</guid>
+      <description>當每個你看到的程式，執行結果都與你想得差不多，你會察覺到你正工作在 Clean Code 上</description>
+    </item><item>
+      <title>PHP Type Hint Closure vs callable</title>
+      <link>https://clouding.city/php/closure-vs-callable/</link>
+      <pubDate>Sun, 09 Dec 2018 15:37:55 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/closure-vs-callable/</guid>
+      <description>Closure 和 callable Type Hint 差異</description>
+    </item><item>
+      <title>PsySH 強大的 PHP REPL</title>
+      <link>https://clouding.city/php/psysh/</link>
+      <pubDate>Sun, 22 Jul 2018 22:08:55 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/psysh/</guid>
+      <description>A runtime developer console, interactive debugger and REPL for PHP.</description>
+    </item><item>
+      <title>PHP ?: 和 ?? 運算子差異</title>
+      <link>https://clouding.city/php/operator-diff/</link>
+      <pubDate>Sun, 15 Jul 2018 16:06:53 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/operator-diff/</guid>
+      <description>簡單介紹 ?: 和 ?? 兩者的差異。</description>
+    </item><item>
+      <title>PHP 陣列結尾逗號加還是不加</title>
+      <link>https://clouding.city/php/array-comma/</link>
+      <pubDate>Sun, 19 Nov 2017 16:35:14 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/array-comma/</guid>
+      <description>PHP 陣列最後一個值的結尾逗號要加還是不加?</description>
+    </item><item>
+      <title>if else 技巧</title>
+      <link>https://clouding.city/php/if-else-tip/</link>
+      <pubDate>Sun, 05 Nov 2017 21:24:17 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/if-else-tip/</guid>
+      <description>if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。</description>
+    </item><item>
+      <title>PHP empty() 和 isset() 差別</title>
+      <link>https://clouding.city/php/empty-vs-isset/</link>
+      <pubDate>Sat, 16 Sep 2017 13:57:36 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/empty-vs-isset/</guid>
+      <description>常常在判斷數值是產生疑惑，什麼時候用 empty()，什麼時候用 isset()，或者直接使用 if($variable)，這邊做個小小的整理。</description>
+    </item><item>
+      <title>物件導向設計原則 SOLID</title>
+      <link>https://clouding.city/php/solid/</link>
+      <pubDate>Fri, 26 May 2017 13:33:00 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/solid/</guid>
+      <description>如果有人想成為更棒的PHP工程師? Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 SOLID。</description>
+    </item><item>
+      <title>PHP DateTime 時間類別</title>
+      <link>https://clouding.city/php/datetime/</link>
+      <pubDate>Wed, 17 May 2017 13:40:19 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/datetime/</guid>
+      <description>Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？</description>
+    </item><item>
+      <title>PHP 控制流程替代語法提高程式碼可讀性</title>
+      <link>https://clouding.city/php/alternative-syntax/</link>
+      <pubDate>Sat, 13 May 2017 13:55:07 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/alternative-syntax/</guid>
+      <description>最近看 Laracasts 學到的一個小技巧，可以讓程式碼在 PHP + HTML View Template 更好閱讀。</description>
+    </item>
+  </channel>
+</rss>

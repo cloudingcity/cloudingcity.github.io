@@ -1,0 +1,63 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>PHP - Clouding City 克勞丁城市</title>
+    <link>https://clouding.city/categories/php/</link>
+    <description>Recent content in PHP on Clouding City 克勞丁城市</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sun, 16 Dec 2018 16:14:47 +0000</lastBuildDate>
+    
+        <atom:link href="https://clouding.city/categories/php/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>PHP_CodeSniffer 檢查程式碼標準 phpcs phpcbf</title>
+      <link>https://clouding.city/php/phpcs-phpcbf/</link>
+      <pubDate>Mon, 01 May 2017 21:29:28 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/phpcs-phpcbf/</guid>
+      <description>PHP_CodeSniffer 是一個檢查程式碼是否符合標準的工具，裡面有兩個 PHP scripts，phpcs, phpcbf。</description>
+    </item><item>
+      <title>PHP Generators 產生器</title>
+      <link>https://clouding.city/php/generator/</link>
+      <pubDate>Sun, 09 Apr 2017 19:10:28 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/generator/</guid>
+      <description>Generator 是一個簡單版的 Iterator，不同的是不需要實作 Iterator。 只有在需要的時候計算並產生迭代的數值，減少佔用記憶體空間。</description>
+    </item><item>
+      <title>PHP Traits 特徵</title>
+      <link>https://clouding.city/php/traits/</link>
+      <pubDate>Sun, 26 Mar 2017 15:47:56 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/traits/</guid>
+      <description>是一個局部類別的實作，它可以被混入一個以上的類別，達到兩個不相關的類別，卻可以有相似的行為。</description>
+    </item><item>
+      <title>PHP Interface 介面</title>
+      <link>https://clouding.city/php/interface/</link>
+      <pubDate>Thu, 16 Mar 2017 22:05:02 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/interface/</guid>
+      <description>Modern PHP 作者說學習如何讓程式碼做為介面改變了我做為PHP程式設計師的生活。</description>
+    </item><item>
+      <title>PHP Namespace Use Alias 名稱空間 匯入 別名</title>
+      <link>https://clouding.city/php/namespace-use-alias/</link>
+      <pubDate>Sat, 04 Mar 2017 20:06:11 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/namespace-use-alias/</guid>
+      <description></description>
+    </item><item>
+      <title>PHP 刪除目錄和以下檔案</title>
+      <link>https://clouding.city/php/delete-directory-files/</link>
+      <pubDate>Sat, 18 Feb 2017 15:29:23 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/delete-directory-files/</guid>
+      <description>最近在維護程式碼的時候，發現有一段刪除目錄以下全部檔案的 code。</description>
+    </item><item>
+      <title>PHP_EOL 常數對應各種平台換行符號</title>
+      <link>https://clouding.city/php/php-eol/</link>
+      <pubDate>Mon, 16 Jan 2017 22:38:44 +0000</pubDate>
+      
+      <guid>https://clouding.city/php/php-eol/</guid>
+      <description>PHP_EOL 常數對應各種平台換行符號，可以讓程式碼適應各種環境。</description>
+    </item>
+  </channel>
+</rss>

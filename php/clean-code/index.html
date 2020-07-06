@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>Clean Code 如何寫出更乾淨的程式碼 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="當每個你看到的程式，執行結果都與你想得差不多，你會察覺到你正工作在 Clean Code 上" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Clean Code 如何寫出更乾淨的程式碼</h1>
+          <p class="post-date">Posted <time datetime="2018-12-16">Dec 16, 2018</time></p>
+        </header>
+        
+        <pre><code>當每個你看到的程式，執行結果都與你想得差不多，你會察覺到你正工作在 Clean Code 上
+</code></pre>
+<p>你是否經常遇到一些惱人或在維護時連自己都看不懂的程式碼呢？程式碼不僅是寫給機器看，更是為寫給人看。</p>
+<p>程式碼的可讀性很重要，是日後維護的關鍵，以下介紹幾個簡單的規則，幫助寫出更乾淨的程式碼：</p>
+<blockquote>
+<p><em>Any fool can write code that a computer can understand. Good programmers write code that humans can understand - Martin Fowler</em></p>
+</blockquote>
+<h2 id="1-有意義的命名">1. 有意義的命名</h2>
+<p>不使用 <code>$x</code> <code>$y</code> 之類的變數名稱，沒人知道是什麼意思</p>
+<pre><code class="language-php">// Bad
+foreach ($x as $y) {...}
+
+// Good
+foreach ($people as $person) {...}
+</code></pre>
+<p>讓數字變得有意義</p>
+<pre><code class="language-php">// Bad
+$users = $userRepository-&gt;fetchByType(1);
+
+// Good
+$users = $userRepository-&gt;fetchByType(User::TYPE_ADMIN);
+</code></pre>
+<h2 id="2-不使用縮寫">2. 不使用縮寫</h2>
+<p>寫程式常常會用縮寫代表的意義，可能為了讓變數名稱看起來更簡短，或者減少打字的時間！？
+但這都是不需要的，縮寫會導致程式碼可讀性更差，讓意義變得更模糊，就把完整名稱打出來吧！</p>
+<pre><code class="language-php">// Bad
+class Trnsltr {...}
+
+// Good
+class Translator {...}
+</code></pre>
+<p>像一些很常見的縮寫，一看就知道代表什麼意思，就不用把完整名稱打出來了</p>
+<pre><code class="language-php">// Bad
+echo $userIdentification;
+
+// Good
+echo $userId;
+</code></pre>
+<h2 id="3-不必要的變數宣告">3. 不必要的變數宣告</h2>
+<p>有時候加上不必要的變數反而會造成混亂，更加難以閱讀</p>
+<pre><code class="language-php">// Bad
+class User
+{
+    ...
+
+    public function isPremium(): bool
+    {
+        if ($this-&gt;type === static::TYPE_PREMIUM) {
+            $result = true;
+        } else {
+            $result = false;
+        }
+
+        return $result;
+    }
+}
+
+// Good
+class User
+{
+    ...
+
+    public function isPremium(): bool
+    {
+        if ($this-&gt;type === static::TYPE_PREMIUM) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// Best
+class User
+{
+    ...
+
+    public function isPremium(): bool
+    {
+        return $this-&gt;type === static::TYPE_PREMIUM;
+    }
+}
+</code></pre>
+<h2 id="4-盡量讓名稱保持在兩個字詞以下">4. 盡量讓名稱保持在兩個字詞以下</h2>
+<p>過長的方法名稱描述也代表這個方法做了過多的事情，讓程式碼保持簡單，做的事情只有一件事</p>
+<pre><code class="language-php">// Bad
+class Post
+{
+    public funciton saveAndUploadPost() {...}
+}
+
+// Good
+class Post
+{
+    public funciton savePost() {...}
+    public funciton uploadPost() {...}
+}
+
+// Best
+class Post
+{
+    public funciton save() {...}
+    public funciton upload() {...}
+}
+</code></pre>
+<p>名稱太長有時候也可以考慮抽成 class</p>
+<pre><code class="language-php">// Bad
+function isShopOpen($day) {...}
+
+// Good
+class Shop
+{
+    public function isOpen($day) {...}
+}
+</code></pre>
+<p>有相同類型的對象描述，可以抽成 Entity</p>
+<pre><code class="language-php">// Bad
+$userName;
+$userPhone;
+$userEmail;
+
+// Good
+class User
+{
+    public $name;
+    public $phone;
+    public $email;
+}
+</code></pre>
+<p>但還是要看情況，有時候為了完整描述做的一件事情這樣做是更好的</p>
+<pre><code class="language-php">$posts = $postRepository-&gt;fetchAllByIdAndDate($id, $date);
+</code></pre>
+<h2 id="5-盡量保持一層縮排">5. 盡量保持一層縮排</h2>
+<p>過多層數的縮排會影響閱讀，也會產生所謂的波動拳程式碼，利用 Early Return，或者 <a href="http://php.net/manual/en/ref.array.php">PHP Array Functions</a> 或者 <a href="https://github.com/tightenco/collect">Collections</a> 去處理，增加可讀性</p>
+<p>Early Return，可以利用 <code>Type Hint</code> 除去檢查類型的程式碼，再利用 array 把相關的邏輯封裝，並且不用 <code>else</code></p>
+<pre><code class="language-php">// Bad
+class Shop
+{
+    public function isOpen($day): bool
+    {
+        if ($day) {
+            if (is_string($day)) {
+                $day = strtolower($day);
+                if ($day === 'friday') {
+                    return true;
+                } elseif ($day === 'saturday') {
+                    return true;
+                } elseif ($day === 'sunday') {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        } else {
+            throw new Exception('$day is empty');
+        }
+    }
+}
+
+// Good
+class Shop
+{
+    public function isOpen(string $day): bool
+    {
+        if (empty($day)) {
+            throw new Exception('$day is empty');
+        }
+
+        $day = strtolower($day);
+        if ($day === 'friday') {
+            return true;
+        } elseif ($day === 'saturday') {
+            return true;
+        } elseif ($day === 'sunday') {
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+// Best
+class Shop
+{
+    public function isOpen(string $day): bool
+    {
+        if (empty($day)) {
+            throw new Exception('$day is empty');
+        }
+
+        $openDays = ['friday', 'saturday', 'sunday'];
+
+        return in_array(strtolower($day), $openDays);
+    }
+}
+</code></pre>
+<p>多利用 <a href="http://php.net/manual/en/ref.array.php">PHP Array Functions</a> 來處理問題，也可以增加可讀性</p>
+<pre><code class="language-php">// Bad
+class Posts
+{
+    ...
+
+    public function filterBy($type): array
+    {
+        $filtered = [];
+        foreach ($this-&gt;posts as $post) {
+            if ($post-&gt;isPublished) {
+                if ($post-&gt;type === $type) {
+                    $filtered[] = $post;
+                }
+            }
+        }
+
+        return $filtered;
+    }
+}
+
+// Good
+class Posts
+{
+    ...
+
+    public function filterBy($type): array
+    {
+        return array_filter($this-&gt;posts, function (Post $post) use ($type) {
+            return $post-&gt;isPublished &amp;&amp; $post-&gt;type === $type;
+        });
+    }
+}
+</code></pre>
+<h2 id="總結">總結</h2>
+<p>以上簡單整理了一些常常出現並且可以改進的地方，程式碼是死的，人是活的，規則沒有一定，多與其他人討論，多接觸不一樣的想法，程式碼可以更靈活、乾淨</p>
+<p>如果有什麼問題歡迎指出或討論</p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/jupeter/clean-code-php">GitHub - jupeter/clean-code-php</a></li>
+<li><a href="https://laracasts.com/series/simple-rules-for-simpler-code">Laracasts - Simple Rules for Simpler Code</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/php/clean-code/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/php/closure-vs-callable/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">PHP Type Hint Closure vs callable</h2>
+    <p class="card-text">Closure 和 callable Type Hint 差異</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2018-12-09 129:00">Dec 9, 2018</time></p>
+      <p>#PHP </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>
