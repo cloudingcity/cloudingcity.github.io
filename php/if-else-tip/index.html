@@ -1,70 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>if else 技巧 &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">if else 技巧</h1>
-          <p class="post-date">Posted <time datetime="2017-11-05">Nov 5, 2017</time></p>
-        </header>
-        
-        <p>if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。</p>
-<h1 id="範例">範例</h1>
-<h2 id="原本寫法">原本寫法</h2>
-<p>層數越來越多，程式碼的焦點越來越模糊，維護上會便當相當困難。</p>
-<pre><code class="language-php">&lt;?php
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>if else 技巧 &#183; Clouding City 克勞丁城市</title><meta name=description content="if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>if else 技巧</h1><p class=post-date>Posted <time datetime=2017-11-05>Nov 5, 2017</time></p></header><p>if else 有時候會造成程式越寫越多層，產生了大家所說的波動拳程式碼，運用一些小技巧讓處理條件更清楚明確。</p><h1 id=範例>範例</h1><h2 id=原本寫法>原本寫法</h2><p>層數越來越多，程式碼的焦點越來越模糊，維護上會便當相當困難。</p><pre><code class=language-php>&lt;?php
 
 function test($foo, $bar)
 {
@@ -84,10 +19,7 @@ function test($foo, $bar)
         // do F
     }
 }
-</code></pre>
-<h2 id="early-return">Early Return</h2>
-<p>可以先把我們不需要的條件，用 <code>return</code> 先過濾掉，可以把焦點專注在剩下需要處理的部分，程式碼不會包得越來越多層，程式碼的可讀性也提升了</p>
-<pre><code class="language-php">&lt;?php
+</code></pre><h2 id=early-return>Early Return</h2><p>可以先把我們不需要的條件，用 <code>return</code> 先過濾掉，可以把焦點專注在剩下需要處理的部分，程式碼不會包得越來越多層，程式碼的可讀性也提升了</p><pre><code class=language-php>&lt;?php
 
 function test($foo, $bar)
 {
@@ -112,52 +44,4 @@ function test($foo, $bar)
 
     // do C
 }
-</code></pre>
-<h1 id="結論">結論</h1>
-<p>可以把條件一條一條的列出來，不需要繼續處理的先 <code>return</code>，需要的則往下處理。</p>
-<p>少用 <code>else</code>，用 <code>return</code> 過濾條件。</p>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/php/if-else-tip/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/php/empty-vs-isset/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">PHP empty() 和 isset() 差別</h2>
-    <p class="card-text">常常在判斷數值是產生疑惑，什麼時候用 empty()，什麼時候用 isset()，或者直接使用 if($variable)，這邊做個小小的整理。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2017-09-16 916:00">Sep 16, 2017</time></p>
-      <p>#PHP </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+</code></pre><h1 id=結論>結論</h1><p>可以把條件一條一條的列出來，不需要繼續處理的先 <code>return</code>，需要的則往下處理。</p><p>少用 <code>else</code>，用 <code>return</code> 過濾條件。</p></article><div class=fb-comments data-href=https://clouding.city/php/if-else-tip/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/empty-vs-isset/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP empty() 和 isset() 差別</h2><p class=card-text>常常在判斷數值是產生疑惑，什麼時候用 empty()，什麼時候用 isset()，或者直接使用 if($variable)，這邊做個小小的整理。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-09-16 916:00">Sep 16, 2017</time></p><p>#PHP</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

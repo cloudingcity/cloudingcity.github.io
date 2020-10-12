@@ -1,111 +1,6 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>物件導向設計原則 SOLID &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="如果有人想成為更棒的PHP工程師? Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 SOLID。" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">物件導向設計原則 SOLID</h1>
-          <p class="post-date">Posted <time datetime="2017-05-26">May 26, 2017</time></p>
-        </header>
-        
-        <p>如果有人想成為更棒的PHP工程師?
-Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 <strong>S.O.L.I.D</strong>。</p>
-<blockquote>
-<p><a href="http://7php.com/php-interview-taylor-otwell/">PHP Interview With Taylor Otwell – Learn Good Design Patterns</a></p>
-</blockquote>
-<hr>
-<h1 id="寫物件導向常見問題">寫物件導向常見問題</h1>
-<h2 id="萬能類別">萬能類別</h2>
-<p>全部的功能都寫在一個類別裡面，職責太大，合併、修改或維護都變得很困難。</p>
-<h2 id="bug製造機">BUG製造機</h2>
-<p>需求一直變，為了寫新功能，需要修改程式碼，可是需要修改的地方越多，BUG也會跟著變多。</p>
-<h2 id="繼承用太多">繼承用太多</h2>
-<p>PHP不允許使用多重繼承，常常為了方便共用同樣的功能而直接繼承，導致之後要改其中一部分程式碼，而影響後面的子類別。</p>
-<h2 id="要知道的太多">要知道的太多</h2>
-<p>類別使用方式寫得太複雜，花費太多時間在看code。</p>
-<h2 id="給多用少">給多用少</h2>
-<p>一個物件有很多方法可以使用，可是只是需要其中一個方法，浪費了很多效能。</p>
-<h2 id="耦合度太高">耦合度太高</h2>
-<p>程式碼之間的關係太深，導致很難修改。</p>
-<hr>
-<h1 id="solid">SOLID</h1>
-<ul>
-<li><a href="#Single-Responsibility-Principle-%E5%96%AE%E4%B8%80%E8%81%B7%E8%B2%AC%E5%8E%9F%E5%89%87">SRP: Single Responsibility Principle (單一職責原則)</a></li>
-<li><a href="#Open-Closed-Principle-%E9%96%8B%E6%94%BE%E5%B0%81%E9%96%89%E5%8E%9F%E5%89%87">OCP: Open Closed Principle           (開放封閉原則)</a></li>
-<li><a href="#Liskov-Substitution-Principle-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8F%9B%E5%8E%9F%E5%89%87">LSP: Liskov Substitution Principle   (里氏替換原則)</a></li>
-<li><a href="#Least-Knowledge-Principle-%E6%9C%80%E5%B0%8F%E7%9F%A5%E8%AD%98%E5%8E%9F%E5%89%87">LKP: Least Knowledge Principle       (最小知識原則)</a></li>
-<li><a href="#Interface-Segregation-Principle-%E4%BB%8B%E9%9D%A2%E9%9A%94%E9%9B%A2%E5%8E%9F%E5%89%87">ISP: Interface Segregation Principle (介面隔離原則)</a></li>
-<li><a href="#Dependency-Inversion-Principle-%E4%BE%9D%E8%B3%B4%E5%8F%8D%E8%BD%89%E5%8E%9F%E5%89%87">DIP: Dependency Inversion Principle  (依賴反轉原則)</a></li>
-</ul>
-<hr>
-<h2 id="single-responsibility-principle-單一職責原則">Single Responsibility Principle 單一職責原則</h2>
-<h3 id="定義">定義</h3>
-<p>應該且僅有一個原因引起類別的變更，讓類別只有一個職責。</p>
-<h3 id="秘訣">秘訣</h3>
-<ul>
-<li>關注點分離</li>
-<li>不要貪方便全塞一起</li>
-<li>注意切太細會有類別太多的問題</li>
-</ul>
-<h3 id="提醒">提醒</h3>
-<ul>
-<li>設計階段就可以避開類別職責太大的問題</li>
-<li>但小心再維護階段受到誘惑又讓類別職責變多</li>
-</ul>
-<p>Bad:</p>
-<pre><code class="language-php">class UserSettings
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>物件導向設計原則 SOLID &#183; Clouding City 克勞丁城市</title><meta name=description content="如果有人想成為更棒的PHP工程師? Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 SOLID。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>物件導向設計原則 SOLID</h1><p class=post-date>Posted <time datetime=2017-05-26>May 26, 2017</time></p></header><p>如果有人想成為更棒的PHP工程師?
+Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 <strong>S.O.L.I.D</strong>。</p><blockquote><p><a href=http://7php.com/php-interview-taylor-otwell/>PHP Interview With Taylor Otwell – Learn Good Design Patterns</a></p></blockquote><hr><h1 id=寫物件導向常見問題>寫物件導向常見問題</h1><h2 id=萬能類別>萬能類別</h2><p>全部的功能都寫在一個類別裡面，職責太大，合併、修改或維護都變得很困難。</p><h2 id=bug製造機>BUG製造機</h2><p>需求一直變，為了寫新功能，需要修改程式碼，可是需要修改的地方越多，BUG也會跟著變多。</p><h2 id=繼承用太多>繼承用太多</h2><p>PHP不允許使用多重繼承，常常為了方便共用同樣的功能而直接繼承，導致之後要改其中一部分程式碼，而影響後面的子類別。</p><h2 id=要知道的太多>要知道的太多</h2><p>類別使用方式寫得太複雜，花費太多時間在看code。</p><h2 id=給多用少>給多用少</h2><p>一個物件有很多方法可以使用，可是只是需要其中一個方法，浪費了很多效能。</p><h2 id=耦合度太高>耦合度太高</h2><p>程式碼之間的關係太深，導致很難修改。</p><hr><h1 id=solid>SOLID</h1><ul><li><a href=#Single-Responsibility-Principle-%E5%96%AE%E4%B8%80%E8%81%B7%E8%B2%AC%E5%8E%9F%E5%89%87>SRP: Single Responsibility Principle (單一職責原則)</a></li><li><a href=#Open-Closed-Principle-%E9%96%8B%E6%94%BE%E5%B0%81%E9%96%89%E5%8E%9F%E5%89%87>OCP: Open Closed Principle (開放封閉原則)</a></li><li><a href=#Liskov-Substitution-Principle-%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8F%9B%E5%8E%9F%E5%89%87>LSP: Liskov Substitution Principle (里氏替換原則)</a></li><li><a href=#Least-Knowledge-Principle-%E6%9C%80%E5%B0%8F%E7%9F%A5%E8%AD%98%E5%8E%9F%E5%89%87>LKP: Least Knowledge Principle (最小知識原則)</a></li><li><a href=#Interface-Segregation-Principle-%E4%BB%8B%E9%9D%A2%E9%9A%94%E9%9B%A2%E5%8E%9F%E5%89%87>ISP: Interface Segregation Principle (介面隔離原則)</a></li><li><a href=#Dependency-Inversion-Principle-%E4%BE%9D%E8%B3%B4%E5%8F%8D%E8%BD%89%E5%8E%9F%E5%89%87>DIP: Dependency Inversion Principle (依賴反轉原則)</a></li></ul><hr><h2 id=single-responsibility-principle-單一職責原則>Single Responsibility Principle 單一職責原則</h2><h3 id=定義>定義</h3><p>應該且僅有一個原因引起類別的變更，讓類別只有一個職責。</p><h3 id=秘訣>秘訣</h3><ul><li>關注點分離</li><li>不要貪方便全塞一起</li><li>注意切太細會有類別太多的問題</li></ul><h3 id=提醒>提醒</h3><ul><li>設計階段就可以避開類別職責太大的問題</li><li>但小心再維護階段受到誘惑又讓類別職責變多</li></ul><p>Bad:</p><pre><code class=language-php>class UserSettings
 {
     private $user;
 
@@ -126,9 +21,7 @@ Laravel 之父 Taylor Otwell: 學習良好的設計模式，尤其是 <strong>S.
         // ...
     }
 }
-</code></pre>
-<p>Good:</p>
-<pre><code class="language-php">class UserAuth
+</code></pre><p>Good:</p><pre><code class=language-php>class UserAuth
 {
     private $user;
 
@@ -161,25 +54,7 @@ class UserSettings
         }
     }
 }
-</code></pre>
-<hr>
-<h2 id="open-closed-principle-開放封閉原則">Open Closed Principle 開放封閉原則</h2>
-<h3 id="定義-1">定義</h3>
-<p>軟體中的對象(類別、函數)，對於擴展是開放的，對於修改是封閉的。</p>
-<h3 id="秘訣-1">秘訣</h3>
-<ul>
-<li>只考慮抽象層級的介面互動</li>
-<li>把變化委託給其他類別處理</li>
-<li>只要異動 metadata 或 config</li>
-</ul>
-<h3 id="提醒-1">提醒</h3>
-<ul>
-<li>不是所有程式都須遵守 OCP</li>
-<li>可能一開始無法預想到需要擴充，但可以透過重構完成</li>
-<li>不要過度用繼承的方式來擴充</li>
-</ul>
-<p>Bad:</p>
-<pre><code class="language-php">abstract class Adapter
+</code></pre><hr><h2 id=open-closed-principle-開放封閉原則>Open Closed Principle 開放封閉原則</h2><h3 id=定義-1>定義</h3><p>軟體中的對象(類別、函數)，對於擴展是開放的，對於修改是封閉的。</p><h3 id=秘訣-1>秘訣</h3><ul><li>只考慮抽象層級的介面互動</li><li>把變化委託給其他類別處理</li><li>只要異動 metadata 或 config</li></ul><h3 id=提醒-1>提醒</h3><ul><li>不是所有程式都須遵守 OCP</li><li>可能一開始無法預想到需要擴充，但可以透過重構完成</li><li>不要過度用繼承的方式來擴充</li></ul><p>Bad:</p><pre><code class=language-php>abstract class Adapter
 {
     protected $name;
 
@@ -239,9 +114,7 @@ class HttpRequester
         // request and return promise
     }
 }
-</code></pre>
-<p>Good:</p>
-<pre><code class="language-php">interface Adapter
+</code></pre><p>Good:</p><pre><code class=language-php>interface Adapter
 {
     public function request(string $url): Promise;
 }
@@ -276,25 +149,7 @@ class HttpRequester
         return $this-&gt;adapter-&gt;request($url);
     }
 }
-</code></pre>
-<hr>
-<h2 id="liskov-substitution-principle-里氏替換原則">Liskov Substitution Principle 里氏替換原則</h2>
-<h3 id="定義-2">定義</h3>
-<p>所有參照基礎類別的地方，必須可以使用衍生類別的物件代替，而不需要任何改變。</p>
-<p>子類別應該可以替換掉父類別而不影響程式架構。</p>
-<p>子類別應該可以執行父類別想做的事情。</p>
-<h3 id="秘訣-2">秘訣</h3>
-<ul>
-<li>對介面寫程式</li>
-<li>方法簽名、回傳值與丟出的異常要一致</li>
-</ul>
-<h3 id="提醒-2">提醒</h3>
-<ul>
-<li>依賴子類別的地方不能用父類別取代</li>
-<li>拋棄繼承，思考可否改用組合的方式</li>
-</ul>
-<p>Bad:</p>
-<pre><code class="language-php">class Rectangle
+</code></pre><hr><h2 id=liskov-substitution-principle-里氏替換原則>Liskov Substitution Principle 里氏替換原則</h2><h3 id=定義-2>定義</h3><p>所有參照基礎類別的地方，必須可以使用衍生類別的物件代替，而不需要任何改變。</p><p>子類別應該可以替換掉父類別而不影響程式架構。</p><p>子類別應該可以執行父類別想做的事情。</p><h3 id=秘訣-2>秘訣</h3><ul><li>對介面寫程式</li><li>方法簽名、回傳值與丟出的異常要一致</li></ul><h3 id=提醒-2>提醒</h3><ul><li>依賴子類別的地方不能用父類別取代</li><li>拋棄繼承，思考可否改用組合的方式</li></ul><p>Bad:</p><pre><code class=language-php>class Rectangle
 {
     protected $width = 0;
     protected $height = 0;
@@ -342,9 +197,7 @@ $rectangles = [new Rectangle(), new Square()];
 foreach ($rectangles as $rectangle) {
     printArea($rectangle);
 }
-</code></pre>
-<p>Good:</p>
-<pre><code class="language-php">interface Shape
+</code></pre><p>Good:</p><pre><code class=language-php>interface Shape
 {
     public function getArea(): int;
 }
@@ -391,30 +244,7 @@ $shapes = [new Rectangle(4, 5), new Square(5)];
 foreach ($shapes as $shape) {
     printArea($shape);
 }
-</code></pre>
-<hr>
-<h2 id="least-knowledge-principle-最小知識原則">Least Knowledge Principle 最小知識原則</h2>
-<h3 id="定義-3">定義</h3>
-<p>一個物件應該對其他物件有最少的了解，盡可能減少類別中的 public method，降低其他類別對此類別的偶合度。</p>
-<h3 id="秘訣-3">秘訣</h3>
-<ul>
-<li>已經成形的操作流程就封裝起來</li>
-<li>不必要的公開方法就設為 private 或 protected</li>
-<li>外面知道的越少，偶合度就越低</li>
-</ul>
-<hr>
-<h2 id="interface-segregation-principle-介面隔離原則">Interface Segregation Principle 介面隔離原則</h2>
-<h3 id="定義-4">定義</h3>
-<p>用戶端程式碼不應該依賴他用不到的介面，依賴的介面都是有其必要性。</p>
-<p>把不同功能的從介面中分離出來。</p>
-<h3 id="秘訣-4">秘訣</h3>
-<ul>
-<li>把 Interface 當成「可以做什麼」， 而不是「是一個什麼」</li>
-<li>減少讓每個 Interface 可以做的事</li>
-<li>如果發現有空實作時，就表示 Interface 可以再細化</li>
-</ul>
-<p>Bad:</p>
-<pre><code class="language-php">interface Employee
+</code></pre><hr><h2 id=least-knowledge-principle-最小知識原則>Least Knowledge Principle 最小知識原則</h2><h3 id=定義-3>定義</h3><p>一個物件應該對其他物件有最少的了解，盡可能減少類別中的 public method，降低其他類別對此類別的偶合度。</p><h3 id=秘訣-3>秘訣</h3><ul><li>已經成形的操作流程就封裝起來</li><li>不必要的公開方法就設為 private 或 protected</li><li>外面知道的越少，偶合度就越低</li></ul><hr><h2 id=interface-segregation-principle-介面隔離原則>Interface Segregation Principle 介面隔離原則</h2><h3 id=定義-4>定義</h3><p>用戶端程式碼不應該依賴他用不到的介面，依賴的介面都是有其必要性。</p><p>把不同功能的從介面中分離出來。</p><h3 id=秘訣-4>秘訣</h3><ul><li>把 Interface 當成「可以做什麼」， 而不是「是一個什麼」</li><li>減少讓每個 Interface 可以做的事</li><li>如果發現有空實作時，就表示 Interface 可以再細化</li></ul><p>Bad:</p><pre><code class=language-php>interface Employee
 {
     public function work(): void;
 
@@ -446,9 +276,7 @@ class Robot implements Employee
         //.... robot can't eat, but it must implement this method
     }
 }
-</code></pre>
-<p>Good:</p>
-<pre><code class="language-php">interface Workable
+</code></pre><p>Good:</p><pre><code class=language-php>interface Workable
 {
     public function work(): void;
 }
@@ -483,23 +311,7 @@ class Robot implements Workable
         // ....working
     }
 }
-</code></pre>
-<hr>
-<h2 id="dependency-inversion-principle-依賴反轉原則">Dependency Inversion Principle 依賴反轉原則</h2>
-<p>高階模組不應該依賴低階模組，兩者應該要依賴其抽象，抽象不要依賴細節，細節要依賴抽象。</p>
-<p>不要把程式碼寫死某種實作上。</p>
-<h3 id="秘訣-5">秘訣</h3>
-<ul>
-<li>互動的部分交給抽象類別或介面</li>
-<li>會改變的實作，就放到子類別裡面</li>
-</ul>
-<h3 id="提醒-3">提醒</h3>
-<ul>
-<li>設計階段就可以先以抽象層次的互動來避開這個問題</li>
-<li>抽象層次不要太高，以免無法對焦於真正關注的類別特徵</li>
-</ul>
-<p>Bad:</p>
-<pre><code class="language-php">class Employee
+</code></pre><hr><h2 id=dependency-inversion-principle-依賴反轉原則>Dependency Inversion Principle 依賴反轉原則</h2><p>高階模組不應該依賴低階模組，兩者應該要依賴其抽象，抽象不要依賴細節，細節要依賴抽象。</p><p>不要把程式碼寫死某種實作上。</p><h3 id=秘訣-5>秘訣</h3><ul><li>互動的部分交給抽象類別或介面</li><li>會改變的實作，就放到子類別裡面</li></ul><h3 id=提醒-3>提醒</h3><ul><li>設計階段就可以先以抽象層次的互動來避開這個問題</li><li>抽象層次不要太高，以免無法對焦於真正關注的類別特徵</li></ul><p>Bad:</p><pre><code class=language-php>class Employee
 {
     public function work(): void
     {
@@ -529,9 +341,7 @@ class Manager
         $this-&gt;employee-&gt;work();
     }
 }
-</code></pre>
-<p>Good:</p>
-<pre><code class="language-php">interface Employee
+</code></pre><p>Good:</p><pre><code class=language-php>interface Employee
 {
     public function work(): void;
 }
@@ -566,72 +376,9 @@ class Manager
         $this-&gt;employee-&gt;work();
     }
 }
-</code></pre>
-<hr>
-<h1 id="solid-其實講的事同一件事">SOLID 其實講的事同一件事</h1>
-<p><strong>面對原始碼改變的策略</strong></p>
-<p>SRP: 降低單一類別被「改變」所影響的機會
+</code></pre><hr><h1 id=solid-其實講的事同一件事>SOLID 其實講的事同一件事</h1><p><strong>面對原始碼改變的策略</strong></p><p>SRP: 降低單一類別被「改變」所影響的機會
 OCP: 讓主類別不會因為新增需求而改變
 LSP: 避免繼承時子類別所造成的「行為改變」
 LKP: 避免暴露過多資訊造成用戶端因流程調整而改變
 ISP: 降低用戶端因為不相關介面而被改變
-DIP: 避免高階程式因為低階程式改變而被迫改變</p>
-<hr>
-<h1 id="後記">後記</h1>
-<p>真的很感謝鐵大，從他身上學到很多東西，他真的很厲害。</p>
-<p>寫 PHP 幾年以來，認識 <strong>SOLID</strong> 真的學到很多，遵守這些可以讓程式碼更好維護、更好擴充，但實際上要運用起來還是相當的難。</p>
-<p>所以要有 <strong>Design Patterns</strong> 來做為輔助，這些都是原則，而不是聖旨，應該要學會如何運用，而不是變成阻礙。</p>
-<hr>
-<h1 id="references">References</h1>
-<ul>
-<li><a href="https://www.youtube.com/watch?v=SLCajYNcThE&amp;t=954s">PHP 也有 Day #19 - PHP 返樸歸真系列之從實例學設計模式 by 大澤木小鐵 (Jace Ju)</a></li>
-<li><a href="http://oomusou.io/tdd/tdd-solid/">使用TDD實踐SOLID</a></li>
-<li><a href="http://blog.turn.tw/?p=957">LARAVEL之父：學習出色的DESIGN PATTERNS！</a></li>
-<li><a href="https://skyyen999.gitbooks.io/-study-design-pattern-in-java/content/oodPrinciple.html">物件導向程式設計基本原則 - SOLID</a></li>
-<li><a href="https://github.com/jupeter/clean-code-php">Clean Code PHP</a></li>
-</ul>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/php/solid/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/php/datetime/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">PHP DateTime 時間類別</h2>
-    <p class="card-text">Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2017-05-17 517:00">May 17, 2017</time></p>
-      <p>#PHP </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+DIP: 避免高階程式因為低階程式改變而被迫改變</p><hr><h1 id=後記>後記</h1><p>真的很感謝鐵大，從他身上學到很多東西，他真的很厲害。</p><p>寫 PHP 幾年以來，認識 <strong>SOLID</strong> 真的學到很多，遵守這些可以讓程式碼更好維護、更好擴充，但實際上要運用起來還是相當的難。</p><p>所以要有 <strong>Design Patterns</strong> 來做為輔助，這些都是原則，而不是聖旨，應該要學會如何運用，而不是變成阻礙。</p><hr><h1 id=references>References</h1><ul><li><a href="https://www.youtube.com/watch?v=SLCajYNcThE&t=954s">PHP 也有 Day #19 - PHP 返樸歸真系列之從實例學設計模式 by 大澤木小鐵 (Jace Ju)</a></li><li><a href=http://oomusou.io/tdd/tdd-solid/>使用TDD實踐SOLID</a></li><li><a href="http://blog.turn.tw/?p=957">LARAVEL之父：學習出色的DESIGN PATTERNS！</a></li><li><a href=https://skyyen999.gitbooks.io/-study-design-pattern-in-java/content/oodPrinciple.html>物件導向程式設計基本原則 - SOLID</a></li><li><a href=https://github.com/jupeter/clean-code-php>Clean Code PHP</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/php/solid/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/datetime/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP DateTime 時間類別</h2><p class=card-text>Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-05-17 517:00">May 17, 2017</time></p><p>#PHP</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

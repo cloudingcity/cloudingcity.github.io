@@ -1,70 +1,5 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>PHP 控制流程替代語法提高程式碼可讀性 &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="最近看 Laracasts 學到的一個小技巧，可以讓程式碼在 PHP &#43; HTML View Template 更好閱讀。" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">PHP 控制流程替代語法提高程式碼可讀性</h1>
-          <p class="post-date">Posted <time datetime="2017-05-13">May 13, 2017</time></p>
-        </header>
-        
-        <p>最近看 <a href="https://laracasts.com/">Laracasts</a> 學到的一個小技巧，可以讓程式碼在 PHP + HTML View Template 更好閱讀。</p>
-<h1 id="example">Example</h1>
-<p>首先我們可能有一筆資料有學生的成績，並把成績分成 Excellent Good Bad。</p>
-<h3 id="indexphp">index.php</h3>
-<pre><code class="language-php">&lt;?php
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>PHP 控制流程替代語法提高程式碼可讀性 &#183; Clouding City 克勞丁城市</title><meta name=description content="最近看 Laracasts 學到的一個小技巧，可以讓程式碼在 PHP + HTML View Template 更好閱讀。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>PHP 控制流程替代語法提高程式碼可讀性</h1><p class=post-date>Posted <time datetime=2017-05-13>May 13, 2017</time></p></header><p>最近看 <a href=https://laracasts.com/>Laracasts</a> 學到的一個小技巧，可以讓程式碼在 PHP + HTML View Template 更好閱讀。</p><h1 id=example>Example</h1><p>首先我們可能有一筆資料有學生的成績，並把成績分成 Excellent Good Bad。</p><h3 id=indexphp>index.php</h3><pre><code class=language-php>&lt;?php
 
 $datas = [
     ['number' =&gt; 1, 'name' =&gt; 'Marry', 'score' =&gt; 56],
@@ -74,10 +9,7 @@ $datas = [
 ];
 
 require 'index.view.php';
-</code></pre>
-<h2 id="原本寫法">原本寫法</h2>
-<h3 id="indexviewphp">index.view.php</h3>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
+</code></pre><h2 id=原本寫法>原本寫法</h2><h3 id=indexviewphp>index.view.php</h3><pre><code class=language-php>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -101,11 +33,7 @@ require 'index.view.php';
     &lt;/table&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
-<p>雖然有縮排，但 PHP + HTML 寫在一起的時候，有些情況很難判斷哪個括號是誰的，括號太多造成許多困擾。</p>
-<h2 id="替代語法">替代語法</h2>
-<h3 id="indexviewphp-1">index.view.php</h3>
-<pre><code class="language-php">&lt;!DOCTYPE html&gt;
+</code></pre><p>雖然有縮排，但 PHP + HTML 寫在一起的時候，有些情況很難判斷哪個括號是誰的，括號太多造成許多困擾。</p><h2 id=替代語法>替代語法</h2><h3 id=indexviewphp-1>index.view.php</h3><pre><code class=language-php>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
 &lt;head&gt;
     &lt;meta charset=&quot;UTF-8&quot;&gt;
@@ -129,54 +57,4 @@ require 'index.view.php';
     &lt;/table&gt;
 &lt;/body&gt;
 &lt;/html&gt;
-</code></pre>
-<p>用了替代語法後結尾跟整體清楚很多，大大提高可讀性。</p>
-<h1 id="conclusion">Conclusion</h1>
-<p>do&hellip;while, while, switch&hellip; 等這些也有替代語法，雖然替代語法在 PHP 和 HTML 裡可以提高可讀性，但純 PHP 裡還是用原本的寫法會比較清楚乾淨。</p>
-<h1 id="references">References</h1>
-<p><a href="http://php.net/manual/en/control-structures.alternative-syntax.php">php.net - Alternative syntax for control structures</a></p>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/php/alternative-syntax/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/php/phpcs-phpcbf/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">PHP_CodeSniffer 檢查程式碼標準 phpcs phpcbf</h2>
-    <p class="card-text">PHP_CodeSniffer 是一個檢查程式碼是否符合標準的工具，裡面有兩個 PHP scripts，phpcs, phpcbf。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2017-05-01 51:00">May 1, 2017</time></p>
-      <p>#PHP #PhpStorm </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+</code></pre><p>用了替代語法後結尾跟整體清楚很多，大大提高可讀性。</p><h1 id=conclusion>Conclusion</h1><p>do&mldr;while, while, switch&mldr; 等這些也有替代語法，雖然替代語法在 PHP 和 HTML 裡可以提高可讀性，但純 PHP 裡還是用原本的寫法會比較清楚乾淨。</p><h1 id=references>References</h1><p><a href=http://php.net/manual/en/control-structures.alternative-syntax.php>php.net - Alternative syntax for control structures</a></p></article><div class=fb-comments data-href=https://clouding.city/php/alternative-syntax/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/phpcs-phpcbf/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP_CodeSniffer 檢查程式碼標準 phpcs phpcbf</h2><p class=card-text>PHP_CodeSniffer 是一個檢查程式碼是否符合標準的工具，裡面有兩個 PHP scripts，phpcs, phpcbf。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-05-01 51:00">May 1, 2017</time></p><p>#PHP #PhpStorm</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

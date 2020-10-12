@@ -1,107 +1,15 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>PsySH 強大的 PHP REPL &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="A runtime developer console, interactive debugger and REPL for PHP." />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">PsySH 強大的 PHP REPL</h1>
-          <p class="post-date">Posted <time datetime="2018-07-22">Jul 22, 2018</time></p>
-        </header>
-        
-        <p><a href="https://psysh.org/">PsySh</a> 是一種 <a href="https://zh.wikipedia.org/wiki/%E8%AF%BB%E5%8F%96%EF%B9%A3%E6%B1%82%E5%80%BC%EF%B9%A3%E8%BE%93%E5%87%BA%E5%BE%AA%E7%8E%AF">REPL</a> (Read-Eval-Print Loop)，可以接受使用者輸入，執行它們，並把結果回傳，省去了永無止境的 <code>var_dump()</code> and <code>die()</code>，可以完全取代 PHP interactive shell (<code>php -a</code>)，而且還有很多方便的功能，可大大提升 debug 的效率。</p>
-<blockquote>
-<p>PsySh 是 Laravel Tinker 的核心程式</p>
-</blockquote>
-<h1 id="安裝">安裝</h1>
-<pre><code>composer g require psy/psysh:@stable
-</code></pre>
-<p>為了方便使用，可以把 composer bin 目錄加到 <code>PATH</code></p>
-<ul>
-<li>OS X: <code>~/.composer/vendor/bin</code></li>
-<li>Windows: <code>C:\Users\{USER}\AppData\Roaming\Composer\vendor\bin</code></li>
-</ul>
-<p>安裝完輸入 <code>psysh</code>：
-<img src="install.png" alt="install.png"></p>
-<h1 id="功能">功能</h1>
-<p>輸入馬上回傳結果，省去 <code>var_dump()</code> <code>echo</code> 等動作:
-<img src="dump.png" alt="dump.png"></p>
-<p>快速寫一個類別，會自動判斷開始與結束：
-<img src="dump-2.png" alt="dump-2.png"></p>
-<p>Auto <code>[tab]</code> <code>[tab]</code> 自動完成：
-<img src="auto.png" alt="auto.png"></p>
-<h3 id="快速查詢-php-manual">快速查詢 PHP manual</h3>
-<p>這裡下載想要的語言 PHP 文件檔案 <a href="https://github.com/bobthecow/psysh/wiki/PHP-manual">PHP-manual</a></p>
-<p>丟到</p>
-<ul>
-<li>OS X: <code>~/.local/share/psysh/</code> or <code>/usr/local/share/psysh/</code></li>
-<li>Windows: <code>C:\Users\{USER}\AppData\Roaming\PsySH\</code></li>
-</ul>
-<pre><code class="language-bash">// 可查看 Function, class, instance, constant, method, property 的文件
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>PsySH 強大的 PHP REPL &#183; Clouding City 克勞丁城市</title><meta name=description content="A runtime developer console, interactive debugger and REPL for PHP."><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>PsySH 強大的 PHP REPL</h1><p class=post-date>Posted <time datetime=2018-07-22>Jul 22, 2018</time></p></header><p><a href=https://psysh.org/>PsySh</a> 是一種 <a href=https://zh.wikipedia.org/wiki/%E8%AF%BB%E5%8F%96%EF%B9%A3%E6%B1%82%E5%80%BC%EF%B9%A3%E8%BE%93%E5%87%BA%E5%BE%AA%E7%8E%AF>REPL</a> (Read-Eval-Print Loop)，可以接受使用者輸入，執行它們，並把結果回傳，省去了永無止境的 <code>var_dump()</code> and <code>die()</code>，可以完全取代 PHP interactive shell (<code>php -a</code>)，而且還有很多方便的功能，可大大提升 debug 的效率。</p><blockquote><p>PsySh 是 Laravel Tinker 的核心程式</p></blockquote><h1 id=安裝>安裝</h1><pre><code>composer g require psy/psysh:@stable
+</code></pre><p>為了方便使用，可以把 composer bin 目錄加到 <code>PATH</code></p><ul><li>OS X: <code>~/.composer/vendor/bin</code></li><li>Windows: <code>C:\Users\{USER}\AppData\Roaming\Composer\vendor\bin</code></li></ul><p>安裝完輸入 <code>psysh</code>：
+<img src=install.png alt=install.png></p><h1 id=功能>功能</h1><p>輸入馬上回傳結果，省去 <code>var_dump()</code> <code>echo</code> 等動作:
+<img src=dump.png alt=dump.png></p><p>快速寫一個類別，會自動判斷開始與結束：
+<img src=dump-2.png alt=dump-2.png></p><p>Auto <code>[tab]</code> <code>[tab]</code> 自動完成：
+<img src=auto.png alt=auto.png></p><h3 id=快速查詢-php-manual>快速查詢 PHP manual</h3><p>這裡下載想要的語言 PHP 文件檔案 <a href=https://github.com/bobthecow/psysh/wiki/PHP-manual>PHP-manual</a></p><p>丟到</p><ul><li>OS X: <code>~/.local/share/psysh/</code> or <code>/usr/local/share/psysh/</code></li><li>Windows: <code>C:\Users\{USER}\AppData\Roaming\PsySH\</code></li></ul><pre><code class=language-bash>// 可查看 Function, class, instance, constant, method, property 的文件
 
 $ doc &lt;target&gt;
-</code></pre>
-<p><img src="doc.png" alt="doc.png"></p>
-<p>方法也可以：
-<img src="doc-2.png" alt="doc-2.png"></p>
-<h3 id="中斷點除錯">中斷點除錯</h3>
-<p>像 Xdebug 一樣可以中斷點除錯，但省去一堆複雜的設定</p>
-<p>假設這邊安裝：</p>
-<pre><code class="language-bash">composer require nesbot/carbon psy/psysh:@stable
-</code></pre>
-<p>再假設有一個檔案 <code>index.php</code>：</p>
-<pre><code class="language-php">&lt;?php
+</code></pre><p><img src=doc.png alt=doc.png></p><p>方法也可以：
+<img src=doc-2.png alt=doc-2.png></p><h3 id=中斷點除錯>中斷點除錯</h3><p>像 Xdebug 一樣可以中斷點除錯，但省去一堆複雜的設定</p><p>假設這邊安裝：</p><pre><code class=language-bash>composer require nesbot/carbon psy/psysh:@stable
+</code></pre><p>再假設有一個檔案 <code>index.php</code>：</p><pre><code class=language-php>&lt;?php
 
 require 'vendor/autoload.php';
 
@@ -117,9 +25,7 @@ $todos = [
 $today = Carbon::today();
 
 $tomorrow = Carbon::tomorrow();
-</code></pre>
-<p>把 <code>eval(\Psy\sh());</code> 插入你想中斷的位置：</p>
-<pre><code class="language-php">&lt;?php
+</code></pre><p>把 <code>eval(\Psy\sh());</code> 插入你想中斷的位置：</p><pre><code class=language-php>&lt;?php
 
 require 'vendor/autoload.php';
 
@@ -138,22 +44,11 @@ eval(\Psy\sh()); // &lt;---------------------- 假設插這
 
 $tomorrow = Carbon::tomorrow();
 
-</code></pre>
-<p>可以</p>
-<ul>
-<li><code>php -S localhost:8000</code> 然後開瀏覽器進入</li>
-<li><code>php index.php</code></li>
-</ul>
-<p>碰到中斷點就會停住：
-<img src="breakpoint.png" alt="breakpoint.png"></p>
-<p>可以 <code>ls</code> 指令，查看目前所使用的變數方法類別等：
-<img src="ls.png" alt="ls.png"></p>
-<p>查看 <code>$todos</code>：
-<img src="todos.png" alt="todos.png"></p>
-<p>當然也可以使用 <strong>Carbon</strong>：
-<img src="carbon.png" alt="carbon.png"></p>
-<p>類別裡面也可以：</p>
-<pre><code class="language-php">&lt;?php
+</code></pre><p>可以</p><ul><li><code>php -S localhost:8000</code> 然後開瀏覽器進入</li><li><code>php index.php</code></li></ul><p>碰到中斷點就會停住：
+<img src=breakpoint.png alt=breakpoint.png></p><p>可以 <code>ls</code> 指令，查看目前所使用的變數方法類別等：
+<img src=ls.png alt=ls.png></p><p>查看 <code>$todos</code>：
+<img src=todos.png alt=todos.png></p><p>當然也可以使用 <strong>Carbon</strong>：
+<img src=carbon.png alt=carbon.png></p><p>類別裡面也可以：</p><pre><code class=language-php>&lt;?php
 
 require 'vendor/autoload.php';
 
@@ -171,57 +66,4 @@ class Star
 
 $star = new Star();
 $star-&gt;attack();
-</code></pre>
-<p><img src="star.png" alt="star.png"></p>
-<h1 id="總結">總結</h1>
-<p>大概簡單介紹了一些用法，在對於測試簡單的程式碼應該會有不少幫助，或是快速查詢一下 function 的用法，大部分的功能也都可以在 <a href="https://github.com/laravel/tinker">Laravel Tinker</a> 中實現，還有許多功能沒說到，詳細就參考 <a href="https://psysh.org/">PsySh</a> 拉！</p>
-<h1 id="references">References</h1>
-<ul>
-<li><a href="https://psysh.org/">PsySh</a></li>
-<li><a href="https://laravel-news.com/laravel-tinker">Getting to Know the Laravel Tinker Shell</a></li>
-</ul>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/php/psysh/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/php/operator-diff/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">PHP ?: 和 ?? 運算子差異</h2>
-    <p class="card-text">簡單介紹 ?: 和 ?? 兩者的差異。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2018-07-15 715:00">Jul 15, 2018</time></p>
-      <p>#PHP </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+</code></pre><p><img src=star.png alt=star.png></p><h1 id=總結>總結</h1><p>大概簡單介紹了一些用法，在對於測試簡單的程式碼應該會有不少幫助，或是快速查詢一下 function 的用法，大部分的功能也都可以在 <a href=https://github.com/laravel/tinker>Laravel Tinker</a> 中實現，還有許多功能沒說到，詳細就參考 <a href=https://psysh.org/>PsySh</a> 拉！</p><h1 id=references>References</h1><ul><li><a href=https://psysh.org/>PsySh</a></li><li><a href=https://laravel-news.com/laravel-tinker>Getting to Know the Laravel Tinker Shell</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/php/psysh/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/operator-diff/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP ?: 和 ?? 運算子差異</h2><p class=card-text>簡單介紹 ?: 和 ?? 兩者的差異。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2018-07-15 715:00">Jul 15, 2018</time></p><p>#PHP</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

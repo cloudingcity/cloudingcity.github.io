@@ -1,84 +1,7 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>PHP Interface 介面 &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="Modern PHP 作者說學習如何讓程式碼做為介面改變了我做為PHP程式設計師的生活。" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">PHP Interface 介面</h1>
-          <p class="post-date">Posted <time datetime="2017-03-16">Mar 16, 2017</time></p>
-        </header>
-        
-        <p>Modern PHP 作者說<strong>學習如何讓程式碼做為介面改變了我做為PHP程式設計師的生活</strong>。
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>PHP Interface 介面 &#183; Clouding City 克勞丁城市</title><meta name=description content="Modern PHP 作者說學習如何讓程式碼做為介面改變了我做為PHP程式設計師的生活。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>PHP Interface 介面</h1><p class=post-date>Posted <time datetime=2017-03-16>Mar 16, 2017</time></p></header><p>Modern PHP 作者說<strong>學習如何讓程式碼做為介面改變了我做為PHP程式設計師的生活</strong>。
 介面是一個介於兩個PHP物件之中的<strong>合約</strong>，讓另一個物件知道這個物件可以做什麼，賦予了第三方程式碼互動的能力。
-我們不需要知道第三方如何實作這個介面，只要知道它確實做了。</p>
-<h1 id="interface-介面">Interface 介面</h1>
-<ul>
-<li>
-<p>定義 <code>class</code> 必須實作哪些方法，不需要知道實作的內容</p>
-</li>
-<li>
-<p><code>interface</code> 內方法必須為 <code>public</code></p>
-</li>
-<li>
-<p>實作 <code>interface</code> 時使用 <code>implements</code></p>
-</li>
-<li>
-<p>一個檔案一個 <code>interface</code>，讓程式碼簡單容易除錯</p>
-</li>
-</ul>
-<pre><code class="language-php">&lt;?php
+我們不需要知道第三方如何實作這個介面，只要知道它確實做了。</p><h1 id=interface-介面>Interface 介面</h1><ul><li><p>定義 <code>class</code> 必須實作哪些方法，不需要知道實作的內容</p></li><li><p><code>interface</code> 內方法必須為 <code>public</code></p></li><li><p>實作 <code>interface</code> 時使用 <code>implements</code></p></li><li><p>一個檔案一個 <code>interface</code>，讓程式碼簡單容易除錯</p></li></ul><pre><code class=language-php>&lt;?php
 interface a
 {
     public function foo();
@@ -91,13 +14,9 @@ class b implements a
         // do something
     }
 }
-</code></pre>
-<h1 id="範例">範例</h1>
-<p><img src="diagram.png" alt="diagram.png"></p>
-<p>假如說有一位老師要出作業，作業規定要有<strong>名字</strong>、<strong>標題</strong>、<strong>內容</strong>。
+</code></pre><h1 id=範例>範例</h1><p><img src=diagram.png alt=diagram.png></p><p>假如說有一位老師要出作業，作業規定要有<strong>名字</strong>、<strong>標題</strong>、<strong>內容</strong>。
 有一個收作業到講桌上的方法<code>addHomework()</code>
-裡面的參數<code>$homework</code>規定是要符合 <code>interface HomeworkRule</code> 的物件</p>
-<pre><code class="language-php">class Teacher
+裡面的參數<code>$homework</code>規定是要符合 <code>interface HomeworkRule</code> 的物件</p><pre><code class=language-php>class Teacher
 {
     protected $table = [];
 
@@ -115,17 +34,13 @@ class b implements a
         return $this-&gt;table;
     }
 }
-</code></pre>
-<h3 id="定義-interface-homeworkrule">定義 <code>interface HomeworkRule</code></h3>
-<pre><code class="language-php">interface HomeworkRule
+</code></pre><h3 id=定義-interface-homeworkrule>定義 <code>interface HomeworkRule</code></h3><pre><code class=language-php>interface HomeworkRule
 {
     public function getName();
     public function getTitle();
     public function getBody();
 }
-</code></pre>
-<h3 id="marry-寫作業">Marry 寫作業</h3>
-<pre><code class="language-php">class Marry implements HomeworkRule
+</code></pre><h3 id=marry-寫作業>Marry 寫作業</h3><pre><code class=language-php>class Marry implements HomeworkRule
 {
     public function getName()
     {
@@ -142,9 +57,7 @@ class b implements a
         return 'I have an ugly friend - Tom';
     }
 }
-</code></pre>
-<h3 id="tom-寫作業">Tom 寫作業</h3>
-<pre><code class="language-php">class Tom implements HomeworkRule
+</code></pre><h3 id=tom-寫作業>Tom 寫作業</h3><pre><code class=language-php>class Tom implements HomeworkRule
 {
     public function getName()
     {
@@ -178,59 +91,10 @@ class b implements a
         return $ans;
     }
 }
-</code></pre>
-<h3 id="老師收作業">老師收作業</h3>
-<pre><code class="language-php">$teacher = new Teacher();
+</code></pre><h3 id=老師收作業>老師收作業</h3><pre><code class=language-php>$teacher = new Teacher();
 $teacher-&gt;addHomework(new Marry());
 $teacher-&gt;addHomework(new Tom());
 var_dump($teacher-&gt;getHomework());
-</code></pre>
-<h3 id="conclusion">Conclusion</h3>
-<p>兩個類別除了<code>interface</code>規定的相同方法之外，沒有其他共同的地方，
+</code></pre><h3 id=conclusion>Conclusion</h3><p>兩個類別除了<code>interface</code>規定的相同方法之外，沒有其他共同的地方，
 只需要知道知道實作了<code>interface</code>的方法，並不需要知道其他人怎麼實作，
-達到互動無縫接軌的能力。</p>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/php/interface/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/php/namespace-use-alias/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">PHP Namespace Use Alias 名稱空間 匯入 別名</h2>
-    <p class="card-text"></p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2017-03-04 34:00">Mar 4, 2017</time></p>
-      <p>#PHP </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+達到互動無縫接軌的能力。</p></article><div class=fb-comments data-href=https://clouding.city/php/interface/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/namespace-use-alias/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP Namespace Use Alias 名稱空間 匯入 別名</h2><p class=card-text></p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-03-04 34:00">Mar 4, 2017</time></p><p>#PHP</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

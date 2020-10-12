@@ -1,94 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>Go 重構筆記 2 - Get test data path &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="優雅地取得專案下特定檔案路徑" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">Go 重構筆記 2 - Get test data path</h1>
-          <p class="post-date">Posted <time datetime="2020-05-10">May 10, 2020</time></p>
-        </header>
-        
-        <picture class="post-figure">
-          
-          
-          <source srcset="https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png">
-          <img src="https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png" >
-        </picture>
-        
-        <h2 id="background">Background</h2>
-<p>測試的時候會偶爾需要測試資料來 mock 真實資料，通常會在根目錄建一個 <code>testdata</code> 的 folder， 然後取得的時候這樣寫：</p>
-<p><code>my-project/internal/foo_test.go</code></p>
-<pre><code class="language-go">func TestFoo(t *testing.T) {
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>Go 重構筆記 2 - Get test data path &#183; Clouding City 克勞丁城市</title><meta name=description content="優雅地取得專案下特定檔案路徑"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>Go 重構筆記 2 - Get test data path</h1><p class=post-date>Posted <time datetime=2020-05-10>May 10, 2020</time></p></header><picture class=post-figure>
+<source srcset=https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png><img src=https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png></picture><h2 id=background>Background</h2><p>測試的時候會偶爾需要測試資料來 mock 真實資料，通常會在根目錄建一個 <code>testdata</code> 的 folder， 然後取得的時候這樣寫：</p><p><code>my-project/internal/foo_test.go</code></p><pre><code class=language-go>func TestFoo(t *testing.T) {
     testfile := &quot;../testdata/testfile&quot;
     // do some stuff
 }
-</code></pre>
-<p><code>my-project/internal/one/two/bar_test.go</code></p>
-<pre><code class="language-go">func TestBar(t *testing.T) {
+</code></pre><p><code>my-project/internal/one/two/bar_test.go</code></p><pre><code class=language-go>func TestBar(t *testing.T) {
     testfile := &quot;../../../testdata/testfile&quot;
     // do some stuff
 }
-</code></pre>
-<p>可以發現當相對位置不一樣的時候，就要去改變目錄的路徑，相當惱人。</p>
-<h2 id="runtimecaller">runtime.Caller</h2>
-<p><code>func Caller(skip int) (pc uintptr, file string, line int, ok bool)</code></p>
-<p><a href="https://golang.org/pkg/runtime/#Caller">runtime.Caller</a> 可以顯示執行過程中呼叫的訊息，藉由 skip 參數的不同，還可以往前 trace 呼叫的順序。</p>
-<blockquote>
-<p><code>skip=0</code> 表示 caller 自己</p>
-</blockquote>
-<pre><code class="language-go">package main
+</code></pre><p>可以發現當相對位置不一樣的時候，就要去改變目錄的路徑，相當惱人。</p><h2 id=runtimecaller>runtime.Caller</h2><p><code>func Caller(skip int) (pc uintptr, file string, line int, ok bool)</code></p><p><a href=https://golang.org/pkg/runtime/#Caller>runtime.Caller</a> 可以顯示執行過程中呼叫的訊息，藉由 skip 參數的不同，還可以往前 trace 呼叫的順序。</p><blockquote><p><code>skip=0</code> 表示 caller 自己</p></blockquote><pre><code class=language-go>package main
 
 import (
     &quot;fmt&quot;
@@ -100,12 +20,7 @@ func main() {
     fmt.Println(file, line)
     // /Users/clouding/go/src/github.com/cloudingcity/testing/main.go 9
 }
-</code></pre>
-<p>上面的例子可以得知 runtime.Caller 是在 main.go#9 執行的。</p>
-<h2 id="solution">Solution</h2>
-<p>根據 <code>runtime.Caller</code>，可以知道 runtime 中該 file 的完整路徑，當然也可以得到他的目錄路徑。</p>
-<p>在 testdata 目錄中新增一個 file <code>my-project/testdata/testdata.go</code></p>
-<pre><code class="language-go">package testdata
+</code></pre><p>上面的例子可以得知 runtime.Caller 是在 main.go#9 執行的。</p><h2 id=solution>Solution</h2><p>根據 <code>runtime.Caller</code>，可以知道 runtime 中該 file 的完整路徑，當然也可以得到他的目錄路徑。</p><p>在 testdata 目錄中新增一個 file <code>my-project/testdata/testdata.go</code></p><pre><code class=language-go>package testdata
 
 import (
     &quot;path/filepath&quot;
@@ -122,77 +37,13 @@ func init() {
 func Path(rel string) string {
     return filepath.Join(basepath, rel)
 }
-</code></pre>
-<p><code>filepath.Dir</code> 取得 testdata 的目錄路徑，<code>Path</code> function 給相對路徑然後返回完整路徑。</p>
-<h3 id="refactor">Refactor</h3>
-<p><code>my-project/internal/foo_test.go</code></p>
-<pre><code class="language-go">func TestFoo(t *testing.T) {
+</code></pre><p><code>filepath.Dir</code> 取得 testdata 的目錄路徑，<code>Path</code> function 給相對路徑然後返回完整路徑。</p><h3 id=refactor>Refactor</h3><p><code>my-project/internal/foo_test.go</code></p><pre><code class=language-go>func TestFoo(t *testing.T) {
     testfile := testdata.Path(&quot;testfile&quot;)
     // do some stuff
 }
-</code></pre>
-<p><code>my-project/internal/one/two/bar_test.go</code></p>
-<pre><code class="language-go">func TestBar(t *testing.T) {
+</code></pre><p><code>my-project/internal/one/two/bar_test.go</code></p><pre><code class=language-go>func TestBar(t *testing.T) {
     testfile := testdata.Path(&quot;testfile&quot;)
     // do some stuff
 }
-</code></pre>
-<p>重構之後就乾淨很多，之後要取得 testdata 目錄下的檔案也只要使用 <code>testdata.Path()</code> 就可以了。</p>
-<h3 id="read-more">Read More</h3>
-<ul>
-<li><a href="/go/refactor">Go 重構筆記 1 - Extract Method</a></li>
-</ul>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/go/refactor-2/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/go/mutex-rwmutex/" class="card blog-card" rel="bookmark" >
-  
-  <div class="card-img-container">
-    <p class="card-img-overlay">Next Article</p>
-    <picture>
-      
-      <source srcset="https://clouding.city/go/mutex-rwmutex/go-learn.png">
-      <img src="https://clouding.city/go/mutex-rwmutex/go-learn.png" class="card-img" >
-    </picture>
-  </div>
-  
-  <article class="card-body">
-    <h2 class="card-title">Go 簡單例子來理解 sync.Mutex 和 sync.RWMutex</h2>
-    <p class="card-text">用簡單的例子來理解 sync.Mutex 和 sync.RWMutex。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2020-05-01 51:00">May 1, 2020</time></p>
-      <p>#go </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+</code></pre><p>重構之後就乾淨很多，之後要取得 testdata 目錄下的檔案也只要使用 <code>testdata.Path()</code> 就可以了。</p><h3 id=read-more>Read More</h3><ul><li><a href=/go/refactor>Go 重構筆記 1 - Extract Method</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/go/refactor-2/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/go/mutex-rwmutex/ class="card blog-card" rel=bookmark><div class=card-img-container><p class=card-img-overlay>Next Article</p><picture>
+<source srcset=https://clouding.city/go/mutex-rwmutex/go-learn.png><img src=https://clouding.city/go/mutex-rwmutex/go-learn.png class=card-img></picture></div><article class=card-body><h2 class=card-title>Go 簡單例子來理解 sync.Mutex 和 sync.RWMutex</h2><p class=card-text>用簡單的例子來理解 sync.Mutex 和 sync.RWMutex。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2020-05-01 51:00">May 1, 2020</time></p><p>#go</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>

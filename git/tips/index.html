@@ -1,202 +1,39 @@
-<!DOCTYPE html>
-<html lang="zh-tw" dir="ltr">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="fb:app_id" content="300727321066688" />
-  <title>Git 環境設定 小技巧 &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-  
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
-  
-  
-  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  
-    
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-	ga('create', 'UA-146771426-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-<script async src='https://www.google-analytics.com/analytics.js'></script>
-
-  
-  
-</head>
-
-  <body class="single-body">
-    <nav class="nav-bar side-padding">
-  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
-  <h1 class="nav-header">
-    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
-    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
-  </h1>
-  <div class="hamburger-menu">
-    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
-      <span></span>
-      <span></span>
-    </button>
-    <ul id="menu" class="hamburger-menu-overlay">
-      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
-      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
-      
-    </ul>
-  </div>
-</nav>
-
-    <main class="content side-text-padding">
-      <article class="post">
-        <header class="post-header">
-        	<h1 class="post-title">Git 環境設定 小技巧</h1>
-          <p class="post-date">Posted <time datetime="2017-06-07">Jun 7, 2017</time></p>
-        </header>
-        
-        <p>從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</p>
-<h1 id="git-設定">Git 設定</h1>
-<p>git config 有三個層級，設定優先權: local &gt; global &gt; system</p>
-<ul>
-<li>系統 <code>--system</code> (需要 root 權限)
-<ul>
-<li>Windows: C:\Program Files (x86)\Git\etc\gitconfig</li>
-<li>Linux: /etc/gitconfig</li>
-<li>OS X: /usr/local/git/etc/gitconfig</li>
-</ul>
-</li>
-<li>使用者 <code>--global</code>
-<ul>
-<li>Windows: C:\Users&lt;user-name&gt;.gitconfig</li>
-<li>Linux: ~/.gitconfig</li>
-<li>OS X: ~/.gitconfig</li>
-</ul>
-</li>
-<li>儲存庫 <code>--local</code> (default)
-<ul>
-<li><!-- raw HTML omitted -->/.git/config</li>
-</ul>
-</li>
-</ul>
-<h2 id="錯字自動校正">錯字自動校正</h2>
-<p>常常打錯字可以開啟自動校正。</p>
-<p>預設值為 0，會顯示 <code>Did you mean this?</code></p>
-<pre><code class="language-bash">$ git lpg
+<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>Git 環境設定 小技巧 &#183; Clouding City 克勞丁城市</title><meta name=description content="從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
+<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>Git 環境設定 小技巧</h1><p class=post-date>Posted <time datetime=2017-06-07>Jun 7, 2017</time></p></header><p>從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</p><h1 id=git-設定>Git 設定</h1><p>git config 有三個層級，設定優先權: local > global > system</p><ul><li>系統 <code>--system</code> (需要 root 權限)<ul><li>Windows: C:\Program Files (x86)\Git\etc\gitconfig</li><li>Linux: /etc/gitconfig</li><li>OS X: /usr/local/git/etc/gitconfig</li></ul></li><li>使用者 <code>--global</code><ul><li>Windows: C:\Users&lt;user-name>.gitconfig</li><li>Linux: ~/.gitconfig</li><li>OS X: ~/.gitconfig</li></ul></li><li>儲存庫 <code>--local</code> (default)<ul><li>/.git/config</li></ul></li></ul><h2 id=錯字自動校正>錯字自動校正</h2><p>常常打錯字可以開啟自動校正。</p><p>預設值為 0，會顯示 <code>Did you mean this?</code></p><pre><code class=language-bash>$ git lpg
 
 git: 'lpg' is not a git command. See 'git --help'.
 
 Did you mean this?
         log
-</code></pre>
-<p>設定一秒後校正，單位為 1/10 秒</p>
-<pre><code class="language-bash">git config --global help.autocorrect 10
-</code></pre>
-<pre><code class="language-bash">$ git lpg
+</code></pre><p>設定一秒後校正，單位為 1/10 秒</p><pre><code class=language-bash>git config --global help.autocorrect 10
+</code></pre><pre><code class=language-bash>$ git lpg
 
 WARNING: You called a Git command named 'lpg', which does not exist.
 Continuing under the assumption that you meant 'log'
 in 1.0 seconds automatically...
 ...
-</code></pre>
-<blockquote>
-<p><code>ctrl+c</code> 可中斷校正</p>
-</blockquote>
-<h2 id="設定-push-預設值">設定 push 預設值</h2>
-<p>避免將錯誤的分支 push 到遠端去</p>
-<ul>
-<li><strong>nothing</strong>: 需要指定分支才能 push</li>
-<li><strong>simple</strong>: local/remote 分支名稱相同才可以 push</li>
-</ul>
-<pre><code class="language-bash">git config --global push.default [nothing/simple]
-</code></pre>
-<h2 id="設定預設編輯器">設定預設編輯器</h2>
-<pre><code class="language-bash">git config --global core.editor [your-editor]
-</code></pre>
-<hr>
-<h1 id="git-alias">Git Alias</h1>
-<p>用來縮短打字的時間，或是定義有意義的名字使用多種參數指令化為新功能</p>
-<blockquote>
-<p>移除別名用 <code>--unset</code> 參數
-外部指令開頭要 + <code>!</code></p>
-</blockquote>
-<h2 id="常用指令設為別名">常用指令設為別名</h2>
-<pre><code class="language-bash">git config --global alias.co checkout
+</code></pre><blockquote><p><code>ctrl+c</code> 可中斷校正</p></blockquote><h2 id=設定-push-預設值>設定 push 預設值</h2><p>避免將錯誤的分支 push 到遠端去</p><ul><li><strong>nothing</strong>: 需要指定分支才能 push</li><li><strong>simple</strong>: local/remote 分支名稱相同才可以 push</li></ul><pre><code class=language-bash>git config --global push.default [nothing/simple]
+</code></pre><h2 id=設定預設編輯器>設定預設編輯器</h2><pre><code class=language-bash>git config --global core.editor [your-editor]
+</code></pre><hr><h1 id=git-alias>Git Alias</h1><p>用來縮短打字的時間，或是定義有意義的名字使用多種參數指令化為新功能</p><blockquote><p>移除別名用 <code>--unset</code> 參數
+外部指令開頭要 + <code>!</code></p></blockquote><h2 id=常用指令設為別名>常用指令設為別名</h2><pre><code class=language-bash>git config --global alias.co checkout
 git config --global alias.br branch
 git config --global alias.ci commit
 git config --global alias.cm &quot;commit -m&quot;
 git config --global alias.st status
-</code></pre>
-<h2 id="git-acm">git acm</h2>
-<p>相等於 <code>git add -A + git commit -m</code></p>
-<p>新增全部到索引並提交</p>
-<pre><code class="language-bash">git config --global alias.acm &quot;!git add -A &amp;&amp; git commit -m&quot;
-</code></pre>
-<h2 id="git-log">git log</h2>
-<p>更好閱讀的 git log</p>
-<pre><code class="language-bash">git config --global alias.tree &quot;log --graph --decorate --pretty=oneline --abbrev-commit&quot;
+</code></pre><h2 id=git-acm>git acm</h2><p>相等於 <code>git add -A + git commit -m</code></p><p>新增全部到索引並提交</p><pre><code class=language-bash>git config --global alias.acm &quot;!git add -A &amp;&amp; git commit -m&quot;
+</code></pre><h2 id=git-log>git log</h2><p>更好閱讀的 git log</p><pre><code class=language-bash>git config --global alias.tree &quot;log --graph --decorate --pretty=oneline --abbrev-commit&quot;
 git config --global alias.lg1 &quot;log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all&quot;
 git config --global alias.lg2 &quot;log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all&quot;
 git config --global alias.lg &quot;!git lg1&quot;
-</code></pre>
-<h2 id="git-unstage">git unstage</h2>
-<p>將檔案移除索引</p>
-<pre><code class="language-bash">git config --global alias.unstage &quot;reset HEAD --&quot;
-</code></pre>
-<blockquote>
-<p><code>git unstage myFile.txt</code> 相等於 <code>git reset HEAD myFile.txt</code></p>
-</blockquote>
-<h2 id="git-undo">git undo</h2>
-<p>快速取消最近一次的提交</p>
-<pre><code class="language-bash">git config --global alias.undo &quot;reset --soft HEAD~1&quot;
-</code></pre>
-<h2 id="git-last">git last</h2>
-<p>查看最近提交的內容</p>
-<pre><code class="language-bash">git config --global alias.last &quot;log -1 HEAD&quot;
-</code></pre>
-<h2 id="git-difflast">git difflast</h2>
-<p>查看最近提交的內容差異</p>
-<pre><code class="language-bash">git config --global alias.difflast &quot;diff --cached HEAD^&quot;
-</code></pre>
-<hr>
-<h1 id="git-rebase-避免無謂的-merge">git rebase 避免無謂的 merge</h1>
-<p>常常在合併遠端相同分支的時候，都會出現沒有必要的 merge，會造成線路變得複雜。</p>
-<blockquote>
-<p>rebase 會修改原本的 hash id，要注意</p>
-</blockquote>
-<h2 id="比較">比較</h2>
-<ul>
-<li>
-<p><code>git pull</code> 會多出不必要的 merge 分支
-<img src="merge.png" alt="merge.png"></p>
-</li>
-<li>
-<p><code>git pull --rebase</code> 路線看起來比較好看不複雜
-<img src="rebase.png" alt="rebase.png"></p>
-</li>
-</ul>
-<h2 id="設定-local-master-分支預設值為-git-pull---rebase">設定 local master 分支預設值為 <code>git pull --rebase</code></h2>
-<pre><code class="language-bash">git config branch.master.rebase true
-</code></pre>
-<h2 id="設定-global-預設值為-git-pull---rebase">設定 global 預設值為 <code>git pull --rebase</code></h2>
-<pre><code class="language-bash">git config --global pull.rebase true
-</code></pre>
-<blockquote>
-<p>更多相關設定<a href="https://stackoverflow.com/questions/13846300/how-to-make-git-pull-use-rebase-by-default-for-all-my-repositories">How to make Git pull use rebase by default for all my repositories?</a></p>
-</blockquote>
-<hr>
-<h1 id="head-符號參照">HEAD 符號參照</h1>
-<ul>
-<li><code>~</code>: 代表第幾個階層</li>
-<li><code>^</code>: 代表第幾個 parent</li>
-</ul>
-<p>這裡有一個參考圖，可以看出之間的關係</p>
-<pre><code>G   H   I   J
+</code></pre><h2 id=git-unstage>git unstage</h2><p>將檔案移除索引</p><pre><code class=language-bash>git config --global alias.unstage &quot;reset HEAD --&quot;
+</code></pre><blockquote><p><code>git unstage myFile.txt</code> 相等於 <code>git reset HEAD myFile.txt</code></p></blockquote><h2 id=git-undo>git undo</h2><p>快速取消最近一次的提交</p><pre><code class=language-bash>git config --global alias.undo &quot;reset --soft HEAD~1&quot;
+</code></pre><h2 id=git-last>git last</h2><p>查看最近提交的內容</p><pre><code class=language-bash>git config --global alias.last &quot;log -1 HEAD&quot;
+</code></pre><h2 id=git-difflast>git difflast</h2><p>查看最近提交的內容差異</p><pre><code class=language-bash>git config --global alias.difflast &quot;diff --cached HEAD^&quot;
+</code></pre><hr><h1 id=git-rebase-避免無謂的-merge>git rebase 避免無謂的 merge</h1><p>常常在合併遠端相同分支的時候，都會出現沒有必要的 merge，會造成線路變得複雜。</p><blockquote><p>rebase 會修改原本的 hash id，要注意</p></blockquote><h2 id=比較>比較</h2><ul><li><p><code>git pull</code> 會多出不必要的 merge 分支
+<img src=merge.png alt=merge.png></p></li><li><p><code>git pull --rebase</code> 路線看起來比較好看不複雜
+<img src=rebase.png alt=rebase.png></p></li></ul><h2 id=設定-local-master-分支預設值為-git-pull---rebase>設定 local master 分支預設值為 <code>git pull --rebase</code></h2><pre><code class=language-bash>git config branch.master.rebase true
+</code></pre><h2 id=設定-global-預設值為-git-pull---rebase>設定 global 預設值為 <code>git pull --rebase</code></h2><pre><code class=language-bash>git config --global pull.rebase true
+</code></pre><blockquote><p>更多相關設定<a href=https://stackoverflow.com/questions/13846300/how-to-make-git-pull-use-rebase-by-default-for-all-my-repositories>How to make Git pull use rebase by default for all my repositories?</a></p></blockquote><hr><h1 id=head-符號參照>HEAD 符號參照</h1><ul><li><code>~</code>: 代表第幾個階層</li><li><code>^</code>: 代表第幾個 parent</li></ul><p>這裡有一個參考圖，可以看出之間的關係</p><pre><code>G   H   I   J
  \ /     \ /
   D   E   F
    \  |  / \
@@ -217,65 +54,4 @@ G = A^^^ = A^1^1^1 = A~3
 H = D^2  = B^^2    = A^^^2  = A~2^2
 I = F^   = B^3^    = A^^3^
 J = F^2  = B^3^2   = A^^3^2
-</code></pre>
-<hr>
-<h1 id="學習資源">學習資源</h1>
-<p><a href="http://learngitbranching.js.org/">LearnGitBranching</a> 以圖形化的方式學習 Git，可以清楚了解分支 HEAD之間的關係，左邊下command，右邊會有圖形呈現，是個不錯的學習網站。</p>
-<hr>
-<h1 id="my-gitconfig-settings">My .gitconfig settings</h1>
-<ul>
-<li><a href="https://gist.github.com/cloudingcity/64335393dd835c315992b8139b505cfb">GitHubGist</a></li>
-</ul>
-<hr>
-<h1 id="reference">Reference</h1>
-<ul>
-<li><a href="https://ihower.tw/blog/archives/3843">使用 git rebase 避免無謂的 merge</a></li>
-<li><a href="https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs">Pretty git branch graphs</a></li>
-<li><a href="https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git">What&rsquo;s the difference between HEAD^ and HEAD~ in Git?</a></li>
-<li>7天學會版版控制 (ISBN：9789864340842)</li>
-</ul>
-
-      </article>
-      
-      <div class="fb-comments"
-     data-href="https://clouding.city/git/tips/"
-     data-numposts="5"
-     data-width="100%">
-</div>
-
-    </main>
-    <nav class="end-nav side-padding">
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/git/command/" class="card blog-card" rel="bookmark" >
-  
-  <article class="card-body">
-    <h2 class="card-title">Git 指令</h2>
-    <p class="card-text">筆記一下 Git 指令。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2017-06-03 63:00">Jun 3, 2017</time></p>
-      <p>#Git </p>
-    </div>
-  </article>
-</a>
-      
-      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
-  Home
-</a>
-    </nav>
-    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
-    onload="renderMathInElement(document.body);"></script>
-  
-  <script src="https://clouding.city/js/core.min.js"></script>
-<script>
-  hljs.initHighlightingOnLoad();
-</script>
-<div id="fb-root"></div>
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
-
-  </body>
-</html>
+</code></pre><hr><h1 id=學習資源>學習資源</h1><p><a href=http://learngitbranching.js.org/>LearnGitBranching</a> 以圖形化的方式學習 Git，可以清楚了解分支 HEAD之間的關係，左邊下command，右邊會有圖形呈現，是個不錯的學習網站。</p><hr><h1 id=my-gitconfig-settings>My .gitconfig settings</h1><ul><li><a href=https://gist.github.com/cloudingcity/64335393dd835c315992b8139b505cfb>GitHubGist</a></li></ul><hr><h1 id=reference>Reference</h1><ul><li><a href=https://ihower.tw/blog/archives/3843>使用 git rebase 避免無謂的 merge</a></li><li><a href=https://stackoverflow.com/questions/1057564/pretty-git-branch-graphs>Pretty git branch graphs</a></li><li><a href=https://stackoverflow.com/questions/2221658/whats-the-difference-between-head-and-head-in-git>What&rsquo;s the difference between HEAD^ and HEAD~ in Git?</a></li><li>7天學會版版控制 (ISBN：9789864340842)</li></ul></article><div class=fb-comments data-href=https://clouding.city/git/tips/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/git/command/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>Git 指令</h2><p class=card-text>筆記一下 Git 指令。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-06-03 63:00">Jun 3, 2017</time></p><p>#Git</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
