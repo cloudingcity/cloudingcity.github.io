@@ -1,5 +1,141 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>忽略已追蹤的檔案 &#183; Clouding City 克勞丁城市</title><meta name=description content="有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>忽略已追蹤的檔案</h1><p class=post-date>Posted <time datetime=2019-01-13>Jan 13, 2019</time></p></header><p>有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做：</p><ol><li><code>.gitconfig</code> 加入 <code>core.excludesfile</code></li><li>直接修改 <code>.git/info/exclude</code></li></ol><p>但是某些情況要忽略<strong>已追蹤</strong>的檔案，這些方法行不通，該怎麼處理？</p><h4 id=1-忽略已追蹤>1. 忽略已追蹤</h4><p><code>git update-index --skip-worktree [&lt;file>...]</code></p><h4 id=2-解除忽略>2. 解除忽略</h4><p><code>git update-index --no-skip-worktree [&lt;file>...]</code></p><h4 id=3-顯示忽略>3. 顯示忽略</h4><p><code>git ls-files -v | grep ^S</code></p><h2 id=aliases>Aliases</h2><p>可以加入 alias 方便操作</p><pre><code>ignore = update-index --skip-worktree
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>忽略已追蹤的檔案 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">忽略已追蹤的檔案</h1>
+          <p class="post-date">Posted <time datetime="2019-01-13">Jan 13, 2019</time></p>
+        </header>
+        
+        <p>有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做：</p>
+<ol>
+<li><code>.gitconfig</code> 加入 <code>core.excludesfile</code></li>
+<li>直接修改 <code>.git/info/exclude</code></li>
+</ol>
+<p>但是某些情況要忽略<strong>已追蹤</strong>的檔案，這些方法行不通，該怎麼處理？</p>
+<h4 id="1-忽略已追蹤">1. 忽略已追蹤</h4>
+<p><code>git update-index --skip-worktree [&lt;file&gt;...]</code></p>
+<h4 id="2-解除忽略">2. 解除忽略</h4>
+<p><code>git update-index --no-skip-worktree [&lt;file&gt;...]</code></p>
+<h4 id="3-顯示忽略">3. 顯示忽略</h4>
+<p><code>git ls-files -v | grep ^S</code></p>
+<h2 id="aliases">Aliases</h2>
+<p>可以加入 alias 方便操作</p>
+<pre><code>ignore = update-index --skip-worktree
 unignore = update-index --no-skip-worktree
 ignored = !git ls-files -v | grep ^S
-</code></pre><h2 id=assume-unchanged-vs-skip-worktree>assume-unchanged vs skip-worktree</h2><p><code>update-index</code> 有兩個很相似的參數：</p><ul><li><p><strong>assume-unchanged</strong> 在使用 <code>git reset --hard</code> 時會改變 index，如果 repository 被忽略的檔案有修改時，<code>git pull</code> 會直接覆蓋被忽略的狀態</p></li><li><p><strong>skip-worktree</strong> 則一定要手動下 <code>--no-skip-worktree</code> 才能成功進行 <code>git pull</code></p></li></ul><p>所以為了了解被忽略的檔案在 remote 是否有發生改變，還是推薦使用 <code>--skip-worktree</code></p><h2 id=references>References</h2><ul><li><a href=https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally>How do I configure git to ignore some files locally?</a></li><li><a href=https://stackoverflow.com/questions/13630849/git-difference-between-assume-unchanged-and-skip-worktree/13631525#13631525>Git - Difference Between &lsquo;assume-unchanged&rsquo; and &lsquo;skip-worktree&rsquo;</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/git/ignore-tracked/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/git/fixup-autosquash/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>git fixup & autosquash 加快 commit 整理速度</h2><p class=card-text>在提交程式碼的時候，總會用 rebase -i 來整理還沒推送出去的 branch，像是錯字或是 coding style 之類的小錯誤，以往總是</p><div class="card-subtext muted-text"><p>Posted <time datetime="2018-05-20 520:00">May 20, 2018</time></p><p>#Git</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+</code></pre>
+<h2 id="assume-unchanged-vs-skip-worktree">assume-unchanged vs skip-worktree</h2>
+<p><code>update-index</code> 有兩個很相似的參數：</p>
+<ul>
+<li>
+<p><strong>assume-unchanged</strong> 在使用 <code>git reset --hard</code> 時會改變 index，如果 repository 被忽略的檔案有修改時，<code>git pull</code> 會直接覆蓋被忽略的狀態</p>
+</li>
+<li>
+<p><strong>skip-worktree</strong> 則一定要手動下 <code>--no-skip-worktree</code> 才能成功進行 <code>git pull</code></p>
+</li>
+</ul>
+<p>所以為了了解被忽略的檔案在 remote 是否有發生改變，還是推薦使用 <code>--skip-worktree</code></p>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/1753070/how-do-i-configure-git-to-ignore-some-files-locally">How do I configure git to ignore some files locally?</a></li>
+<li><a href="https://stackoverflow.com/questions/13630849/git-difference-between-assume-unchanged-and-skip-worktree/13631525#13631525">Git - Difference Between &lsquo;assume-unchanged&rsquo; and &lsquo;skip-worktree&rsquo;</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/git/ignore-tracked/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/git/fixup-autosquash/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">git fixup &amp; autosquash 加快 commit 整理速度</h2>
+    <p class="card-text">在提交程式碼的時候，總會用 rebase -i 來整理還沒推送出去的 branch，像是錯字或是 coding style 之類的小錯誤，以往總是</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2018-05-20 520:00">May 20, 2018</time></p>
+      <p>#Git </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

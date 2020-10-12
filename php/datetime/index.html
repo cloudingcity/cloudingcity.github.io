@@ -1,5 +1,79 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>PHP DateTime 時間類別 &#183; Clouding City 克勞丁城市</title><meta name=description content="Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>PHP DateTime 時間類別</h1><p class=post-date>Posted <time datetime=2017-05-17>May 17, 2017</time></p></header><p>Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？</p><p>以下 5 種相關類別:</p><ul><li><a href=#datetime>DateTime</a>: 日期時間主要類別</li><li><a href=#datetimeimmutable>DateTimeImmutable</a>: 和 <code>DateTime</code> 完全一樣，差別在於不會被修改，而是返回一個新的物件</li><li><a href=#dateinterval>DateInterval</a>: 代表固定或相對長度的時間</li><li><a href=#datetimezone>DateTimeZone</a>: 時區相關</li><li><a href=#dateperiod>DatePeriod</a>: 固定時間區間取得日期時間</li></ul><hr><h1 id=datetime><code>DateTime</code></h1><h2 id=create>Create:</h2><h3 id=new-datetime>new DateTime()</h3><pre><code class=language-php>// 預設值為 now，等同 new DateTime('now');
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>PHP DateTime 時間類別 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">PHP DateTime 時間類別</h1>
+          <p class="post-date">Posted <time datetime="2017-05-17">May 17, 2017</time></p>
+        </header>
+        
+        <p>Developer 應該會常處理到日期和時間的問題，該如何更簡單準確的建立和調整日期、時間、時區？</p>
+<p>以下 5 種相關類別:</p>
+<ul>
+<li><a href="#datetime">DateTime</a>: 日期時間主要類別</li>
+<li><a href="#datetimeimmutable">DateTimeImmutable</a>: 和 <code>DateTime</code> 完全一樣，差別在於不會被修改，而是返回一個新的物件</li>
+<li><a href="#dateinterval">DateInterval</a>: 代表固定或相對長度的時間</li>
+<li><a href="#datetimezone">DateTimeZone</a>: 時區相關</li>
+<li><a href="#dateperiod">DatePeriod</a>: 固定時間區間取得日期時間</li>
+</ul>
+<hr>
+<h1 id="datetime"><code>DateTime</code></h1>
+<h2 id="create">Create:</h2>
+<h3 id="new-datetime">new DateTime()</h3>
+<pre><code class="language-php">// 預設值為 now，等同 new DateTime('now');
 $date = new DateTime();
 
 // yesterday, tomorrow (時間為 00:00:00)
@@ -13,44 +87,98 @@ $date = new DateTime('2017/05/17 09:15 PM');
 
 // +- day, week, month, year
 $date = new DateTime('+1 day');
-</code></pre><h3 id=relative-formats>Relative Formats</h3><p>特別的關鍵字解析</p><pre><code class=language-php>// today: 2018-07-22 (Sunday)
+</code></pre>
+<h3 id="relative-formats">Relative Formats</h3>
+<p>特別的關鍵字解析</p>
+<pre><code class="language-php">// today: 2018-07-22 (Sunday)
 
 // 2018-07-01
 $date = new DateTime('first day of this month');
 
 // 2018-07-16
 $date = new DateTime('monday this week');
-</code></pre><blockquote><p><a href=http://php.net/manual/en/datetime.formats.relative.php>PHP.net - Relative Formats</a></p></blockquote><h3 id=datetimecreatefromformat>DateTime::createFromFormat()</h3><p>因應不同格式建立物件</p><pre><code class=language-php>$date = DateTime::createFromFormat('Y/m/d H.i', '2017/05/17 15.15');
+</code></pre>
+<blockquote>
+<p><a href="http://php.net/manual/en/datetime.formats.relative.php">PHP.net - Relative Formats</a></p>
+</blockquote>
+<h3 id="datetimecreatefromformat">DateTime::createFromFormat()</h3>
+<p>因應不同格式建立物件</p>
+<pre><code class="language-php">$date = DateTime::createFromFormat('Y/m/d H.i', '2017/05/17 15.15');
 
 $date = DateTime::createFromFormat('\t\o\d\a\y \i\s Y F j', 'today is 2014 January 1');
-</code></pre><blockquote><p><a href=http://php.net/manual/en/datetime.createfromformat.php>PHP.net - datetime.createfromformat</a></p></blockquote><h2 id=output>Output:</h2><h3 id=format>format()</h3><pre><code class=language-php>// 2017-05-18 13:27:43
+</code></pre>
+<blockquote>
+<p><a href="http://php.net/manual/en/datetime.createfromformat.php">PHP.net - datetime.createfromformat</a></p>
+</blockquote>
+<h2 id="output">Output:</h2>
+<h3 id="format">format()</h3>
+<pre><code class="language-php">// 2017-05-18 13:27:43
 echo $date-&gt;format('Y-m-d H:i:s');
-</code></pre><blockquote><p><a href=http://www.php.net/manual/en/function.date.php>PHP.net - format</a></p></blockquote><h3 id=gettimestamp>getTimestamp()</h3><pre><code class=language-php>// 1495088399
+</code></pre>
+<blockquote>
+<p><a href="http://www.php.net/manual/en/function.date.php">PHP.net - format</a></p>
+</blockquote>
+<h3 id="gettimestamp">getTimestamp()</h3>
+<pre><code class="language-php">// 1495088399
 echo $date-&gt;getTimestamp();
-</code></pre><h2 id=setting>Setting:</h2><h3 id=setdate>setDate()</h3><pre><code class=language-php>$date-&gt;setDate(2017, 05, 17);
-</code></pre><h3 id=settime>setTime()</h3><pre><code class=language-php>$date-&gt;setTime(19, 30, 17);
-</code></pre><h3 id=settimestamp>setTimestamp()</h3><pre><code class=language-php>$date-&gt;setTimestamp(1495088399);
-</code></pre><h3 id=modify>modify()</h3><pre><code class=language-php>// +- day, week, month, year
+</code></pre>
+<h2 id="setting">Setting:</h2>
+<h3 id="setdate">setDate()</h3>
+<pre><code class="language-php">$date-&gt;setDate(2017, 05, 17);
+</code></pre>
+<h3 id="settime">setTime()</h3>
+<pre><code class="language-php">$date-&gt;setTime(19, 30, 17);
+</code></pre>
+<h3 id="settimestamp">setTimestamp()</h3>
+<pre><code class="language-php">$date-&gt;setTimestamp(1495088399);
+</code></pre>
+<h3 id="modify">modify()</h3>
+<pre><code class="language-php">// +- day, week, month, year
 $date-&gt;modify('-10 years');
-</code></pre><h2 id=compare>Compare:</h2><h3 id=diff>diff()</h3><p>帶入 <code>DateTime</code> 2物件，回傳 <code>DateInterval</code> 物件</p><pre><code class=language-php>$date1 = new DateTime('2017-05-11');
+</code></pre>
+<h2 id="compare">Compare:</h2>
+<h3 id="diff">diff()</h3>
+<p>帶入 <code>DateTime</code> 2物件，回傳 <code>DateInterval</code> 物件</p>
+<pre><code class="language-php">$date1 = new DateTime('2017-05-11');
 $datt2 = new DateTime('2017-05-17');
 $interval = $date1-&gt;diff($datt2);
 
 // +6 days
 echo $interval-&gt;format('%R%a days');
-</code></pre><blockquote><p><a href=http://php.net/manual/en/dateinterval.format.php>PHP.net - DateInterval::format</a></p></blockquote><hr><h1 id=datetimeimmutable><code>DateTimeImmutable</code></h1><p>和 <code>DateTime</code> 一樣，差別在於不會被修改，而是返回一個新的物件</p><pre><code class=language-php>$date = new DateTime('2018-06-06');
+</code></pre>
+<blockquote>
+<p><a href="http://php.net/manual/en/dateinterval.format.php">PHP.net - DateInterval::format</a></p>
+</blockquote>
+<hr>
+<h1 id="datetimeimmutable"><code>DateTimeImmutable</code></h1>
+<p>和 <code>DateTime</code> 一樣，差別在於不會被修改，而是返回一個新的物件</p>
+<pre><code class="language-php">$date = new DateTime('2018-06-06');
 $date-&gt;modify('+10 days');
 $date-&gt;format('Y-m-d'); // 2018-06-16
 
 $date = new DateTimeImmutable('2018-06-06');
 $date-&gt;modify('+10 days');
 $date-&gt;format('Y-m-d'); // 2018-06-06
-</code></pre><hr><h1 id=dateinterval><code>DateInterval</code></h1><h2 id=create-1>Create:</h2><h3 id=new-dateinterval>new DateInterval()</h3><p><code>DateIntervale</code> 類別代表固定或相對長度的時間，用來修改 <code>DateTime</code> 的值。
-建構式接受一個字串參數，以 <code>P</code> 為開頭的字串，<code>T</code>分隔日期和時間，最後接上 <strong>period designator</strong> 修飾前一個整數。</p><blockquote><p>Y (年), M (月), W (週), D (日), H (時), M (分), S (秒)</p></blockquote><pre><code class=language-php>// 建立 2週 5小時
+</code></pre>
+<hr>
+<h1 id="dateinterval"><code>DateInterval</code></h1>
+<h2 id="create-1">Create:</h2>
+<h3 id="new-dateinterval">new DateInterval()</h3>
+<p><code>DateIntervale</code> 類別代表固定或相對長度的時間，用來修改 <code>DateTime</code> 的值。
+建構式接受一個字串參數，以 <code>P</code> 為開頭的字串，<code>T</code>分隔日期和時間，最後接上 <strong>period designator</strong> 修飾前一個整數。</p>
+<blockquote>
+<p>Y (年), M (月), W (週), D (日), H (時), M (分), S (秒)</p>
+</blockquote>
+<pre><code class="language-php">// 建立 2週 5小時
 $interval = new DateInterval('P2WT5H');
-</code></pre><h3 id=dateintervalcreatefromdatestring>DateInterval::createFromDateString</h3><pre><code class=language-php>// 建立 2週 5小時
+</code></pre>
+<h3 id="dateintervalcreatefromdatestring">DateInterval::createFromDateString</h3>
+<pre><code class="language-php">// 建立 2週 5小時
 $interval = DateInterval::createFromDateString('2 weeks + 5 hours');
-</code></pre><h2 id=setting-1>Setting:</h2><h3 id=add-sub>add(), sub()</h3><pre><code class=language-php>$date = new DateTime('2017-05-17');
+</code></pre>
+<h2 id="setting-1">Setting:</h2>
+<h3 id="add-sub">add(), sub()</h3>
+<pre><code class="language-php">$date = new DateTime('2017-05-17');
 
 // 建立 2週 5小時
 $interval = new DateInterval('P2WT5H');
@@ -62,7 +190,12 @@ echo $date-&gt;format('Y-m-d H:i:s');
 // 2017-05-17 00:00:00
 $date-&gt;sub($interval);
 echo $date-&gt;format('Y-m-d H:i:s');
-</code></pre><hr><h1 id=datetimezone><code>DateTimeZone</code></h1><p><code>DateTimeZone</code> 類別代表時區，用來修改 <code>DateTime</code> 的值。</p><h2 id=create-2>Create:</h2><pre><code class=language-php>$timezone = new DateTimeZone('America/New_York');
+</code></pre>
+<hr>
+<h1 id="datetimezone"><code>DateTimeZone</code></h1>
+<p><code>DateTimeZone</code> 類別代表時區，用來修改 <code>DateTime</code> 的值。</p>
+<h2 id="create-2">Create:</h2>
+<pre><code class="language-php">$timezone = new DateTimeZone('America/New_York');
 
 $date = new DateTime('now', $timezone);
 
@@ -72,11 +205,33 @@ $date = DateTime::createFromFormat(
     '2017/05/17',
     $timezone
 );
-</code></pre><blockquote><p><a href=http://php.net/manual/en/timezones.php>PHP.net - List of Supported Timezones</a></p></blockquote><h2 id=setting-2>Setting:</h2><pre><code class=language-php>$date = new DateTime();
+</code></pre>
+<blockquote>
+<p><a href="http://php.net/manual/en/timezones.php">PHP.net - List of Supported Timezones</a></p>
+</blockquote>
+<h2 id="setting-2">Setting:</h2>
+<pre><code class="language-php">$date = new DateTime();
 
 $timezone = new DateTimeZone('America/New_York');
 $date-&gt;setTimezone($timezone);
-</code></pre><ul><li><a href=http://php.net/manual/en/timezones.php>PHP.net - List of Supported Timezones</a></li></ul><hr><h1 id=dateperiod><code>DatePeriod</code></h1><p>固定時間區間取得日期時間，<code>DatePeriod</code> 建構需要三個參數</p><ul><li><code>DateTime</code> 代表起始時間</li><li><code>DateInterval</code> 代表時間區間</li><li><strong>整數</strong>代表總數 或 <code>DateTime</code> 代表結束時間</li><li>DatePeriod::EXCLUDE_START_DATE = 1 ，排除初始日期 (option)</li></ul><p><code>DatePeriod</code>是個迭代器，每次都會拋出一個 <code>DateTime</code>。</p><ul><li>兩週為週期三輪</li></ul><pre><code class=language-php>$start = new DateTime('2017-05-17');
+</code></pre>
+<ul>
+<li><a href="http://php.net/manual/en/timezones.php">PHP.net - List of Supported Timezones</a></li>
+</ul>
+<hr>
+<h1 id="dateperiod"><code>DatePeriod</code></h1>
+<p>固定時間區間取得日期時間，<code>DatePeriod</code> 建構需要三個參數</p>
+<ul>
+<li><code>DateTime</code> 代表起始時間</li>
+<li><code>DateInterval</code> 代表時間區間</li>
+<li><strong>整數</strong>代表總數 或 <code>DateTime</code> 代表結束時間</li>
+<li>DatePeriod::EXCLUDE_START_DATE = 1 ，排除初始日期 (option)</li>
+</ul>
+<p><code>DatePeriod</code>是個迭代器，每次都會拋出一個 <code>DateTime</code>。</p>
+<ul>
+<li>兩週為週期三輪</li>
+</ul>
+<pre><code class="language-php">$start = new DateTime('2017-05-17');
 $interval = new DateInterval('P2W');
 $period = new DatePeriod(
     $start,
@@ -93,7 +248,11 @@ foreach ($period as $nextDateTime) {
  * 2017-06-14
  * 2017-06-28
  */
-</code></pre><ul><li>往後時間區間</li></ul><pre><code class=language-php>$start = new DateTime('2017-05-14');
+</code></pre>
+<ul>
+<li>往後時間區間</li>
+</ul>
+<pre><code class="language-php">$start = new DateTime('2017-05-14');
 $interval = DateInterval::createFromDateString('-1 day');
 $period = new DatePeriod($start, $interval, 3);
 
@@ -106,4 +265,56 @@ foreach ($period as $date) {
  * 2017-05-15
  * 2017-05-14
  */
-</code></pre><hr><h1 id=references>References</h1><ul><li>Modern PHP - Josh Lockhart</li><li><a href=http://php.net/manual/en/class.datetime.php>PHP.net - The DateTime class</a></li><li><a href=https://paulund.co.uk/datetime-php>Learn How To Use DateTime With PHP</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/php/datetime/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/php/alternative-syntax/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>PHP 控制流程替代語法提高程式碼可讀性</h2><p class=card-text>最近看 Laracasts 學到的一個小技巧，可以讓程式碼在 PHP + HTML View Template 更好閱讀。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-05-13 513:00">May 13, 2017</time></p><p>#PHP</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+</code></pre>
+<hr>
+<h1 id="references">References</h1>
+<ul>
+<li>Modern PHP - Josh Lockhart</li>
+<li><a href="http://php.net/manual/en/class.datetime.php">PHP.net - The DateTime class</a></li>
+<li><a href="https://paulund.co.uk/datetime-php">Learn How To Use DateTime With PHP</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/php/datetime/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/php/alternative-syntax/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">PHP 控制流程替代語法提高程式碼可讀性</h2>
+    <p class="card-text">最近看 Laracasts 學到的一個小技巧，可以讓程式碼在 PHP &#43; HTML View Template 更好閱讀。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2017-05-13 513:00">May 13, 2017</time></p>
+      <p>#PHP </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

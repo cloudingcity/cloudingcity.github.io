@@ -1,7 +1,185 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>Docker 基本使用 &#183; Clouding City 克勞丁城市</title><meta name=description content="最近很紅的 Container 技術，來試玩看看，寫個筆記。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>Docker 基本使用</h1><p class=post-date>Posted <time datetime=2017-05-08>May 8, 2017</time></p></header><p>最近很紅的 Container 技術 <strong><a href=https://www.docker.com>Docker</a></strong>，來試玩看看，寫個筆記。</p><h1 id=什麼是-docker->什麼是 Docker ?</h1><ul><li>使用 Container 技術</li><li>不是 VM (Virtual Machine)</li><li>有可封裝性</li><li>可攜性</li><li>輕量化</li></ul><h1 id=docker-可以做什麼>Docker 可以做什麼?</h1><ul><li>真對個別專案去建立它所需要的環境</li><li>每個專案有獨立空間</li><li>可打包和可攜性</li><li>部屬輕量化且快速</li></ul><h1 id=containers-vs-virtual-machine>Containers vs Virtual Machine</h1><p><img src=container-vm.png alt=container.png></p><ul><li><p><strong>Containers</strong>
-不必實作作業系統，直接使用 Host 資源，效能上快很多，共享 OS kernel，image 大小通常為 MB，幾乎立即啟動。</p></li><li><p><strong>Virtual Machine</strong>
-模擬完整作業系統，效能上比較慢，每個VM包含Apps、Bins/Libs，大小通常為 GB，啟動上也慢很多。</p></li></ul><table><thead><tr><th>特性</th><th>Containers</th><th>Virtual Machines</th></tr></thead><tbody><tr><td><strong>啟動</strong></td><td>秒級</td><td>分鐘級</td></tr><tr><td><strong>硬碟容量</strong></td><td>一般為 MB</td><td>一般為 GB</td></tr><tr><td><strong>效能</strong></td><td>接近原生</td><td>比較慢</td></tr><tr><td><strong>系統支援量</strong></td><td>單機支援上千個容器</td><td>一般幾十個</td></tr></tbody></table><h1 id=基本概念>基本概念</h1><p><img src=workflow.png alt=workflow.png></p><p><strong>與 Git Vagrant 的相似處</strong></p><table><thead><tr><th>Docker</th><th>Git</th><th>Vagrant</th></tr></thead><tbody><tr><td><strong>Image</strong> (映像檔)</td><td>git log</td><td>Vagrant Box</td></tr><tr><td><strong>Container</strong> (容器)</td><td>staging</td><td>Running VM</td></tr><tr><td><strong>Registry</strong> (倉庫)</td><td>GitHub</td><td>VagrantCloud</td></tr></tbody></table><h2 id=image-映像檔>Image 映像檔</h2><p>映像檔是一個唯讀的模板，可以用來建立容器，也可以從倉庫 <code>pull</code> 做好的映像檔來使用。</p><ul><li>唯讀</li><li>內容不可改變</li><li>一個環境可以用來運行</li><li><code>run</code> → <strong>Container</strong></li></ul><h2 id=container-容器>Container 容器</h2><p>Docker 利用容器執行應用，從映像檔建立的執行實例。它可以被啟動、開始、停止、刪除。每個容器都是相互隔離的、保證安全的平台。</p><ul><li>可讀可寫</li><li>執行程序</li><li>一到多個映像檔建構而成</li><li><code>commit</code> → <strong>Image</strong></li></ul><h2 id=registry-倉庫>Registry 倉庫</h2><p>倉庫是集中存放映像檔檔案的場所，公開倉庫（Public）和私有倉庫（Private）兩種形式。最大的公開倉庫是 <a href=https://hub.docker.com>Docker Hub</a>，存放了數量龐大的映像檔供使用者下載。使用者也可以在本地網路內建立一個私有倉庫。</p><ul><li><code>push</code> <strong>Image</strong> → <strong>Registry</strong></li><li><code>pull</code> <strong>Registry</strong> → <strong>Image</strong></li></ul><h1 id=installation>Installation</h1><p>參考<a href=https://docs.docker.com/engine/installation/>官方文件</a>，Windows 10 或 Mac 10.11 版本以上可以直接安裝，以下的版本可能要安裝 Docker Toolbox，用 VM 模擬 Docker 所需的環境。</p><blockquote><p>用 VM 架環境，本地端 IP 可能就不是 localhost，要用 <code>docker-machine ip</code> 查看 ip</p></blockquote><h1 id=command>Command</h1><ul><li><p><a href=https://docs.docker.com/engine/reference/commandline/version/>docker version</a> 顯示 Docker 版本資訊</p><pre><code class=language-bash># docker version [OPTIONS]
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>Docker 基本使用 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="最近很紅的 Container 技術，來試玩看看，寫個筆記。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Docker 基本使用</h1>
+          <p class="post-date">Posted <time datetime="2017-05-08">May 8, 2017</time></p>
+        </header>
+        
+        <p>最近很紅的 Container 技術 <strong><a href="https://www.docker.com">Docker</a></strong>，來試玩看看，寫個筆記。</p>
+<h1 id="什麼是-docker-">什麼是 Docker ?</h1>
+<ul>
+<li>使用 Container 技術</li>
+<li>不是 VM (Virtual Machine)</li>
+<li>有可封裝性</li>
+<li>可攜性</li>
+<li>輕量化</li>
+</ul>
+<h1 id="docker-可以做什麼">Docker 可以做什麼?</h1>
+<ul>
+<li>真對個別專案去建立它所需要的環境</li>
+<li>每個專案有獨立空間</li>
+<li>可打包和可攜性</li>
+<li>部屬輕量化且快速</li>
+</ul>
+<h1 id="containers-vs-virtual-machine">Containers vs Virtual Machine</h1>
+<p><img src="container-vm.png" alt="container.png"></p>
+<ul>
+<li>
+<p><strong>Containers</strong>
+不必實作作業系統，直接使用 Host 資源，效能上快很多，共享 OS kernel，image 大小通常為 MB，幾乎立即啟動。</p>
+</li>
+<li>
+<p><strong>Virtual Machine</strong>
+模擬完整作業系統，效能上比較慢，每個VM包含Apps、Bins/Libs，大小通常為 GB，啟動上也慢很多。</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Containers</th>
+<th>Virtual Machines</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>啟動</strong></td>
+<td>秒級</td>
+<td>分鐘級</td>
+</tr>
+<tr>
+<td><strong>硬碟容量</strong></td>
+<td>一般為 MB</td>
+<td>一般為 GB</td>
+</tr>
+<tr>
+<td><strong>效能</strong></td>
+<td>接近原生</td>
+<td>比較慢</td>
+</tr>
+<tr>
+<td><strong>系統支援量</strong></td>
+<td>單機支援上千個容器</td>
+<td>一般幾十個</td>
+</tr>
+</tbody>
+</table>
+<h1 id="基本概念">基本概念</h1>
+<p><img src="workflow.png" alt="workflow.png"></p>
+<p><strong>與 Git Vagrant 的相似處</strong></p>
+<table>
+<thead>
+<tr>
+<th>Docker</th>
+<th>Git</th>
+<th>Vagrant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Image</strong> (映像檔)</td>
+<td>git log</td>
+<td>Vagrant Box</td>
+</tr>
+<tr>
+<td><strong>Container</strong> (容器)</td>
+<td>staging</td>
+<td>Running VM</td>
+</tr>
+<tr>
+<td><strong>Registry</strong> (倉庫)</td>
+<td>GitHub</td>
+<td>VagrantCloud</td>
+</tr>
+</tbody>
+</table>
+<h2 id="image-映像檔">Image 映像檔</h2>
+<p>映像檔是一個唯讀的模板，可以用來建立容器，也可以從倉庫 <code>pull</code> 做好的映像檔來使用。</p>
+<ul>
+<li>唯讀</li>
+<li>內容不可改變</li>
+<li>一個環境可以用來運行</li>
+<li><code>run</code> → <strong>Container</strong></li>
+</ul>
+<h2 id="container-容器">Container 容器</h2>
+<p>Docker 利用容器執行應用，從映像檔建立的執行實例。它可以被啟動、開始、停止、刪除。每個容器都是相互隔離的、保證安全的平台。</p>
+<ul>
+<li>可讀可寫</li>
+<li>執行程序</li>
+<li>一到多個映像檔建構而成</li>
+<li><code>commit</code> → <strong>Image</strong></li>
+</ul>
+<h2 id="registry-倉庫">Registry 倉庫</h2>
+<p>倉庫是集中存放映像檔檔案的場所，公開倉庫（Public）和私有倉庫（Private）兩種形式。最大的公開倉庫是 <a href="https://hub.docker.com">Docker Hub</a>，存放了數量龐大的映像檔供使用者下載。使用者也可以在本地網路內建立一個私有倉庫。</p>
+<ul>
+<li><code>push</code> <strong>Image</strong> → <strong>Registry</strong></li>
+<li><code>pull</code> <strong>Registry</strong> → <strong>Image</strong></li>
+</ul>
+<h1 id="installation">Installation</h1>
+<p>參考<a href="https://docs.docker.com/engine/installation/">官方文件</a>，Windows 10 或 Mac 10.11 版本以上可以直接安裝，以下的版本可能要安裝 Docker Toolbox，用 VM 模擬 Docker 所需的環境。</p>
+<blockquote>
+<p>用 VM 架環境，本地端 IP 可能就不是 localhost，要用 <code>docker-machine ip</code> 查看 ip</p>
+</blockquote>
+<h1 id="command">Command</h1>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/version/">docker version</a> 顯示 Docker 版本資訊</p>
+<pre><code class="language-bash"># docker version [OPTIONS]
 
 $ docker version
 Client:
@@ -21,10 +199,18 @@ Server:
  OS/Arch:      linux/amd64
  Experimental: false
 
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/info/>docker info</a> 顯示系統資訊</p><pre><code class=language-bash># docker info [OPTIONS]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/info/">docker info</a> 顯示系統資訊</p>
+<pre><code class="language-bash"># docker info [OPTIONS]
 
 略
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/pull/>docker pull</a> 下載映像檔</p><pre><code class=language-bash># docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/pull/">docker pull</a> 下載映像檔</p>
+<pre><code class="language-bash"># docker pull [OPTIONS] NAME[:TAG|@DIGEST]
 
 $ docker pull hello-world
 Using default tag: latest
@@ -35,7 +221,11 @@ latest: Pulling from library/hello-world
 78445dd45222: Pull complete
 Digest: sha256:c5515758d4c5e1e838e9cd307f6c6a0d620b5e07e6f927b07d05f6d12a1ac8d7
 Status: Downloaded newer image for hello-world:latest
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/images/>docker images</a> 列出映像檔</p><pre><code class=language-bash># docker images [OPTIONS] [REPOSITORY[:TAG]]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/images/">docker images</a> 列出映像檔</p>
+<pre><code class="language-bash"># docker images [OPTIONS] [REPOSITORY[:TAG]]
 
 $ docker images
 REPOSITORY          TAG         IMAGE ID          CREATED             SIZE
@@ -45,7 +235,11 @@ php                 latest      000ccf546bbd      2 weeks ago         365MB
 mysql               latest      9e64176cd8a2      2 weeks ago         407MB
 hello-world         latest      48b5124b2768      3 months ago        1.84kB
 laraedit/laraedit   latest      42d78c084a84      9 months ago        1.18GB
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/run/>docker run</a> 新建並啟動容器</p><pre><code class=language-bash># docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/run/">docker run</a> 新建並啟動容器</p>
+<pre><code class="language-bash"># docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 #
 # -d: daemon 模式，背景執行
 # -p: 設定連接埠 [hostIP]:[hostPort]:[ContainerPort]
@@ -74,14 +268,22 @@ cfc30f2595de7518537f4ac0c293a355f77c007292225516aed7dee1cf89ae0f
 # 4. 掛載當前目錄到 laraedit 容器裡
 $ docker run -d --name myLaravel -p 8080:80 -v `pwd`:/var/www/html/app laraedit/laraedit
 291f0f4d3349a31fb84f60bb1c462b4f209ca5cccc28b91352d65f798973934b
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/ps/>docker ps</a> 列出所有容器</p><pre><code class=language-bash># docker ps [OPTIONS]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/ps/">docker ps</a> 列出所有容器</p>
+<pre><code class="language-bash"># docker ps [OPTIONS]
 #
 # -a: 列出所有容器，包含沒有在執行的
 
 $ docker ps -a
 CONTAINER ID   IMAGE   COMMAND                  CREATED         STATUS         PORTS                    NAMES
 cfc30f2595de   mysql   &quot;docker-entrypoint...&quot;   12 minutes ago  Up 12 minutes  0.0.0.0:3306-&gt;3306/tcp   optimistic_volhard
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/start/>docker start</a> / <a href=https://docs.docker.com/engine/reference/commandline/restart/>restart</a> / <a href=https://docs.docker.com/engine/reference/commandline/stop/>stop</a> 啟動/重啟/關閉 容器</p><pre><code class=language-bash># docker start/restart/stop [OPTIONS] CONTAINER [CONTAINER...]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/start/">docker start</a> / <a href="https://docs.docker.com/engine/reference/commandline/restart/">restart</a> / <a href="https://docs.docker.com/engine/reference/commandline/stop/">stop</a> 啟動/重啟/關閉 容器</p>
+<pre><code class="language-bash"># docker start/restart/stop [OPTIONS] CONTAINER [CONTAINER...]
 #
 # container 可用 id or name
 # 可用空格隔開，處理多個
@@ -93,7 +295,11 @@ cfc30f2595de
 # 2. 啟動容器 id cfc30f2595de
 $ docker start cfc30f2595de
 cfc30f2595de
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/exec/>docker exec</a> 在一個正在執行的容器執行指令</p><pre><code class=language-bash># docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/exec/">docker exec</a> 在一個正在執行的容器執行指令</p>
+<pre><code class="language-bash"># docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
 
 # 1. 啟動 mysql 容器
 $ docker run -d --name my-mysql -e MYSQL_ROOT_PASSWORD=password mysql
@@ -115,21 +321,33 @@ owners.
 Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 
 mysql&gt;
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/commit/>docker commit</a> 提交容器為映像檔</p><pre><code class=language-bash># docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/commit/">docker commit</a> 提交容器為映像檔</p>
+<pre><code class="language-bash"># docker commit [OPTIONS] CONTAINER [REPOSITORY[:TAG]]
 #
 # -a 作者
 # -m 提交訊息
 
 $ docker commit -a &quot;clouding&quot; -m &quot;new image&quot; 06de29dd84d1 my-mysql
 sha256:60ac23ef0ac7103b50916b2ef165f685faff4fba1358261b84608004c0337048
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/tag/>docker tag</a> 修改 tag</p><pre><code class=language-bash># docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/tag/">docker tag</a> 修改 tag</p>
+<pre><code class="language-bash"># docker tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
 
 # 透過 IMAGE ID 修改
 $ docker tag 60ac23ef0ac7 my-mysql:1.0
 
 # 透過 REPOSITORY 修改
 $ docker tag my-mysql my-mysql:1.0
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/rmi/>docker rmi</a> 刪除映像檔</p><pre><code class=language-bash># docker rmi [OPTIONS] IMAGE [IMAGE...]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/rmi/">docker rmi</a> 刪除映像檔</p>
+<pre><code class="language-bash"># docker rmi [OPTIONS] IMAGE [IMAGE...]
 #
 # -f 強制移除 (包含正在執行的)
 # 可用空格隔開，處理多個
@@ -139,7 +357,11 @@ Untagged: my-mysql:1.0
 
 # Delete all dangling (unused) images
 docker rmi $( docker images -q -f dangling=true)
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/rm/>docker rm</a> 刪除容器</p><pre><code class=language-bash># docker rm [OPTIONS] CONTAINER [CONTAINER...]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/rm/">docker rm</a> 刪除容器</p>
+<pre><code class="language-bash"># docker rm [OPTIONS] CONTAINER [CONTAINER...]
 #
 # -f 強制移除 (包含正在執行的)
 # 可用空格隔開，處理多個
@@ -152,7 +374,11 @@ my-nginx
 
 # Delete all stopped containers
 docker rm $( docker ps -q -f status=exited)
-</code></pre></li><li><p><a href=https://docs.docker.com/engine/reference/commandline/push/>docker push</a> 上傳映像檔</p><pre><code class=language-bash># docker push [OPTIONS] NAME[:TAG]
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/push/">docker push</a> 上傳映像檔</p>
+<pre><code class="language-bash"># docker push [OPTIONS] NAME[:TAG]
 #
 # 需要先登入 Docker Registry 才可以使用
 
@@ -164,4 +390,49 @@ $ docker tag my-hello ghost0436/hello-world
 
 # push
 $ docker push ghost0436/hello-world
-</code></pre></li></ul><h1 id=後記>後記</h1><p>Docker 是一個很強大的工具，能運用的方法非常多，這邊只有寫一些基本的用法。最近 Docekr 被改成 Moby，之間的關西搞得我好亂阿！之後有空再深入學習吧。</p><h1 id=references>References</h1><ul><li><a href=https://www.docker.com>Docker Official</a></li><li><a href="https://www.youtube.com/watch?v=Y5Gvk0mutZ4">[PHPConf Taiwan 2014] 運用 Docker 部署PHP專案</a></li><li><a href="https://www.youtube.com/watch?v=v_q1t4f3EwY">[線上讀書會] miles 主講 docker 起手式</a></li><li><a href=https://www.gitbook.com/book/philipzheng/docker_practice/details>Docker —— 從入門到實踐</a></li><li><a href="https://www.youtube.com/watch?v=k5iwKUZY9tk">前端工程師一定要知道的 Docker 虛擬化容器技巧</a></li><li><a href=https://github.com/wsargent/docker-cheat-sheet/tree/master/zh-cn>docker cheat sheet</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/docker/get-started/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+</code></pre>
+</li>
+</ul>
+<h1 id="後記">後記</h1>
+<p>Docker 是一個很強大的工具，能運用的方法非常多，這邊只有寫一些基本的用法。最近 Docekr 被改成 Moby，之間的關西搞得我好亂阿！之後有空再深入學習吧。</p>
+<h1 id="references">References</h1>
+<ul>
+<li><a href="https://www.docker.com">Docker Official</a></li>
+<li><a href="https://www.youtube.com/watch?v=Y5Gvk0mutZ4">[PHPConf Taiwan 2014] 運用 Docker 部署PHP專案</a></li>
+<li><a href="https://www.youtube.com/watch?v=v_q1t4f3EwY">[線上讀書會] miles 主講 docker 起手式</a></li>
+<li><a href="https://www.gitbook.com/book/philipzheng/docker_practice/details">Docker —— 從入門到實踐</a></li>
+<li><a href="https://www.youtube.com/watch?v=k5iwKUZY9tk">前端工程師一定要知道的 Docker 虛擬化容器技巧</a></li>
+<li><a href="https://github.com/wsargent/docker-cheat-sheet/tree/master/zh-cn">docker cheat sheet</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/docker/get-started/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

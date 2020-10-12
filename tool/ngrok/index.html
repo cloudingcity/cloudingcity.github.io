@@ -1,7 +1,185 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>ngrok 讓外界可以造訪 localhost &#183; Clouding City 克勞丁城市</title><meta name=description content="需要臨時 demo 本地端開發東西給別人看嗎? 不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>ngrok 讓外界可以造訪 localhost</h1><p class=post-date>Posted <time datetime=2017-06-14>Jun 14, 2017</time></p></header><picture class=post-figure>
-<source srcset=https://clouding.city/tool/ngrok/demo_hue82cfc9fdf00d1b2c8623d5ea715aeec_90082_800x0_resize_lanczos_2.png><img src=https://clouding.city/tool/ngrok/demo_hue82cfc9fdf00d1b2c8623d5ea715aeec_90082_800x0_resize_lanczos_2.png></picture><blockquote><p>image from <a href=https://ngrok.com/>https://ngrok.com/</a></p></blockquote><p>需要臨時 demo 本地端開發東西給別人看嗎?</p><p>不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。</p><h1 id=ngrok-是什麼>ngrok 是什麼?</h1><p><a href=https://ngrok.com/>ngrok</a> 是一個託管服務，跨平台且容易使用，為你 HTTP 流量提供一個安全的通道。</p><ul><li>想讓外界能夠造訪本地開發網站或 API<ul><li>讓別人測試</li><li>行動裝置上測試</li></ul></li><li>想讓外部工具能夠訪問本地開發平台上的東西<ul><li>webhook</li></ul></li></ul><h1 id=如何使用>如何使用</h1><ol><li><p>官網<a href=https://ngrok.com/download>下載</a>對應作業系統並解壓縮。</p></li><li><p>測試一下
-<img src=version.png alt=version.png></p></li><li><p><code>ngrok http 8080</code> 指令 開放 localhost:8080
-<img src=http-8080.png alt=http-8080.png></p></li></ol><blockquote><p>會產生一組 16進制 <code>xxxxx.ngrok.io</code> domain
-可以用 <code>php -S localhost:8080</code> 快速測試一下</p></blockquote><ol start=4><li><p>現在連 <code>cae40aa9.ngrok.io</code> 就可以連到 <code>localhost:8080</code></p></li><li><p>當不需要這個通道時，只要簡單 <code>Ctrl+C</code> 就可以關閉通道</p></li></ol><h1 id=basic-authentication>Basic Authentication</h1><p>ngrok 也可以使用 HTTP 基本認證，不過要先註冊帳號取得 authtoken，再將 token 加到本地設定。</p><p><img src=auth.png alt=auth.png></p><ol><li><p><code>ngrok authtoken [your token]</code> 設定 token</p></li><li><p><code>ngrok http -auth "username:password" 8080</code> 設定認證帳號密碼</p></li></ol><h1 id=web-interface>Web Interface</h1><p>可以列出、檢查、Replay任何傳到這個通道的 request、response。</p><p>紀錄診斷資訊，可以重複一個 request ，複製一個錯誤，對 debug 很有用。</p><ul><li>預設 <code>localhost:4040</code>
-<img src=web-interface.png alt=web-interface.png></li></ul><h1 id=後記>後記</h1><p>這個工具很適合每個 web developer，可以簡單讓其他人臨時造訪本地端，還可以保留或註冊自訂 subdomain (需付費)，每次都可以使用同一個 domain。</p><h1 id=reference>Reference</h1><ul><li>O&rsquo;REILLY PHP 網路服務(第二版) (ISBN：9789864761760)</li></ul></article><div class=fb-comments data-href=https://clouding.city/tool/ngrok/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/tool/tables-generator/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>Tables Generator 好用的線上畫表格工具</h2><p class=card-text>Tables Generator 是一個線上畫表個工具，支援 LaTex、HTML、Text、Markdown、MediaWiki多種語法。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-05-07 57:00">May 7, 2017</time></p><p>#Tool</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>ngrok 讓外界可以造訪 localhost &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="需要臨時 demo 本地端開發東西給別人看嗎? 不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">ngrok 讓外界可以造訪 localhost</h1>
+          <p class="post-date">Posted <time datetime="2017-06-14">Jun 14, 2017</time></p>
+        </header>
+        
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/tool/ngrok/demo_hue82cfc9fdf00d1b2c8623d5ea715aeec_90082_800x0_resize_lanczos_2.png">
+          <img src="https://clouding.city/tool/ngrok/demo_hue82cfc9fdf00d1b2c8623d5ea715aeec_90082_800x0_resize_lanczos_2.png" >
+        </picture>
+        
+        <blockquote>
+<p>image from <a href="https://ngrok.com/">https://ngrok.com/</a></p>
+</blockquote>
+<p>需要臨時 demo 本地端開發東西給別人看嗎?</p>
+<p>不用部屬，用 ngrok快速開放一個端點讓外界也可以造訪 localhost。</p>
+<!-- raw HTML omitted -->
+<h1 id="ngrok-是什麼">ngrok 是什麼?</h1>
+<p><a href="https://ngrok.com/">ngrok</a> 是一個託管服務，跨平台且容易使用，為你 HTTP 流量提供一個安全的通道。</p>
+<ul>
+<li>想讓外界能夠造訪本地開發網站或 API
+<ul>
+<li>讓別人測試</li>
+<li>行動裝置上測試</li>
+</ul>
+</li>
+<li>想讓外部工具能夠訪問本地開發平台上的東西
+<ul>
+<li>webhook</li>
+</ul>
+</li>
+</ul>
+<h1 id="如何使用">如何使用</h1>
+<ol>
+<li>
+<p>官網<a href="https://ngrok.com/download">下載</a>對應作業系統並解壓縮。</p>
+</li>
+<li>
+<p>測試一下
+<img src="version.png" alt="version.png"></p>
+</li>
+<li>
+<p><code>ngrok http 8080</code> 指令 開放 localhost:8080
+<img src="http-8080.png" alt="http-8080.png"></p>
+</li>
+</ol>
+<blockquote>
+<p>會產生一組 16進制 <code>xxxxx.ngrok.io</code> domain
+可以用 <code>php -S localhost:8080</code> 快速測試一下</p>
+</blockquote>
+<ol start="4">
+<li>
+<p>現在連 <code>cae40aa9.ngrok.io</code> 就可以連到 <code>localhost:8080</code></p>
+</li>
+<li>
+<p>當不需要這個通道時，只要簡單 <code>Ctrl+C</code> 就可以關閉通道</p>
+</li>
+</ol>
+<h1 id="basic-authentication">Basic Authentication</h1>
+<p>ngrok 也可以使用 HTTP 基本認證，不過要先註冊帳號取得 authtoken，再將 token 加到本地設定。</p>
+<p><img src="auth.png" alt="auth.png"></p>
+<ol>
+<li>
+<p><code>ngrok authtoken [your token]</code> 設定 token</p>
+</li>
+<li>
+<p><code>ngrok http -auth &quot;username:password&quot; 8080</code> 設定認證帳號密碼</p>
+</li>
+</ol>
+<h1 id="web-interface">Web Interface</h1>
+<p>可以列出、檢查、Replay任何傳到這個通道的 request、response。</p>
+<p>紀錄診斷資訊，可以重複一個 request ，複製一個錯誤，對 debug 很有用。</p>
+<ul>
+<li>預設 <code>localhost:4040</code>
+<img src="web-interface.png" alt="web-interface.png"></li>
+</ul>
+<h1 id="後記">後記</h1>
+<p>這個工具很適合每個 web developer，可以簡單讓其他人臨時造訪本地端，還可以保留或註冊自訂 subdomain (需付費)，每次都可以使用同一個 domain。</p>
+<h1 id="reference">Reference</h1>
+<ul>
+<li>O&rsquo;REILLY PHP 網路服務(第二版) (ISBN：9789864761760)</li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/tool/ngrok/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/tool/tables-generator/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">Tables Generator 好用的線上畫表格工具</h2>
+    <p class="card-text">Tables Generator 是一個線上畫表個工具，支援 LaTex、HTML、Text、Markdown、MediaWiki多種語法。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2017-05-07 57:00">May 7, 2017</time></p>
+      <p>#Tool </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

@@ -1,10 +1,280 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>Sublime Text 3 教學 &#183; Clouding City 克勞丁城市</title><meta name=description content="Sublime Text 3 是一個輕量、簡潔、高效能的編輯器，可以安裝許多套件(Package)，"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>Sublime Text 3 教學</h1><p class=post-date>Posted <time datetime=2016-11-27>Nov 27, 2016</time></p></header><p>Sublime Text 3 是一個輕量、簡潔、高效能的編輯器，可以安裝許多套件(Package)，
-未註冊版偶爾會跳出詢問購買視窗，功能上與註冊版都一樣，分享一下自己的用法。</p><h1 id=安裝>安裝</h1><h2 id=安裝-sublime-text-3>安裝 Sublime Text 3</h2><ul><li><p>官網下載對應版本 <a href=https://www.sublimetext.com/3>Sublime Text - Download</a></p><p><img src=download.png alt=download.png></p></li></ul><h2 id=安裝-package-control>安裝 Package Control</h2><ol><li><a href=https://packagecontrol.io/installation>Package Control</a> 到此複製安裝代碼</li></ol><p><img src=package_control_code.png alt=package_control_code.png></p><ol start=2><li>Sublime 開啟 Console <code>ctrl</code> + ` or <code>View</code> > <code>Show Console</code></li></ol><p><img src=show_console.png alt=show_console.png></p><ol start=3><li>貼上代碼後<code>Enter</code>執行</li></ol><p><img src=console.png alt=console.png></p><ol start=4><li>開啟 Package Control <code>ctrl</code> + <code>shift</code> + <code>P</code> or <code>Preferences</code> > <code>Package Control</code></li></ol><p><img src=show_package_control.png alt=show_package_control.png></p><ol start=5><li>輸入 install 選擇 Package Control: Install Package</li></ol><p><img src=package_control.png alt=package_control.png></p><ol start=6><li>可開始搜尋安裝套件</li></ol><p><img src=package_control_install.png alt=package_control_install.png></p><h1 id=套件>套件</h1><table><thead><tr><th>套件</th><th>功能</th></tr></thead><tbody><tr><td><a href=https://packagecontrol.io/packages/ConvertToUTF8>convertToUTF8</a></td><td>轉換邊碼，正常顯示中文</td></tr><tr><td><a href=https://packagecontrol.io/packages/Color%20Highlighter>Color Highlighter</a></td><td>顯示色碼顏色</td></tr><tr><td><a href=https://packagecontrol.io/packages/AutoFileName>AutoFileName</a></td><td>自動抓取檔案路徑</td></tr><tr><td><a href=https://packagecontrol.io/packages/Emmet>Emmet</a></td><td>快速建立 html code，<a href=http://docs.emmet.io/cheat-sheet/>Emmet cheat sheet</a></td></tr><tr><td><a href=https://packagecontrol.io/packages/BracketHighlighter>BracketHighlighter</a></td><td>括號高亮顏色顯示</td></tr><tr><td><a href=https://packagecontrol.io/packages/PackageResourceViewer>PackageResourceViewer</a></td><td>查看編輯套件</td></tr><tr><td><a href=https://packagecontrol.io/packages/Tomorrow%20Color%20Schemes>Tomorrow Color Schemes</a></td><td>Tomorrow 風格高亮程式碼</td></tr><tr><td><a href=https://packagecontrol.io/packages/Seti_UI>Seti_UI</a></td><td>Seti 風格介面</td></tr></tbody></table><h1 id=設定>設定</h1><ul><li><p>Sublime 設定是以 JSON 格式去做存取，<code>Preferences</code> > <code>Setting</code>，右邊可以自定義設定</p><p><img src=setting.png alt=setting.png></p></li></ul><p>名稱 | 值 | 作用
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>Sublime Text 3 教學 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="Sublime Text 3 是一個輕量、簡潔、高效能的編輯器，可以安裝許多套件(Package)，" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Sublime Text 3 教學</h1>
+          <p class="post-date">Posted <time datetime="2016-11-27">Nov 27, 2016</time></p>
+        </header>
+        
+        <p>Sublime Text 3 是一個輕量、簡潔、高效能的編輯器，可以安裝許多套件(Package)，
+未註冊版偶爾會跳出詢問購買視窗，功能上與註冊版都一樣，分享一下自己的用法。</p>
+<h1 id="安裝">安裝</h1>
+<h2 id="安裝-sublime-text-3">安裝 Sublime Text 3</h2>
+<ul>
+<li>
+<p>官網下載對應版本 <a href="https://www.sublimetext.com/3">Sublime Text - Download</a></p>
+<p><img src="download.png" alt="download.png"></p>
+</li>
+</ul>
+<h2 id="安裝-package-control">安裝 Package Control</h2>
+<ol>
+<li><a href="https://packagecontrol.io/installation">Package Control</a> 到此複製安裝代碼</li>
+</ol>
+<p><img src="package_control_code.png" alt="package_control_code.png"></p>
+<ol start="2">
+<li>Sublime 開啟 Console <code>ctrl</code> + <!-- raw HTML omitted -->`<!-- raw HTML omitted --> or <code>View</code> &gt; <code>Show Console</code></li>
+</ol>
+<p><img src="show_console.png" alt="show_console.png"></p>
+<ol start="3">
+<li>貼上代碼後<code>Enter</code>執行</li>
+</ol>
+<p><img src="console.png" alt="console.png"></p>
+<ol start="4">
+<li>開啟 Package Control <code>ctrl</code> + <code>shift</code> + <code>P</code> or <code>Preferences</code> &gt; <code>Package Control</code></li>
+</ol>
+<p><img src="show_package_control.png" alt="show_package_control.png"></p>
+<ol start="5">
+<li>輸入 install 選擇 Package Control: Install Package</li>
+</ol>
+<p><img src="package_control.png" alt="package_control.png"></p>
+<ol start="6">
+<li>可開始搜尋安裝套件</li>
+</ol>
+<p><img src="package_control_install.png" alt="package_control_install.png"></p>
+<h1 id="套件">套件</h1>
+<table>
+<thead>
+<tr>
+<th>套件</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://packagecontrol.io/packages/ConvertToUTF8">convertToUTF8</a></td>
+<td>轉換邊碼，正常顯示中文</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Color%20Highlighter">Color Highlighter</a></td>
+<td>顯示色碼顏色</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/AutoFileName">AutoFileName</a></td>
+<td>自動抓取檔案路徑</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Emmet">Emmet</a></td>
+<td>快速建立 html code，<a href="http://docs.emmet.io/cheat-sheet/">Emmet cheat sheet</a></td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/BracketHighlighter">BracketHighlighter</a></td>
+<td>括號高亮顏色顯示</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/PackageResourceViewer">PackageResourceViewer</a></td>
+<td>查看編輯套件</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Tomorrow%20Color%20Schemes">Tomorrow Color Schemes</a></td>
+<td>Tomorrow 風格高亮程式碼</td>
+</tr>
+<tr>
+<td><a href="https://packagecontrol.io/packages/Seti_UI">Seti_UI</a></td>
+<td>Seti 風格介面</td>
+</tr>
+</tbody>
+</table>
+<h1 id="設定">設定</h1>
+<ul>
+<li>
+<p>Sublime 設定是以 JSON 格式去做存取，<code>Preferences</code> &gt; <code>Setting</code>，右邊可以自定義設定</p>
+<p><img src="setting.png" alt="setting.png"></p>
+</li>
+</ul>
+<p>名稱 | 值 | 作用
 &mdash; | &mdash;
 font_size | number | 字體大小
 draw_white_space | &ldquo;all&rdquo; / &ldquo;none&rdquo; | 顯示空白
 show_encoding | true / false | 右下角顯示檔案編碼
 tab_size | number | tab 代表幾個空白
 trim_trailing_white_space_on_save | true / false | 儲存後去檔案空白
-word_wrap | true / false | 程式碼換行</p><h1 id=熱鍵>熱鍵</h1><table><thead><tr><th>熱鍵</th><th>功能</th></tr></thead><tbody><tr><td><code>ctrl</code>+<code>H</code></td><td>搜尋取代</td></tr><tr><td><code>ctrl</code>+<code>G</code></td><td>搜尋行數</td></tr><tr><td><code>ctrl</code>+<code>R</code></td><td>搜尋函式類別</td></tr><tr><td><code>ctrl</code>+<code>Y</code></td><td>回覆上一步</td></tr><tr><td><code>ctrl</code>+<code>L</code></td><td>選取整行</td></tr><tr><td><code>ctrl</code>+<code>shift</code>+<code>V</code></td><td>按照格式貼上</td></tr><tr><td><code>ctrl</code>+<code>Enter</code></td><td>跳到下一行縮排開始</td></tr><tr><td><code>ctrl</code>+<code>/</code></td><td>註解/移除</td></tr><tr><td><code>ctrl</code>+<code>shift</code>+<code>/</code></td><td>區域註解/移除</td></tr><tr><td><code>ctrl</code>+<code>N</code></td><td>開啟新分頁</td></tr><tr><td><code>ctrl</code>+<code>W</code></td><td>關閉當前分頁</td></tr><tr><td><code>ctrl</code>+<code>shift</code>+<code>T</code></td><td>還原最後關閉分頁</td></tr><tr><td><code>ctrl</code>+<code>F2</code></td><td>設定書籤</td></tr><tr><td><code>F2</code></td><td>到下一個書籤</td></tr><tr><td><code>alt</code>+<code>shift</code>+<code>1</code>~<code>4</code></td><td>垂直分割視窗(1~4)</td></tr><tr><td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>J</code></td><td>展開所有程式碼</td></tr><tr><td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>1</code>~<code>4</code></td><td>摺疊所有程式碼1~4層數</td></tr><tr><td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>B</code></td><td>切換側邊欄位</td></tr><tr><td><code>ctrl</code>+<code>shift</code>+<code>P</code></td><td>開啟命令列</td></tr></tbody></table><h1 id=demo>Demo</h1><p><img src=demo.png alt=demo.png></p><h1 id=my-sublime-settings>My Sublime Settings</h1><ul><li><a href=https://gist.github.com/cloudingcity/50b5ebfa08689f7d50ef8e79d3e82f0a>GitHubGist</a></li></ul></article><div class=fb-comments data-href=https://clouding.city/sublime/installation/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+word_wrap | true / false | 程式碼換行</p>
+<h1 id="熱鍵">熱鍵</h1>
+<table>
+<thead>
+<tr>
+<th>熱鍵</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ctrl</code>+<code>H</code></td>
+<td>搜尋取代</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>G</code></td>
+<td>搜尋行數</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>R</code></td>
+<td>搜尋函式類別</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>Y</code></td>
+<td>回覆上一步</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>L</code></td>
+<td>選取整行</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>shift</code>+<code>V</code></td>
+<td>按照格式貼上</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>Enter</code></td>
+<td>跳到下一行縮排開始</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>/</code></td>
+<td>註解/移除</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>shift</code>+<code>/</code></td>
+<td>區域註解/移除</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>N</code></td>
+<td>開啟新分頁</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>W</code></td>
+<td>關閉當前分頁</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>shift</code>+<code>T</code></td>
+<td>還原最後關閉分頁</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>F2</code></td>
+<td>設定書籤</td>
+</tr>
+<tr>
+<td><code>F2</code></td>
+<td>到下一個書籤</td>
+</tr>
+<tr>
+<td><code>alt</code>+<code>shift</code>+<code>1</code>~<code>4</code></td>
+<td>垂直分割視窗(1~4)</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>J</code></td>
+<td>展開所有程式碼</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>1</code>~<code>4</code></td>
+<td>摺疊所有程式碼1~4層數</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>K</code>, <code>ctrl</code>+<code>B</code></td>
+<td>切換側邊欄位</td>
+</tr>
+<tr>
+<td><code>ctrl</code>+<code>shift</code>+<code>P</code></td>
+<td>開啟命令列</td>
+</tr>
+</tbody>
+</table>
+<h1 id="demo">Demo</h1>
+<p><img src="demo.png" alt="demo.png"></p>
+<h1 id="my-sublime-settings">My Sublime Settings</h1>
+<ul>
+<li><a href="https://gist.github.com/cloudingcity/50b5ebfa08689f7d50ef8e79d3e82f0a">GitHubGist</a></li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/sublime/installation/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

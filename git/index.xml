@@ -1,1 +1,56 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Gits - Clouding City 克勞丁城市</title><link>https://clouding.city/git/</link><description>Recent content in Gits on Clouding City 克勞丁城市</description><generator>Hugo -- gohugo.io</generator><language>zh-tw</language><lastBuildDate>Sun, 13 Jan 2019 21:48:51 +0000</lastBuildDate><atom:link href="https://clouding.city/git/index.xml" rel="self" type="application/rss+xml"/><item><title>忽略已追蹤的檔案</title><link>https://clouding.city/git/ignore-tracked/</link><pubDate>Sun, 13 Jan 2019 21:48:51 +0000</pubDate><guid>https://clouding.city/git/ignore-tracked/</guid><description>有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做</description></item><item><title>git fixup &amp; autosquash 加快 commit 整理速度</title><link>https://clouding.city/git/fixup-autosquash/</link><pubDate>Sun, 20 May 2018 23:20:44 +0000</pubDate><guid>https://clouding.city/git/fixup-autosquash/</guid><description>在提交程式碼的時候，總會用 rebase -i 來整理還沒推送出去的 branch，像是錯字或是 coding style 之類的小錯誤，以往總是</description></item><item><title>全域範圍 global .gitignore</title><link>https://clouding.city/git/global-gitignore/</link><pubDate>Sun, 29 Oct 2017 22:08:31 +0000</pubDate><guid>https://clouding.city/git/global-gitignore/</guid><description>當我們專案做版本控制的時候，不需要加入的我們通常都會加入到 .gitignore 裡面。</description></item><item><title>GitFlow 流程</title><link>https://clouding.city/git/flow/</link><pubDate>Wed, 05 Jul 2017 14:49:13 +0000</pubDate><guid>https://clouding.city/git/flow/</guid><description>GitFlow 流程是由 Vincent Driessen 所發想，他是一位來自荷蘭、熱情的軟體開發者。</description></item><item><title>Git 環境設定 小技巧</title><link>https://clouding.city/git/tips/</link><pubDate>Wed, 07 Jun 2017 09:30:48 +0000</pubDate><guid>https://clouding.city/git/tips/</guid><description>從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</description></item><item><title>Git 指令</title><link>https://clouding.city/git/command/</link><pubDate>Sat, 03 Jun 2017 14:32:19 +0000</pubDate><guid>https://clouding.city/git/command/</guid><description>筆記一下 Git 指令。</description></item></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gits - Clouding City 克勞丁城市</title>
+    <link>https://clouding.city/git/</link>
+    <description>Recent content in Gits on Clouding City 克勞丁城市</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-tw</language>
+    <lastBuildDate>Sun, 13 Jan 2019 21:48:51 +0000</lastBuildDate>
+    
+        <atom:link href="https://clouding.city/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>忽略已追蹤的檔案</title>
+      <link>https://clouding.city/git/ignore-tracked/</link>
+      <pubDate>Sun, 13 Jan 2019 21:48:51 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/ignore-tracked/</guid>
+      <description>有時候我們本地開發的時會需要忽略一些個人使用的檔案，避免 commit 到不需要的檔案，通常會這樣做</description>
+    </item><item>
+      <title>git fixup &amp; autosquash 加快 commit 整理速度</title>
+      <link>https://clouding.city/git/fixup-autosquash/</link>
+      <pubDate>Sun, 20 May 2018 23:20:44 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/fixup-autosquash/</guid>
+      <description>在提交程式碼的時候，總會用 rebase -i 來整理還沒推送出去的 branch，像是錯字或是 coding style 之類的小錯誤，以往總是</description>
+    </item><item>
+      <title>全域範圍 global .gitignore</title>
+      <link>https://clouding.city/git/global-gitignore/</link>
+      <pubDate>Sun, 29 Oct 2017 22:08:31 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/global-gitignore/</guid>
+      <description>當我們專案做版本控制的時候，不需要加入的我們通常都會加入到 .gitignore 裡面。</description>
+    </item><item>
+      <title>GitFlow 流程</title>
+      <link>https://clouding.city/git/flow/</link>
+      <pubDate>Wed, 05 Jul 2017 14:49:13 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/flow/</guid>
+      <description>GitFlow 流程是由 Vincent Driessen 所發想，他是一位來自荷蘭、熱情的軟體開發者。</description>
+    </item><item>
+      <title>Git 環境設定 小技巧</title>
+      <link>https://clouding.city/git/tips/</link>
+      <pubDate>Wed, 07 Jun 2017 09:30:48 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/tips/</guid>
+      <description>從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</description>
+    </item><item>
+      <title>Git 指令</title>
+      <link>https://clouding.city/git/command/</link>
+      <pubDate>Sat, 03 Jun 2017 14:32:19 +0000</pubDate>
+      
+      <guid>https://clouding.city/git/command/</guid>
+      <description>筆記一下 Git 指令。</description>
+    </item>
+  </channel>
+</rss>

@@ -1,8 +1,154 @@
-<!doctype html><html lang=zh-tw dir=ltr><head><meta charset=utf-8><meta http-equiv=x-ua-compatible content="ie=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta property="fb:app_id" content="300727321066688"><title>GitFlow 流程 &#183; Clouding City 克勞丁城市</title><meta name=description content="GitFlow 流程是由 Vincent Driessen 所發想，他是一位來自荷蘭、熱情的軟體開發者。"><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css integrity=sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y crossorigin=anonymous><link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css><link href=https://clouding.city/css/concated.min.css rel=stylesheet><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;ga('create','UA-146771426-1','auto');ga('send','pageview');}</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=single-body><nav class="nav-bar side-padding"><h1 class=nav-header><a href=https://clouding.city/ class=nav-text>Clouding City 克勞丁城市</a></h1><h1 class=nav-header><a href=https://github.com/cloudingcity target=_blank><i class="fab fa-github-square"></i></a><a href=https://www.linkedin.com/in/shiangyipeng/ target=_blank><i class="fab fa-linkedin"></i></a><a href=mailto:ghost0436@gmail.com target=_blank><i class="fas fa-envelope-square"></i></a></h1><div class=hamburger-menu><button onclick=hamburgerMenuPressed.call(this) aria-haspopup=true aria-expanded=false aria-controls=menu aria-label=Menu>
-<span></span><span></span></button><ul id=menu class=hamburger-menu-overlay><li><a href=https://clouding.city/ class=hamburger-menu-overlay-link>Home</a></li><li><a href=https://clouding.city/categories/chrome class=hamburger-menu-overlay-link>Chrome</a></li><li><a href=https://clouding.city/categories/clean-code class=hamburger-menu-overlay-link>Clean code</a></li><li><a href=https://clouding.city/categories/docker class=hamburger-menu-overlay-link>Docker</a></li><li><a href=https://clouding.city/categories/git class=hamburger-menu-overlay-link>Git</a></li><li><a href=https://clouding.city/categories/go class=hamburger-menu-overlay-link>Go</a></li><li><a href=https://clouding.city/categories/jquery class=hamburger-menu-overlay-link>Jquery</a></li><li><a href=https://clouding.city/categories/laravel class=hamburger-menu-overlay-link>Laravel</a></li><li><a href=https://clouding.city/categories/oop class=hamburger-menu-overlay-link>Oop</a></li><li><a href=https://clouding.city/categories/php class=hamburger-menu-overlay-link>Php</a></li><li><a href=https://clouding.city/categories/phpstorm class=hamburger-menu-overlay-link>Phpstorm</a></li><li><a href=https://clouding.city/categories/refactor class=hamburger-menu-overlay-link>Refactor</a></li><li><a href=https://clouding.city/categories/sublime class=hamburger-menu-overlay-link>Sublime</a></li><li><a href=https://clouding.city/categories/tool class=hamburger-menu-overlay-link>Tool</a></li></ul></div></nav><main class="content side-text-padding"><article class=post><header class=post-header><h1 class=post-title>GitFlow 流程</h1><p class=post-date>Posted <time datetime=2017-07-05>Jul 5, 2017</time></p></header><picture class=post-figure>
-<source srcset=https://clouding.city/git/flow/model_hu9e881d5b3b3544b7c113e669883da81a_86615_800x0_resize_lanczos_2.png><img src=https://clouding.city/git/flow/model_hu9e881d5b3b3544b7c113e669883da81a_86615_800x0_resize_lanczos_2.png></picture><p>GitFlow 流程是由 <em>Vincent Driessen</em> 所發想，他是一位來自荷蘭、熱情的軟體開發者。</p><ul><li><a href=http://nvie.com/posts/a-successful-git-branching-model/>A successful Git branching model</a></li></ul><h1 id=什麼是-gitflow-流程->什麼是 GitFlow 流程 ?</h1><p>GitFlow 流程是一個分支模型，工作流程建構在幾個主要分支上，幾乎不會有任何無法解決的問題。</p><ul><li>主要分支<ul><li><strong>master</strong>: 最終釋出版本</li><li><strong>develop</strong>: 開發中版本</li></ul></li><li>支援分支<ul><li><strong>feature</strong>: 實作新功能</li><li><strong>release</strong>: 準備發佈版本</li><li><strong>hotfix</strong>: 快速修正</li></ul></li></ul><p><strong>主要分支</strong>會一直<strong>存在</strong>，<strong>支援分支</strong>則是合併完後就會<strong>刪除</strong>。</p><table><thead><tr><th></th><th>可建立</th><th>接受合併</th></tr></thead><tbody><tr><td><strong>master</strong></td><td><code>hotfix</code></td><td><code>hotfix</code> <code>release</code></td></tr><tr><td><strong>develop</strong></td><td><code>feature</code> <code>release</code></td><td><code>hotfix</code> <code>release</code> <code>feature</code></td></tr></tbody></table><h2 id=主要分支>主要分支</h2><h3 id=master>master</h3><p><strong><code>master</code></strong> 分支代表<strong>最終釋出階段</strong>，將工作成果合併到 <strong><code>master</code></strong>，通常不會再從 <strong><code>master</code></strong> 建立新分支，除非針對某些必須修正的 bug，則可建立 <code>hotfix</code> 分支，修正後合併，即便其他分支已修正此 bug。</p><p><strong><code>master</code></strong> 分支也是用來<strong>標記發行版本</strong>的地方。</p><h3 id=develop>develop</h3><p><strong><code>develop</code></strong> 分支算是一種 <strong>Beta 版軟體</strong> 分支，開始時做新功能時，必須從 <strong><code>develop</code></strong> 建立 <code>feature</code> 分支後開始工作，完成後可以合併回 <strong><code>develop</code></strong>，之後刪除 <code>feature</code>。</p><p><strong><code>develop</code></strong> 會推送到遠端 Git Repository 與他人共用。</p><h2 id=支援分支>支援分支</h2><h3 id=feature>feature</h3><p>當需要<strong>實作新功能</strong>時，必須從 <strong><code>develop</code></strong> 建立 <code>feature</code> 分支，完成後合併回 <strong><code>develop</code></strong>，之後刪除。</p><p><code>feature</code> 名稱會以 <code>feature/NewAuthenitcation</code> or <code>feature/#1211</code> (trcae code number) 命名。</p><p><code>feature</code> 分支主要是給自己使用，如果有需要和團隊成員一起處理，也可以推送到遠端。</p><h3 id=release>release</h3><p>到某個時間點會需要為下一次發行版本打包，需從 <strong><code>develop</code></strong> 建立分支，為 <code>feature</code> 分支命(e.q. <code>release/1.0</code>)。</p><p><code>release</code> 階段不再接受新功能，因此不能將 <strong><code>develop</code></strong> 合併到 <code>release</code>，只能從 <code>release</code> 修正 bug，讓測試人員測試。完成後合併到 <strong><code>master</code></strong> 並新增 tag，如果有修正 bug，也要合併到 <strong><code>develop</code></strong>，之後刪除。</p><p><code>release</code> 會推送到遠端 Git Repository 與他人共用。</p><h3 id=hotfix>hotfix</h3><p><code>hotfix</code> 分支只能從 <strong><code>master</code></strong> 建立，一旦修好 bug，再合併到 <strong><code>master</code></strong> 和 <strong><code>develop</code></strong>，之後刪除。</p><p><code>hotfix</code> 通常不會推送到遠端，只有在需要其他團隊成員協助時才會推送。</p><hr><h1 id=git-flow>git-flow</h1><h2 id=什麼是-git-flow->什麼是 git-flow ?</h2><p>git-flow 是一個 git 擴充功能，運用簡單的指令實作 GitFlow 流程。</p><blockquote><p>git-flow 是一個以 merge 概念為基底的解決方案，它並無提供 rebase 特性分支的功能</p></blockquote><h2 id=安裝>安裝</h2><p>詳見 <a href=https://danielkummer.github.io/git-flow-cheatsheet/index.zh_TW.html#setup>git-flow 備忘清單#安裝</a></p><blockquote><p>Git for Windows 2.6.4^ 已有內建 git-flow
-<a href=https://www.sourcetreeapp.com/>SourceTree</a> 有內建 git-flow</p></blockquote><h2 id=指令>指令</h2><h3 id=初始化>初始化</h3><pre><code class=language-bash>git flow init
-</code></pre><h3 id=feature-1>Feature</h3><pre><code class=language-bash>$ git flow feature start &lt;name&gt; [&lt;base&gt;]
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>GitFlow 流程 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="GitFlow 流程是由 Vincent Driessen 所發想，他是一位來自荷蘭、熱情的軟體開發者。" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">GitFlow 流程</h1>
+          <p class="post-date">Posted <time datetime="2017-07-05">Jul 5, 2017</time></p>
+        </header>
+        
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/git/flow/model_hu9e881d5b3b3544b7c113e669883da81a_86615_800x0_resize_lanczos_2.png">
+          <img src="https://clouding.city/git/flow/model_hu9e881d5b3b3544b7c113e669883da81a_86615_800x0_resize_lanczos_2.png" >
+        </picture>
+        
+        <p>GitFlow 流程是由 <em>Vincent Driessen</em> 所發想，他是一位來自荷蘭、熱情的軟體開發者。</p>
+<ul>
+<li><a href="http://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></li>
+</ul>
+<!-- raw HTML omitted -->
+<h1 id="什麼是-gitflow-流程-">什麼是 GitFlow 流程 ?</h1>
+<p>GitFlow 流程是一個分支模型，工作流程建構在幾個主要分支上，幾乎不會有任何無法解決的問題。</p>
+<ul>
+<li>主要分支
+<ul>
+<li><strong>master</strong>:  最終釋出版本</li>
+<li><strong>develop</strong>: 開發中版本</li>
+</ul>
+</li>
+<li>支援分支
+<ul>
+<li><strong>feature</strong>: 實作新功能</li>
+<li><strong>release</strong>: 準備發佈版本</li>
+<li><strong>hotfix</strong>: 快速修正</li>
+</ul>
+</li>
+</ul>
+<p><strong>主要分支</strong>會一直<strong>存在</strong>，<strong>支援分支</strong>則是合併完後就會<strong>刪除</strong>。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>可建立</th>
+<th>接受合併</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>master</strong></td>
+<td><code>hotfix</code></td>
+<td><code>hotfix</code> <code>release</code></td>
+</tr>
+<tr>
+<td><strong>develop</strong></td>
+<td><code>feature</code> <code>release</code></td>
+<td><code>hotfix</code> <code>release</code> <code>feature</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="主要分支">主要分支</h2>
+<h3 id="master">master</h3>
+<p><strong><code>master</code></strong> 分支代表<strong>最終釋出階段</strong>，將工作成果合併到 <strong><code>master</code></strong>，通常不會再從 <strong><code>master</code></strong> 建立新分支，除非針對某些必須修正的 bug，則可建立 <code>hotfix</code> 分支，修正後合併，即便其他分支已修正此 bug。</p>
+<p><strong><code>master</code></strong> 分支也是用來<strong>標記發行版本</strong>的地方。</p>
+<h3 id="develop">develop</h3>
+<p><strong><code>develop</code></strong> 分支算是一種 <strong>Beta 版軟體</strong> 分支，開始時做新功能時，必須從 <strong><code>develop</code></strong> 建立 <code>feature</code> 分支後開始工作，完成後可以合併回 <strong><code>develop</code></strong>，之後刪除 <code>feature</code>。</p>
+<p><strong><code>develop</code></strong> 會推送到遠端 Git Repository 與他人共用。</p>
+<h2 id="支援分支">支援分支</h2>
+<h3 id="feature">feature</h3>
+<p>當需要<strong>實作新功能</strong>時，必須從 <strong><code>develop</code></strong> 建立 <code>feature</code> 分支，完成後合併回 <strong><code>develop</code></strong>，之後刪除。</p>
+<p><code>feature</code> 名稱會以 <code>feature/NewAuthenitcation</code> or <code>feature/#1211</code> (trcae code number) 命名。</p>
+<p><code>feature</code> 分支主要是給自己使用，如果有需要和團隊成員一起處理，也可以推送到遠端。</p>
+<h3 id="release">release</h3>
+<p>到某個時間點會需要為下一次發行版本打包，需從 <strong><code>develop</code></strong> 建立分支，為 <code>feature</code> 分支命(e.q. <code>release/1.0</code>)。</p>
+<p><code>release</code> 階段不再接受新功能，因此不能將 <strong><code>develop</code></strong> 合併到 <code>release</code>，只能從 <code>release</code> 修正 bug，讓測試人員測試。完成後合併到 <strong><code>master</code></strong> 並新增 tag，如果有修正 bug，也要合併到 <strong><code>develop</code></strong>，之後刪除。</p>
+<p><code>release</code> 會推送到遠端 Git Repository 與他人共用。</p>
+<h3 id="hotfix">hotfix</h3>
+<p><code>hotfix</code> 分支只能從 <strong><code>master</code></strong> 建立，一旦修好 bug，再合併到 <strong><code>master</code></strong> 和 <strong><code>develop</code></strong>，之後刪除。</p>
+<p><code>hotfix</code> 通常不會推送到遠端，只有在需要其他團隊成員協助時才會推送。</p>
+<hr>
+<h1 id="git-flow">git-flow</h1>
+<h2 id="什麼是-git-flow-">什麼是 git-flow ?</h2>
+<p>git-flow 是一個 git 擴充功能，運用簡單的指令實作 GitFlow 流程。</p>
+<blockquote>
+<p>git-flow 是一個以 merge 概念為基底的解決方案，它並無提供 rebase 特性分支的功能</p>
+</blockquote>
+<h2 id="安裝">安裝</h2>
+<p>詳見 <a href="https://danielkummer.github.io/git-flow-cheatsheet/index.zh_TW.html#setup">git-flow 備忘清單#安裝</a></p>
+<blockquote>
+<p>Git for Windows 2.6.4^ 已有內建 git-flow
+<a href="https://www.sourcetreeapp.com/">SourceTree</a> 有內建 git-flow</p>
+</blockquote>
+<h2 id="指令">指令</h2>
+<h3 id="初始化">初始化</h3>
+<pre><code class="language-bash">git flow init
+</code></pre>
+<h3 id="feature-1">Feature</h3>
+<pre><code class="language-bash">$ git flow feature start &lt;name&gt; [&lt;base&gt;]
 # - 從 develop 最後一個版本建立 feature/&lt;name&gt; 分支
 # - 自動切換到這個分支
 
@@ -19,7 +165,9 @@ $ git flow feature track &lt;name&gt;
 
 $ git flow feature delete &lt;name&gt;
 # 刪除分支
-</code></pre><h3 id=release-1>Release</h3><pre><code class=language-bash>$ git flow release start &lt;name&gt; [&lt;base&gt;]
+</code></pre>
+<h3 id="release-1">Release</h3>
+<pre><code class="language-bash">$ git flow release start &lt;name&gt; [&lt;base&gt;]
 # - 從 develop 最後一個版本建立 release/&lt;name&gt; 分支
 # - 自動切換到這個分支
 
@@ -37,7 +185,9 @@ $ git flow release track &lt;name&gt;
 
 $ git flow release delete &lt;name&gt;
 # 刪除分支
-</code></pre><h3 id=hotfix-1>Hotfix</h3><pre><code class=language-bash>$ git flow hotfix start &lt;name&gt; [&lt;base&gt;]
+</code></pre>
+<h3 id="hotfix-1">Hotfix</h3>
+<pre><code class="language-bash">$ git flow hotfix start &lt;name&gt; [&lt;base&gt;]
 # - 從 master 最後一個版本建立 hotfix/&lt;name&gt; 分支
 # - 自動切換到這個分支
 
@@ -55,4 +205,55 @@ $ git flow hotfix track &lt;name&gt;
 
 $ git flow hotfix delete &lt;name&gt;
 # 刪除分支
-</code></pre><h1 id=reference>Reference</h1><ul><li><a href=https://danielkummer.github.io/git-flow-cheatsheet/>git-flow cheatsheet</a></li><li><a href=https://github.com/petervanderdoes/gitflow-avh/wiki>git-flow wiki</a></li><li>7天學會版版控制 (ISBN：9789864340842)</li></ul></article><div class=fb-comments data-href=https://clouding.city/git/flow/ data-numposts=5 data-width=100%></div></main><nav class="end-nav side-padding"><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/git/tips/ class="card blog-card" rel=bookmark><article class=card-body><h2 class=card-title>Git 環境設定 小技巧</h2><p class=card-text>從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</p><div class="card-subtext muted-text"><p>Posted <time datetime="2017-06-07 67:00">Jun 7, 2017</time></p><p>#Git</p></div></article></a><a ontouchstart=cardPressed.call(this) ontouchend=cardReleased.call(this) ontouchmove=cardReleased.call(this) href=https://clouding.city/ class="card home-card" style=background-image:url(https://clouding.city/img/grey-cloud.jpg) rel=bookmark>Home</a></nav><script src=https://kit.fontawesome.com/9059c77146.js crossorigin=anonymous></script><script src=https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js integrity=sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx crossorigin=anonymous></script><script defer src=https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js integrity=sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe crossorigin=anonymous onload=renderMathInElement(document.body);></script><script src=https://clouding.city/js/core.min.js></script><script>hljs.initHighlightingOnLoad();</script><div id=fb-root></div><script async defer crossorigin=anonymous src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce=ECi6eyCF></script></body></html>
+</code></pre>
+<h1 id="reference">Reference</h1>
+<ul>
+<li><a href="https://danielkummer.github.io/git-flow-cheatsheet/">git-flow cheatsheet</a></li>
+<li><a href="https://github.com/petervanderdoes/gitflow-avh/wiki">git-flow wiki</a></li>
+<li>7天學會版版控制 (ISBN：9789864340842)</li>
+</ul>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/git/flow/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/git/tips/" class="card blog-card" rel="bookmark" >
+  
+  <article class="card-body">
+    <h2 class="card-title">Git 環境設定 小技巧</h2>
+    <p class="card-text">從書和網路上整理一下 Git 一些設定和小技巧，讓使用上更為順手，更省時間。</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2017-06-07 67:00">Jun 7, 2017</time></p>
+      <p>#Git </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>
