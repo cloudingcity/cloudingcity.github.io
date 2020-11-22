@@ -5,8 +5,8 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="fb:app_id" content="300727321066688" />
-  <title>go &middot; Clouding City 克勞丁城市</title>
-  <meta name="description" content="" />
+  <title>Go 重構筆記 3 - Regexp performance &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="避免創建不必要的對象" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   
@@ -15,7 +15,6 @@
   
   
   <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
-  <link rel="alternate" type="application/rss+xml" href="https://clouding.city/categories/go/index.xml" title="Clouding City 克勞丁城市" />
   
     
 <script type="application/javascript">
@@ -33,7 +32,7 @@ if (!doNotTrack) {
   
 </head>
 
-  <body class="list-body">
+  <body class="single-body">
     <nav class="nav-bar side-padding">
   <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
   <h1 class="nav-header">
@@ -54,93 +53,128 @@ if (!doNotTrack) {
   </div>
 </nav>
 
-    <main class="card-container side-gutter">
-      <header class="list-header">
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">Go 重構筆記 3 - Regexp performance</h1>
+          <p class="post-date">Posted <time datetime="2020-11-23">Nov 23, 2020</time></p>
+        </header>
         
-        <h1 class="list-header-title">go</h1>
-      </header>
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/go/refactor-3/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png">
+          <img src="https://clouding.city/go/refactor-3/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_800x0_resize_lanczos_2.png" >
+        </picture>
+        
+        <p>很久沒寫文章了，雖然靈感很多，但最近因為新專案上線，和做一些有的沒的 side project，真的沒空整理資料和寫文章 <del>都是藉口</del>，所以上來刷個存在感，touch 一下 blog 的最後更新時間。</p>
+<h2 id="background">Background</h2>
+<p>專案有一段很長的 Regular expression 在判斷字串符不符合規則。</p>
+<pre><code class="language-go">package main
+
+import &quot;regexp&quot;
+
+const p = `^([A-Za-z0-9_.-]+|[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4})$`
+
+func validate(s string) (bool, error) {
+	return regexp.MatchString(p, s)
+}
+</code></pre>
+<p>測了一下才發現他的 performance 極差，只要每做一次，就會多 alloc 81 次記憶體，增加了很多 gc 壓力。</p>
+<pre><code class="language-go">package main
+
+import &quot;testing&quot;
+
+func BenchmarkValidate(b *testing.B) {
+	for i := 0; i &lt; b.N; i++ {
+		_, _ = validate(&quot;foo&quot;)
+	}
+}
+</code></pre>
+<pre><code class="language-shell">$ go test -bench=. -benchmem -benchtime=3s -run=none
+BenchmarkValidate-4   311816        12025 ns/op       9246 B/op    81 allocs/op
+</code></pre>
+<h2 id="solution">Solution</h2>
+<p>可以使用 <code>regexp.Compile()</code> 讓它只 compile 一次就好，不需要每次 call function 都處理一次 regexp pattern。</p>
+<pre><code class="language-go">package main
+
+import &quot;regexp&quot;
+
+const p = `^([A-Za-z0-9_.-]+|[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4})$`
+
+func validate(s string) (bool, error) {
+	return regexp.MatchString(p, s)
+}
+
+var r = regexp.MustCompile(p)
+
+func validate2(s string) bool {
+	return r.MatchString(s)
+}
+</code></pre>
+<p>我們在測一次發現，效能差了好幾倍，本來會多 alloc 81 次記憶體變成 0 次，速度也快了 50 幾倍。</p>
+<pre><code class="language-go">package main
+
+import &quot;testing&quot;
+
+func BenchmarkValidate(b *testing.B) {
+	for i := 0; i &lt; b.N; i++ {
+		_, _ = validate(&quot;foo&quot;)
+	}
+}
+
+func BenchmarkValidate2(b *testing.B) {
+	for i := 0; i &lt; b.N; i++ {
+		_ = validate2(&quot;foo&quot;)
+	}
+}
+</code></pre>
+<pre><code class="language-shell">$ go test -bench=. -benchmem -benchtime=3s -run=none
+BenchmarkValidate-4     298816     11231 ns/op    9241 B/op     81 allocs/op
+BenchmarkValidate2-4  16597316       215 ns/op       0 B/op      0 allocs/op
+</code></pre>
+<h2 id="後記">後記</h2>
+<p>其實這是在學 Java 發現的 tips，剛好目前專案有遇到這個問題，很多地方都可以用這種方式處理，避免創建多次不必要的 instance，只在 compile 的時候做一次，多 reuse memory，可參考 <a href="https://github.com/valyala/fasthttp#fasthttp-best-practices">Fasthttp best practices</a>，當然因為都共用同一個 memory address，也要多考慮會不會發生 race condition。</p>
+<p>掰。</p>
+
+      </article>
       
-      
+      <div class="fb-comments"
+     data-href="https://clouding.city/go/refactor-3/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
       
       <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/go/refactor-3/" class="card blog-card" rel="bookmark" >
-  
-  <div class="card-img-container">
-    <picture>
-      
-      
-      <source srcset="https://clouding.city/go/refactor-3/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png">
-      <img src="https://clouding.city/go/refactor-3/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png" class="card-img" >
-    </picture>
-  </div>
-  <article class="card-body">
-    <h2 class="card-title">Go 重構筆記 3 - Regexp performance</h2>
-    <p class="card-text">避免創建不必要的對象</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2020-11-23">Nov 23, 2020</time></p>
-      <p>#go #refactor </p>
-    </div>
-  </article>
-</a><a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
   href="https://clouding.city/go/refactor-2/" class="card blog-card" rel="bookmark" >
   
   <div class="card-img-container">
+    <p class="card-img-overlay">Next Article</p>
     <picture>
       
-      
-      <source srcset="https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png">
-      <img src="https://clouding.city/go/refactor-2/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png" class="card-img" >
+      <source srcset="https://clouding.city/go/refactor-2/go-refactor.png">
+      <img src="https://clouding.city/go/refactor-2/go-refactor.png" class="card-img" >
     </picture>
   </div>
+  
   <article class="card-body">
     <h2 class="card-title">Go 重構筆記 2 - Get test data path</h2>
     <p class="card-text">優雅地取得專案下特定檔案路徑</p>
     <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2020-05-10">May 10, 2020</time></p>
-      <p>#go #refactor </p>
-    </div>
-  </article>
-</a><a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/go/mutex-rwmutex/" class="card blog-card" rel="bookmark" >
-  
-  <div class="card-img-container">
-    <picture>
-      
-      
-      <source srcset="https://clouding.city/go/mutex-rwmutex/go-learn_hu28478c9ba1e8937cd2e582b942ccfc77_36749_400x300_fit_lanczos_2.png">
-      <img src="https://clouding.city/go/mutex-rwmutex/go-learn_hu28478c9ba1e8937cd2e582b942ccfc77_36749_400x300_fit_lanczos_2.png" class="card-img" >
-    </picture>
-  </div>
-  <article class="card-body">
-    <h2 class="card-title">Go 簡單例子來理解 sync.Mutex 和 sync.RWMutex</h2>
-    <p class="card-text">用簡單的例子來理解 sync.Mutex 和 sync.RWMutex。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2020-05-01">May 1, 2020</time></p>
-      <p>#go </p>
-    </div>
-  </article>
-</a><a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
-  href="https://clouding.city/go/refactor/" class="card blog-card" rel="bookmark" >
-  
-  <div class="card-img-container">
-    <picture>
-      
-      
-      <source srcset="https://clouding.city/go/refactor/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png">
-      <img src="https://clouding.city/go/refactor/go-refactor_hue58b16d118fc7507dc7511e824214da4_37113_400x300_fit_lanczos_2.png" class="card-img" >
-    </picture>
-  </div>
-  <article class="card-body">
-    <h2 class="card-title">Go 重構筆記 1 - Extract Method</h2>
-    <p class="card-text">把相同的程式碼抽出，減少重複的程式碼，增加可讀性。</p>
-    <div class="card-subtext muted-text">
-      <p>Posted <time datetime="2020-04-29">Apr 29, 2020</time></p>
+      <p>Posted <time datetime="2020-05-10 510:00">May 10, 2020</time></p>
       <p>#go #refactor </p>
     </div>
   </article>
 </a>
-    </main>
-    
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
     <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
