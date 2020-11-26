@@ -112,7 +112,7 @@ func validate2(s string) bool {
 	return r.MatchString(s)
 }
 </code></pre>
-<p>我們在測一次發現，效能差了好幾倍，本來會多 alloc 81 次記憶體變成 0 次，速度也快了 50 幾倍。</p>
+<p>我們再測一次發現，效能差了好幾倍，本來會多 alloc 81 次記憶體變成 0 次，速度也快了 50 幾倍。</p>
 <pre><code class="language-go">package main
 
 import &quot;testing&quot;
