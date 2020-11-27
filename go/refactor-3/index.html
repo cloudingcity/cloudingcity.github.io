@@ -80,7 +80,7 @@ func validate(s string) (bool, error) {
 	return regexp.MatchString(p, s)
 }
 </code></pre>
-<p>測了一下才發現他的 performance 極差，只要每做一次，就會多 alloc 81 次記憶體，增加了很多 gc 壓力。</p>
+<p>測了一下才發現他的 performance 極差，只要每做一次，就會多 alloc 81 次記憶體，增加了很多 GC 壓力。</p>
 <pre><code class="language-go">package main
 
 import &quot;testing&quot;
