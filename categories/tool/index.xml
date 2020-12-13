@@ -5,11 +5,18 @@
     <description>Recent content in Tool on Clouding City 克勞丁城市</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Tue, 21 Apr 2020 02:19:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Dec 2020 20:32:32 +0800</lastBuildDate>
     
         <atom:link href="https://clouding.city/categories/tool/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>k6 - 現代負載測試工具</title>
+      <link>https://clouding.city/tool/k6/</link>
+      <pubDate>Sun, 13 Dec 2020 20:32:32 +0800</pubDate>
+      
+      <guid>https://clouding.city/tool/k6/</guid>
+      <description>最近工作上用了這套工具幫產品做 Load testing，使用起來相當舒服，測試結果與實際狀況也很接近，上來分享一下</description>
+    </item><item>
       <title>申請 JetBrains Open Source Licenses</title>
       <link>https://clouding.city/tool/jetbrain-open-source-license/</link>
       <pubDate>Tue, 21 Apr 2020 02:19:41 +0800</pubDate>

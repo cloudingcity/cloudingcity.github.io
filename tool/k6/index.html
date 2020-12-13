@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-tw" dir="ltr">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="fb:app_id" content="300727321066688" />
+  <title>k6 - 現代負載測試工具 &middot; Clouding City 克勞丁城市</title>
+  <meta name="description" content="最近工作上用了這套工具幫產品做 Load testing，使用起來相當舒服，測試結果與實際狀況也很接近，上來分享一下" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+  
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/styles/monokai-sublime.min.css"/>
+  
+  
+  <link href="https://clouding.city/css/concated.min.css" rel="stylesheet">
+  
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-146771426-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+  
+  
+</head>
+
+  <body class="single-body">
+    <nav class="nav-bar side-padding">
+  <h1 class="nav-header"><a href="https://clouding.city/" class="nav-text">Clouding City 克勞丁城市</a></h1>
+  <h1 class="nav-header">
+    <a href="https://github.com/cloudingcity" target="_blank"><i class="fab fa-github-square"></i></a>
+    <a href="https://www.linkedin.com/in/shiangyipeng/" target="_blank"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:ghost0436@gmail.com" target="_blank"><i class="fas fa-envelope-square"></i></a>
+  </h1>
+  <div class="hamburger-menu">
+    <button onclick="hamburgerMenuPressed.call(this)" aria-haspopup="true" aria-expanded="false" aria-controls="menu" aria-label="Menu">
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="menu" class="hamburger-menu-overlay">
+      <li><a href="https://clouding.city/" class="hamburger-menu-overlay-link">Home</a></li>
+      <li><a href="https://clouding.city/categories/chrome" class="hamburger-menu-overlay-link">Chrome</a></li><li><a href="https://clouding.city/categories/clean-code" class="hamburger-menu-overlay-link">Clean code</a></li><li><a href="https://clouding.city/categories/docker" class="hamburger-menu-overlay-link">Docker</a></li><li><a href="https://clouding.city/categories/git" class="hamburger-menu-overlay-link">Git</a></li><li><a href="https://clouding.city/categories/go" class="hamburger-menu-overlay-link">Go</a></li><li><a href="https://clouding.city/categories/jquery" class="hamburger-menu-overlay-link">Jquery</a></li><li><a href="https://clouding.city/categories/laravel" class="hamburger-menu-overlay-link">Laravel</a></li><li><a href="https://clouding.city/categories/oop" class="hamburger-menu-overlay-link">Oop</a></li><li><a href="https://clouding.city/categories/php" class="hamburger-menu-overlay-link">Php</a></li><li><a href="https://clouding.city/categories/phpstorm" class="hamburger-menu-overlay-link">Phpstorm</a></li><li><a href="https://clouding.city/categories/refactor" class="hamburger-menu-overlay-link">Refactor</a></li><li><a href="https://clouding.city/categories/sublime" class="hamburger-menu-overlay-link">Sublime</a></li><li><a href="https://clouding.city/categories/tool" class="hamburger-menu-overlay-link">Tool</a></li>
+      
+    </ul>
+  </div>
+</nav>
+
+    <main class="content side-text-padding">
+      <article class="post">
+        <header class="post-header">
+        	<h1 class="post-title">k6 - 現代負載測試工具</h1>
+          <p class="post-date">Posted <time datetime="2020-12-13">Dec 13, 2020</time></p>
+        </header>
+        
+        <picture class="post-figure">
+          
+          
+          <source srcset="https://clouding.city/tool/k6/k6_hu2df273a5235260f111bc5de0e284e954_41695_800x0_resize_lanczos_2.png">
+          <img src="https://clouding.city/tool/k6/k6_hu2df273a5235260f111bc5de0e284e954_41695_800x0_resize_lanczos_2.png" >
+        </picture>
+        
+        <p>最近工作上用了這套工具幫產品做 Load testing，使用起來相當舒服，測試結果與實際狀況也很接近，上來分享一下</p>
+<h2 id="k6">k6</h2>
+<p><a href="https://k6.io/">k6</a> 是一個 Open source load testing tool 和 Saas，用 Go 撰寫，有點可惜的是使用 JavaScript 來寫腳本，但有提供許多 <a href="https://k6.io/docs/examples">Examples</a>，對於 JavaScript 不熟的人撰寫起來也不困難。</p>
+<p>使用起來很簡單，介面也相當乾淨，也有提供 <a href="https://test-api.k6.io/">testing API</a> 讓你玩看看它。</p>
+<h2 id="安裝">安裝</h2>
+<p><a href="https://k6.io/docs/getting-started/installation">方法</a>很多種，這邊是直接用 homebrew</p>
+<pre><code class="language-shell">$ brew install k6
+</code></pre>
+<h2 id="執行">執行</h2>
+<p>先簡單寫了一個 <code>test.js</code>，情境為每一秒戳一次 <code>http://test.k6.io</code></p>
+<pre><code class="language-javascript">import http from 'k6/http';
+import { sleep } from 'k6';
+
+export default function () {
+  http.get('http://test.k6.io');
+  sleep(1);
+}
+</code></pre>
+<pre><code class="language-shell">$ k6 run test.js
+</code></pre>
+<pre><code class="language-shell">          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: test.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 1 max VUs, 10m30s max duration (incl. graceful stop):
+           * default: 1 iterations for each of 1 VUs (maxDuration: 10m0s, gracefulStop: 30s)
+
+
+running (00m01.9s), 0/1 VUs, 1 complete and 0 interrupted iterations
+default ✓ [======================================] 1 VUs  00m01.9s/10m0s  1/1 iters, 1 per VU
+
+    data_received..............: 11 kB 5.8 kB/s
+    data_sent..................: 76 B  40 B/s
+    http_req_blocked...........: avg=557.07ms min=557.07ms med=557.07ms max=557.07ms p(90)=557.07ms p(95)=557.07ms
+    http_req_connecting........: avg=303.93ms min=303.93ms med=303.93ms max=303.93ms p(90)=303.93ms p(95)=303.93ms
+    http_req_duration..........: avg=307.96ms min=307.96ms med=307.96ms max=307.96ms p(90)=307.96ms p(95)=307.96ms
+    http_req_receiving.........: avg=518µs    min=518µs    med=518µs    max=518µs    p(90)=518µs    p(95)=518µs
+    http_req_sending...........: avg=1.98ms   min=1.98ms   med=1.98ms   max=1.98ms   p(90)=1.98ms   p(95)=1.98ms
+    http_req_tls_handshaking...: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+    http_req_waiting...........: avg=305.46ms min=305.46ms med=305.46ms max=305.46ms p(90)=305.46ms p(95)=305.46ms
+    http_reqs..................: 1     0.526921/s
+    iteration_duration.........: avg=1.86s    min=1.86s    med=1.86s    max=1.86s    p(90)=1.86s    p(95)=1.86s
+    iterations.................: 1     0.526921/s
+    vus........................: 1     min=1 max=1
+    vus_max....................: 1     min=1 max=1
+</code></pre>
+<p>執行後會直接在 stdout 顯示測試的結果，VU (virtual user) 為 1 ，代表這次測試只有模擬一個 user 在執行這個動作。</p>
+<p>如果要模擬更多 VU 或持續時間只需要：</p>
+<pre><code class="language-shell">$ k6 run --vus 10 --duration 30s test.js
+</code></pre>
+<p>也可以定義在 script 裡面</p>
+<pre><code class="language-javascript">import http from 'k6/http';
+import { sleep } from 'k6';
+export let options = {
+  vus: 10,
+  duration: '30s',
+};
+export default function () {
+  http.get('http://test.k6.io');
+  sleep(1);
+}
+</code></pre>
+<h3 id="ramping-up-and-down-vus">Ramping up and down VUs</h3>
+<p>k6 提供 stages，可以模擬 user 持續增加或遞減</p>
+<pre><code class="language-javascript">import http from 'k6/http';
+import { check, sleep } from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '30s', target: 20 },
+    { duration: '1m30s', target: 10 },
+    { duration: '20s', target: 0 },
+  ],
+};
+
+export default function () {
+  let res = http.get('https://httpbin.org/');
+  check(res, { 'status was 200': (r) =&gt; r.status == 200 });
+  sleep(1);
+}
+</code></pre>
+<p>以上面這個例子來說，情境就會是：</p>
+<ol>
+<li>user 在 30 秒內增加到 20 人</li>
+<li>1 分 30 秒內降至 10 人</li>
+<li>最後 20 秒逐漸退去到 0 人</li>
+</ol>
+<p>check function 為確認回的 code 是 200，如果有非 200 的會在結束後統一顯示結果。</p>
+<h2 id="test-types">Test Types</h2>
+<p>並非每種測試都叫做壓力測試，<a href="https://k6.io/docs/test-types/introduction">官網</a>上有寫出這些測試的差別和使用情境，這邊簡單介紹一下：</p>
+<h3 id="smoke-testing">Smoke Testing</h3>
+<p>盡可能用最少的資源去測試，只是為了測試出有沒有 error</p>
+<p><img src="smoke-test.png" alt="smoke-test"></p>
+<h3 id="load-testing">Load Testing</h3>
+<p>Load testing 也稱 Performance testing ，主要是關注當前系統的配置，在多少 user 或 RPS 時，performance 是如何</p>
+<p><img src="load-test.png" alt="load-test"></p>
+<h3 id="stress-testing">Stress Testing</h3>
+<p>和 Load testing 不同，主要是測試系統的極限在哪裡</p>
+<blockquote>
+<p>勿在 production 測試</p>
+</blockquote>
+<p><img src="stress-test.png" alt="stress-test"></p>
+<h3 id="spike-testing">Spike Testing</h3>
+<p>是 Stress testing 的變體，與之不同的是，流量不會慢慢進來，測試在短時間內大量的流量進來，系統還能不能撐住</p>
+<blockquote>
+<p>勿在 production 測試</p>
+</blockquote>
+<p><img src="spike-test.png" alt="spike-test"></p>
+<h3 id="soak-testing">Soak Testing</h3>
+<p>主要測試在長時間下，系統的可靠性和效能</p>
+<p><img src="soak-test.png" alt="soak-test"></p>
+<h2 id="這次產品測試">這次產品測試</h2>
+<p>這次產品有預估人數，所以設定了一個人數(假設為 5000 人)，來做 Load testing</p>
+<p>人數的情境：</p>
+<ol>
+<li>5 min 到 5000 人</li>
+<li>5 min 持平</li>
+<li>2 min 5000 人退去到 0</li>
+</ol>
+<p><img src="scenario.png" alt="scenario"></p>
+<p>打 API 的情境：</p>
+<ol>
+<li>login 拿到 token (只做一次)</li>
+<li>之後每 10 秒戳一次某 API</li>
+</ol>
+<p>寫成 script 大概會是這樣：</p>
+<pre><code class="language-javascript">import http from 'k6/http';
+import {check, group, sleep} from 'k6';
+
+export let options = {
+  stages: [
+    { duration: '5m', target: 5000 },
+    { duration: '5m', target: 5000 },
+    { duration: '2m', target: 0 },
+  ],
+};
+
+let isLogin = false
+
+export default function () {
+  group('login', () =&gt; {
+    if (!isLogin) {
+      let loginRes = http.post(`https://api.example.com/v1/login/`, {
+        username: `user_${__VU}`,
+        password: 'pwd',
+      });
+      isLogin = true
+
+      check(loginRes, { 'logged in successfully': (resp) =&gt; resp.json('token') !== '' });
+    }
+  })
+
+  group('get something', () =&gt; {
+    let res = http.get(`https://api.example.com/v1/something`, {
+      headers: {
+        Authorization: `Bearer ${loginRes.json('token')}`,
+      },
+    }).json();
+    check(res, { 'status was 204': (r) =&gt; r.status === 204 });
+  })
+
+  sleep(10);
+}
+</code></pre>
+<blockquote>
+<p>不同的 VU 不會共用 variable</p>
+</blockquote>
+<p>測試結果：</p>
+<p><img src="test.png" alt="test"></p>
+<p>實際情況：</p>
+<p><img src="actual.png" alt="actual"></p>
+<p>以 CPU 使用率為例，可以看到在持平的時候測試結果維持在 18% 左右，而產品實際快到達該人數的時候是 17% 左右，很接近測試的數據。</p>
+<h2 id="後記">後記</h2>
+<p>以往做 load testing 的時候都是用 <a href="https://github.com/tsenart/vegeta">vegeta</a> 來測試，但測試的效果有限，沒辦法真正測出 End-User 實際使用的情境，所以只能大概多估算一下目前配置能乘載多少人。</p>
+<p>k6 提供了許多豐富的功能，可以根據不同情境做不同測試，也支援了許多 Protocol，像是 WebSocket gRPC 等，也可以把 result output 到 JSON、CSV、AWS Cloud Watch 等。</p>
+<p><a href="https://k6.io/docs/cloud">k6 Cloud</a> 提供了很豐富的資料分析和精美的介面，也能幫你做定時的測試，但是免費仔要用的話 VU 只能到 50 人，要上去就要再付錢了。</p>
+<p>經過這次認識到測試類型有很多種，而不是每個都叫做壓力測試，讓自己又增長了不少知識，有興趣的可以去官網 docs 看看，收穫會更多。</p>
+
+      </article>
+      
+      <div class="fb-comments"
+     data-href="https://clouding.city/tool/k6/"
+     data-numposts="5"
+     data-width="100%">
+</div>
+
+    </main>
+    <nav class="end-nav side-padding">
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/tool/jetbrain-open-source-license/" class="card blog-card" rel="bookmark" >
+  
+  <div class="card-img-container">
+    <p class="card-img-overlay">Next Article</p>
+    <picture>
+      
+      <source srcset="https://clouding.city/tool/jetbrain-open-source-license/feature.png">
+      <img src="https://clouding.city/tool/jetbrain-open-source-license/feature.png" class="card-img" >
+    </picture>
+  </div>
+  
+  <article class="card-body">
+    <h2 class="card-title">申請 JetBrains Open Source Licenses</h2>
+    <p class="card-text">最近申請到了 JetBrains Open Source License，來分享一下申請的過程</p>
+    <div class="card-subtext muted-text">
+      <p>Posted <time datetime="2020-04-21 421:00">Apr 21, 2020</time></p>
+      <p>#Tool </p>
+    </div>
+  </article>
+</a>
+      
+      <a ontouchstart="cardPressed.call(this)" ontouchend="cardReleased.call(this)" ontouchmove="cardReleased.call(this)" 
+  href="https://clouding.city/" class="card home-card" style="background-image: url( https://clouding.city/img/grey-cloud.jpg )" rel="bookmark" >
+  Home
+</a>
+    </nav>
+    <script src="https://kit.fontawesome.com/9059c77146.js" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.1/highlight.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js" integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js" integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+  
+  <script src="https://clouding.city/js/core.min.js"></script>
+<script>
+  hljs.initHighlightingOnLoad();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/zh_TW/sdk.js#xfbml=1&version=v7.0" nonce="ECi6eyCF"></script>
+
+  </body>
+</html>

@@ -5,11 +5,18 @@
     <description>Recent content in Categories on Clouding City 克勞丁城市</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-tw</language>
-    <lastBuildDate>Mon, 23 Nov 2020 01:27:41 +0800</lastBuildDate>
+    <lastBuildDate>Sun, 13 Dec 2020 20:32:32 +0800</lastBuildDate>
     
         <atom:link href="https://clouding.city/categories/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Tool</title>
+      <link>https://clouding.city/categories/tool/</link>
+      <pubDate>Sun, 13 Dec 2020 20:32:32 +0800</pubDate>
+      
+      <guid>https://clouding.city/categories/tool/</guid>
+      <description></description>
+    </item><item>
       <title>go</title>
       <link>https://clouding.city/categories/go/</link>
       <pubDate>Mon, 23 Nov 2020 01:27:41 +0800</pubDate>
@@ -22,13 +29,6 @@
       <pubDate>Mon, 23 Nov 2020 01:27:41 +0800</pubDate>
       
       <guid>https://clouding.city/categories/refactor/</guid>
-      <description></description>
-    </item><item>
-      <title>Tool</title>
-      <link>https://clouding.city/categories/tool/</link>
-      <pubDate>Tue, 21 Apr 2020 02:19:41 +0800</pubDate>
-      
-      <guid>https://clouding.city/categories/tool/</guid>
       <description></description>
     </item><item>
       <title>Git</title>
